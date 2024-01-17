@@ -66,6 +66,12 @@ const Signup = () => {
               Create Account
             </button>
           </form>
+          <p className="mt-4 text-[14px] text-center">
+            Already have an Account?
+            <a className="ml-2 text-cyan-blue font-medium" href="#">
+              Login
+            </a>
+          </p>
         </div>
       </div>
     </>
