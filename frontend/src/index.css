@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Readex+Pro:wght@400;500&display=swap');
+
+/* Typography */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Fredoka', sans-serif;
+}
+
+body {
+  font-family: 'Readex Pro', sans-serif;
+  line-height: 1.5;
+}
