@@ -5,7 +5,10 @@ import ProductFilter from '../components/ProductFilter';
 const Products = () => {
   return (
     <>
-      <ProductFilter />
+      <div className="max-w-screen-xl mx-auto xl:flex">
+        <ProductFilter />
+        <ProductGrid />
+      </div>
     </>
   );
 };
