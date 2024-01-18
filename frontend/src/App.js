@@ -1,9 +1,9 @@
-import ProductPreview from './components/ProductPreview';
+import Navbar from './components/Navbar';
 
 function App() {
   return (
     <div className="App">
-      <ProductPreview />
+      <Navbar />
     </div>
   );
 }
