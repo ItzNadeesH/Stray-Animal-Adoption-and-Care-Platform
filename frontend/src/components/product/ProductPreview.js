@@ -6,7 +6,7 @@ import Counter from '../common/Counter';
 const ProductPreview = () => {
   return (
     <>
-      <div className="flex flex-wrap max-w-screen-xl mx-auto justify-around mt-4">
+      <div className="flex flex-wrap max-w-screen-xl mx-auto justify-around mt-[80px]">
         <div className="max-w-[400px]">
           <img className="md:rounded-2xl" src={bokdok} alt="bokdok" />
         </div>

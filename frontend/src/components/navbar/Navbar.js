@@ -4,12 +4,14 @@ import avatar from '../../assets/icons/image-avatar.png';
 import CartTab from './CartTab';
 import { FaHome, FaInfoCircle, FaStore } from 'react-icons/fa';
 import { IoMdContacts } from 'react-icons/io';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navbarRef = useRef(null);
   const cartRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleOutsideClick = (event) => {
@@ -44,6 +46,11 @@ const Navbar = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const handleLinkClick = (e) => {
+    setIsMenuOpen(!isMenuOpen);
+    setTimeout(() => navigate(e.target.getAttribute('to')), 200);
+  };
+
   return (
     <>
       <nav className="flex justify-between p-6 pb-8 border-b border-[#e6e6e6] max-w-screen-xl mx-auto mb-4">
@@ -54,16 +61,16 @@ const Navbar = () => {
           <h1 className="inline-block">LOGO</h1>
           <ul className="ml-[56px] hidden md:flex">
             <li className="mx-4">
-              <a href="#!">Home</a>
+              <Link to="/">Home</Link>
             </li>
             <li className="mx-4">
-              <a href="#!">About Us</a>
+              <Link href="/">About Us</Link>
             </li>
             <li className="mx-4">
-              <a href="#!">Contact</a>
+              <Link href="/">Contact</Link>
             </li>
             <li className="mx-4">
-              <a href="#!">Store</a>
+              <Link to="/store">Store</Link>
             </li>
           </ul>
         </div>
@@ -89,7 +96,7 @@ const Navbar = () => {
       {/* Mobile Navbar */}
       <nav
         ref={navbarRef}
-        className={`absolute bg-[#ffffff] top-0 bottom-0 w-[320px] shadow-2xl transition-all ${
+        className={`absolute bg-[#ffffff] top-0 bottom-0 w-[320px] shadow-2xl transition-all z-10 ${
           isMenuOpen ? 'left-0' : 'left-[-320px]'
         }`}
       >
@@ -98,28 +105,44 @@ const Navbar = () => {
         </h2>
         <ul className="text-[18px] ml-10">
           <li className="mb-6">
-            <a className="inline-flex" href="#!">
+            <button
+              onClick={handleLinkClick}
+              className="inline-flex items-center"
+              to="/"
+            >
               <FaHome size={24} className="mr-4" />
               Home
-            </a>
+            </button>
           </li>
           <li className="mb-6">
-            <a className="inline-flex items-center" href="#!">
+            <button
+              onClick={handleLinkClick}
+              className="inline-flex items-center"
+              to="/about"
+            >
               <FaInfoCircle className="mr-4" />
               About Us
-            </a>
+            </button>
           </li>
           <li className="mb-6">
-            <a className="inline-flex items-center" href="#!">
+            <button
+              onClick={handleLinkClick}
+              className="inline-flex items-center"
+              to="/contact"
+            >
               <IoMdContacts className="mr-4" />
               Contact
-            </a>
+            </button>
           </li>
           <li className="mb-6">
-            <a className="inline-flex items-center" href="#!">
+            <button
+              onClick={handleLinkClick}
+              className="inline-flex items-center"
+              to="/store"
+            >
               <FaStore className="mr-4" />
               Store
-            </a>
+            </button>
           </li>
         </ul>
       </nav>
