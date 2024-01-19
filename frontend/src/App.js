@@ -1,4 +1,4 @@
-import ProductPreview from './components/ProductPreview';
+import ProductPreview from './components/product/ProductPreview';
 
 function App() {
   return (
