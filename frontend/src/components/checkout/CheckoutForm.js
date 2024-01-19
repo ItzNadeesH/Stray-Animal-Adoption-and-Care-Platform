@@ -3,7 +3,7 @@ import React from 'react';
 const CheckoutForm = () => {
   return (
     <>
-      <div className="px-5 max-w-[720px] mx-auto">
+      <div className="lg:max-w-[720px] grow">
         <h1 className="mb-5 text-[24px] sm:text-[32px]">Billing Details</h1>
         <div className="lg:flex flex-wrap">
           <div className="grow lg:mr-5">
@@ -11,7 +11,7 @@ const CheckoutForm = () => {
               First Name *
             </label>
             <input
-              className="px-4 py-2.5 mb-3 border-2 border-[#000000] rounded-[12px] w-full placeholder:text-[#00000080]"
+              className="text-[14px] px-4 py-2.5 mb-3 border-2 border-[#000000] rounded-[12px] w-full placeholder:text-[#00000080]"
               type="text"
               name="firstname"
               id="firstname"
@@ -23,7 +23,7 @@ const CheckoutForm = () => {
               Last Name *
             </label>
             <input
-              className="px-4 py-2.5 mb-3 border-2 border-[#000000] rounded-[12px] w-full placeholder:text-[#00000080]"
+              className="text-[14px] px-4 py-2.5 mb-3 border-2 border-[#000000] rounded-[12px] w-full placeholder:text-[#00000080]"
               type="text"
               name="lastname"
               id="lastname"
@@ -39,14 +39,14 @@ const CheckoutForm = () => {
             Street address *
           </label>
           <input
-            className="px-4 py-2.5 mb-3 border-2 border-[#000000] rounded-[12px] w-full placeholder:text-[#00000080]"
+            className="text-[14px] px-4 py-2.5 mb-3 border-2 border-[#000000] rounded-[12px] w-full placeholder:text-[#00000080]"
             type="text"
             name="streetaddress"
             id="streetaddress"
             placeholder="House number and Street name"
           />
           <input
-            className="px-4 py-2.5 mb-3 border-2 border-[#000000] rounded-[12px] w-full placeholder:text-[#00000080]"
+            className="text-[14px] px-4 py-2.5 mb-3 border-2 border-[#000000] rounded-[12px] w-full placeholder:text-[#00000080]"
             type="text"
             name="apartment"
             id="apartment"
@@ -58,7 +58,7 @@ const CheckoutForm = () => {
             Town / City *
           </label>
           <input
-            className="px-4 py-2.5 mb-3 border-2 border-[#000000] rounded-[12px] w-full placeholder:text-[#00000080]"
+            className="text-[14px] px-4 py-2.5 mb-3 border-2 border-[#000000] rounded-[12px] w-full placeholder:text-[#00000080]"
             type="text"
             name="city"
             id="city"
@@ -69,7 +69,7 @@ const CheckoutForm = () => {
             Postcode / ZIP *
           </label>
           <input
-            className="px-4 py-2.5 mb-3 border-2 border-[#000000] rounded-[12px] w-full placeholder:text-[#00000080]"
+            className="text-[14px] px-4 py-2.5 mb-3 border-2 border-[#000000] rounded-[12px] w-full placeholder:text-[#00000080]"
             type="text"
             name="postcode"
             id="postcode"
@@ -80,7 +80,7 @@ const CheckoutForm = () => {
             Phone *
           </label>
           <input
-            className="px-4 py-2.5 mb-3 border-2 border-[#000000] rounded-[12px] w-full placeholder:text-[#00000080]"
+            className="text-[14px] px-4 py-2.5 mb-3 border-2 border-[#000000] rounded-[12px] w-full placeholder:text-[#00000080]"
             type="tel"
             name="phone"
             id="phone"
@@ -92,7 +92,7 @@ const CheckoutForm = () => {
             Email Address *
           </label>
           <input
-            className="px-4 py-2.5 mb-3 border-2 border-[#000000] rounded-[12px] w-full placeholder:text-[#00000080]"
+            className="text-[14px] px-4 py-2.5 mb-3 border-2 border-[#000000] rounded-[12px] w-full placeholder:text-[#00000080]"
             type="email"
             name="email"
             id="email"
@@ -104,10 +104,10 @@ const CheckoutForm = () => {
             Order Notes (optional)
           </label>
           <textarea
-            className="px-4 py-2.5 mb-3 h-[64px] border-2 border-[#000000] rounded-[12px] w-full placeholder:text-[#00000080]"
+            className="text-[14px] px-4 py-2.5 mb-3 h-[64px] border-2 border-[#000000] rounded-[12px] w-full placeholder:text-[#00000080]"
             name="notes"
             id="notes"
-            placeholder="Notes about your order"
+            placeholder="Notes about your order, e.g. special notes for delivery."
             cols="30"
             rows="10"
           ></textarea>

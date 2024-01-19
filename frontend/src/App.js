@@ -3,7 +3,7 @@ import Store from './pages/Store';
 import Product from './pages/Product';
 import Home from './pages/Home';
 import Cart from './pages/Cart';
-import CheckoutForm from './components/checkout/CheckoutForm';
+import Checkout from './pages/Checkout';
 
 function App() {
   return (
@@ -16,7 +16,7 @@ function App() {
           <Route path="/store" element={<Store />} />
           <Route path="/store/product" element={<Product />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/checkout" element={<CheckoutForm />} />
+          <Route path="/checkout" element={<Checkout />} />
         </Routes>
       </Router>
     </>
