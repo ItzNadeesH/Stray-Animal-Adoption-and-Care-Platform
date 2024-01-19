@@ -2,6 +2,7 @@ import Layout from './Layout';
 import OrderDetails from '../components/checkout/OrderDetails';
 import { FaChevronRight } from 'react-icons/fa';
 import CheckoutForm from '../components/checkout/CheckoutForm';
+import PaymentMethod from '../components/checkout/PaymentMethod';
 
 const Checkout = () => {
   return (
@@ -15,8 +16,9 @@ const Checkout = () => {
           </h1>
           <div className="lg:flex gap-10">
             <CheckoutForm />
-            <div className="lg:mt-[92px] lg:max-w-[480px] grow">
+            <div className="lg:mt-[92px] lg:max-w-[480px] mb-8 grow">
               <OrderDetails />
+              <PaymentMethod />
             </div>
           </div>
         </div>
