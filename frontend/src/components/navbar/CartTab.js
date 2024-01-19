@@ -1,6 +1,6 @@
 import React from 'react';
-import bokdok from '../assets/bok-dok.jpg';
-import deleteIcon from '../assets/icons/icon-delete.svg';
+import bokdok from '../../assets/bok-dok.jpg';
+import deleteIcon from '../../assets/icons/icon-delete.svg';
 
 const CartTab = () => {
   const items = [
