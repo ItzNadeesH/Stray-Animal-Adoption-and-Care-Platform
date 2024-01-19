@@ -1,5 +1,5 @@
 import React from 'react';
-import Dropdown from './common/Dropdown';
+import Dropdown from '../common/Dropdown';
 
 const ProductFilter = () => {
   const petTypes = ['All', 'Cat', 'Dog'];
