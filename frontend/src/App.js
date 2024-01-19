@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Store from './pages/Store';
 import Product from './pages/Product';
 import Home from './pages/Home';
-import CartItem from './components/payment/CartItem';
+import CartItemList from './components/cart/CartItemList';
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
           <Route path="/contat" element={<Home />} />
           <Route path="/store" element={<Store />} />
           <Route path="/store/product" element={<Product />} />
-          <Route path="/cart" element={<CartItem />} />
+          <Route path="/cart" element={<CartItemList />} />
         </Routes>
       </Router>
     </>

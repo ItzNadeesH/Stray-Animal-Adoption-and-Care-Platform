@@ -1,14 +1,7 @@
-import bokdok from '../../assets/bok-dok.jpg';
 import Counter from '../common/Counter';
 import deleteIcon from '../../assets/icons/icon-delete.svg';
 
-const CartItem = () => {
-  const item = {
-    image: bokdok,
-    title: 'Bokdok',
-    price: 1200,
-    quantity: 2,
-  };
+const CartItem = ({ item }) => {
   return (
     <>
       <div className="max-w-[720px] flex border-b border-[#e6e6e6] p-5 items-center justify-between">
