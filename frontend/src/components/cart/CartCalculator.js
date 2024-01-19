@@ -3,7 +3,7 @@ import React from 'react';
 const CartCalculator = () => {
   return (
     <>
-      <div className="max-w-[500px] mx-auto p-10 border border-[#e6e6e6]">
+      <div className="w-[480px] mx-auto p-10 border border-[#e6e6e6] mt-[64px]">
         <h2 className="text-[24px] sm:text-[32px]">Cart Totals</h2>
         <div className="flex justify-between py-5 border-b border-[#e6e6e6]">
           <p className="font-medium text-[14px]">Subtotal</p>

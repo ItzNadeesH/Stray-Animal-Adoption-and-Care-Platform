@@ -4,9 +4,9 @@ import deleteIcon from '../../assets/icons/icon-delete.svg';
 const CartItem = ({ item }) => {
   return (
     <>
-      <div className="max-w-[720px] flex border-b border-[#e6e6e6] p-5 items-center justify-between">
+      <div className="flex border-b border-[#e6e6e6] p-5 items-center justify-between">
         <img
-          className="w-[60px] h-[60px]"
+          className="w-[60px] h-[60px] hidden sm:block"
           src={item.image}
           alt="product-image"
         />
