@@ -8,7 +8,7 @@ const CartItem = ({ item }) => {
         <img
           className="w-[60px] h-[60px] hidden sm:block"
           src={item.image}
-          alt="product-image"
+          alt="product"
         />
         <p>{item.title}</p>
         <div className="min-w-[96px]">
