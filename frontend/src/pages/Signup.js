@@ -1,8 +1,11 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { register } from '../actions/auth';
+import Alert from '../components/common/Alert';
 
-const Signup = () => {
+const Signup = ({ register }) => {
   const [formData, setFormData] = useState({
     username: '',
     email: '',
@@ -16,24 +19,9 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    };
     const { username, email, password } = formData;
 
-    const body = JSON.stringify({ username, email, password });
-
-    try {
-      const res = await axios.post('/api/users', body, config);
-      console.log(res.data);
-    } catch (error) {
-      const errors = error.response.data.errors;
-      if (errors) {
-        errors.forEach((error) => console.log(error.msg));
-      }
-    }
+    await register(username, email, password);
   };
 
   return (
@@ -51,6 +39,7 @@ const Signup = () => {
             throughout this website, to manage access to your account, and for
             other purposes described in our privacy policy.
           </p>
+          <Alert />
           <form onSubmit={handleSubmit}>
             <div>
               <label
@@ -121,4 +110,8 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+Signup.propTypes = {
+  register: PropTypes.func.isRequired,
+};
+
+export default connect(null, { register })(Signup);
