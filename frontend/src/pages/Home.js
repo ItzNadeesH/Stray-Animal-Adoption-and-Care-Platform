@@ -4,10 +4,7 @@ import Layout from './Layout';
 const Home = () => {
   return (
     <>
-      <Layout>
-        <Link to="/login">Login</Link>
-        <Link to="/signup">Signup</Link>
-      </Layout>
+      <Layout></Layout>
     </>
   );
 };
