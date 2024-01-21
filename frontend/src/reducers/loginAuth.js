@@ -2,7 +2,7 @@ import { LOGIN_SUCCESS, LOGIN_FAILED } from '../actions/types';
 
 const initialState = {
   token: localStorage.getItem('token'),
-  isAuthenticated: null,
+  isLoggedIn: null,
   isLoading: true,
 };
 
@@ -14,14 +14,14 @@ const loginAuth = (state = initialState, action) => {
       return {
         ...state,
         token: payload,
-        isAuthenticated: true,
+        isLoggedIn: true,
         isLoading: false,
       };
     case LOGIN_FAILED:
       return {
         ...state,
         token: null,
-        isAuthenticated: false,
+        isLoggedIn: false,
         isLoading: false,
       };
     default:

@@ -1,15 +1,19 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { useState } from 'react';
 import { login } from '../actions/auth';
 import Alert from '../components/common/Alert';
 import PropTypes from 'prop-types';
 
-const Login = ({ login }) => {
+const Login = ({ login, isAuthenticated }) => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
+  if (isAuthenticated) {
+    return navigate('/');
+  }
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -22,6 +26,7 @@ const Login = ({ login }) => {
 
     login(email, password);
   };
+
   return (
     <>
       <div className="max-w-screen-xl mx-auto">
@@ -90,6 +95,11 @@ const Login = ({ login }) => {
 
 Login.porpTypes = {
   login: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool,
 };
 
-export default connect(null, { Alert, login })(Login);
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.userAuth.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { Alert, login })(Login);
