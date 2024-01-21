@@ -1,16 +1,24 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { register } from '../actions/auth';
 import Alert from '../components/common/Alert';
+import { useNavigate } from 'react-router-dom';
 
-const Signup = ({ register }) => {
+const Signup = ({ register, isRegistered }) => {
   const [formData, setFormData] = useState({
     username: '',
     email: '',
     password: '',
   });
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isRegistered) {
+      return navigate('/');
+    }
+  }, [isRegistered, navigate]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -112,6 +120,11 @@ const Signup = ({ register }) => {
 
 Signup.propTypes = {
   register: PropTypes.func.isRequired,
+  isRegistered: PropTypes.bool,
 };
 
-export default connect(null, { register })(Signup);
+const mapStateToProps = (state) => ({
+  isRegistered: state.signupAuth.isRegistered,
+});
+
+export default connect(mapStateToProps, { register })(Signup);
