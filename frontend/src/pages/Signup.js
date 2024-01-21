@@ -6,7 +6,7 @@ import { register } from '../actions/auth';
 import Alert from '../components/common/Alert';
 import { useNavigate } from 'react-router-dom';
 
-const Signup = ({ register, isRegistered, isAuthenticated }) => {
+const Signup = ({ register, isAuthenticated }) => {
   const [formData, setFormData] = useState({
     username: '',
     email: '',
@@ -17,10 +17,7 @@ const Signup = ({ register, isRegistered, isAuthenticated }) => {
     if (isAuthenticated) {
       return navigate('/');
     }
-    if (isRegistered) {
-      return navigate('/login');
-    }
-  }, [isRegistered, isAuthenticated, navigate]);
+  }, [isAuthenticated, navigate]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -122,12 +119,10 @@ const Signup = ({ register, isRegistered, isAuthenticated }) => {
 
 Signup.propTypes = {
   register: PropTypes.func.isRequired,
-  isRegistered: PropTypes.bool,
   isAuthenticated: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => ({
-  isRegistered: state.signupAuth.isRegistered,
   isAuthenticated: state.userAuth.isAuthenticated,
 });
 

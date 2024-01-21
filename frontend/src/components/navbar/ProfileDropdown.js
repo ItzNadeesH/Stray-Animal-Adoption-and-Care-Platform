@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { logout } from '../../actions/auth';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -8,10 +8,12 @@ import store from '../../store';
 import setAuthToken from '../../utils/setAuthToken';
 
 const ProfileDropdown = ({ logout }) => {
+  const navigate = useNavigate();
   const handleSignout = () => {
     logout();
     setAuthToken();
     store.dispatch(loadUser());
+    return navigate('/');
   };
   return (
     <>
