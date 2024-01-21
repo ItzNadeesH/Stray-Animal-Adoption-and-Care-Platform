@@ -1,19 +1,21 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { login } from '../actions/auth';
 import Alert from '../components/common/Alert';
 import PropTypes from 'prop-types';
 
 const Login = ({ login, isAuthenticated }) => {
-  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
-  if (isAuthenticated) {
-    return navigate('/');
-  }
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (isAuthenticated) {
+      return navigate('/');
+    }
+  }, [isAuthenticated, navigate]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
