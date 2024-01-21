@@ -7,10 +7,12 @@ import { IoMdContacts } from 'react-icons/io';
 import { Link, useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import ProfileDropdown from './ProfileDropdown';
 
 const Navbar = ({ isAuthenticated }) => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isProfileMenuOpen, setisProfileMenuOpen] = useState(false);
   const navbarRef = useRef(null);
   const cartRef = useRef(null);
   const navigate = useNavigate();
@@ -40,7 +42,13 @@ const Navbar = ({ isAuthenticated }) => {
     };
   }, [navbarRef, cartRef]);
 
+  const handleProfileClick = () => {
+    setIsCartOpen(false);
+    setisProfileMenuOpen(!isProfileMenuOpen);
+  };
+
   const handleCartClick = () => {
+    setisProfileMenuOpen(false);
     setIsCartOpen(!isCartOpen);
   };
 
@@ -66,9 +74,12 @@ const Navbar = ({ isAuthenticated }) => {
       <div className="absolute top-10 right-[-36px] z-10">
         {isCartOpen && <CartTab />}
       </div>
-      <button className="w-8">
+      <button onClick={handleProfileClick} className="w-8">
         <img src={avatar} alt="avatar" />
       </button>
+      <div className="absolute top-6 right-[-36px] z-10">
+        {isProfileMenuOpen && <ProfileDropdown />}
+      </div>
     </div>
   );
   const guestLinks = (
