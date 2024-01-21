@@ -52,7 +52,7 @@ const Signup = ({ register }) => {
                 className="w-full mb-7 py-[12px] px-[15px] rounded-[12px] outline-0 border-2 border-cyan-blue active:border-black placeholder:text-[14px]"
                 type="text"
                 placeholder="Username"
-                autoComplete="username"
+                autoComplete="name"
                 name="username"
                 id="username"
                 value={formData.username}
