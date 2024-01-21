@@ -4,6 +4,7 @@ import {
 } from '../actions/types';
 
 const initialState = {
+  token: null,
   isAuthenticated: null,
   user: null,
 };
@@ -15,12 +16,15 @@ const userAuth = (state = initialState, action) => {
     case AUTHENTICATION_SUCCESS:
       return {
         ...state,
+        token: localStorage.getItem('token'),
         isAuthenticated: true,
         user: payload,
       };
     case AUTHENTICATION_FAILED:
+      localStorage.removeItem('token');
       return {
         ...state,
+        token: null,
         isAuthenticated: false,
         user: null,
       };
