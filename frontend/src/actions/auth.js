@@ -6,6 +6,8 @@ import {
   AUTHENTICATION_SUCCESS,
   LOGIN_FAILED,
   LOGIN_SUCCESS,
+  LOGOUT_FAILED,
+  LOGOUT_SUCCESS,
   REGISTER_FAILED,
   REGISTER_SUCCESS,
 } from './types';
@@ -75,5 +77,13 @@ export const register = (username, email, password) => async (dispatch) => {
     }
 
     dispatch({ type: REGISTER_FAILED });
+  }
+};
+
+export const logout = () => async (dispatch) => {
+  if (localStorage.getItem('token')) {
+    dispatch({ type: LOGOUT_SUCCESS });
+  } else {
+    dispatch({ type: LOGOUT_FAILED });
   }
 };

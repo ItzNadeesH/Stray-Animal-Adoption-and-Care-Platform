@@ -22,6 +22,22 @@ module.exports = {
       colors: {
         'cyan-blue': '#002842',
       },
+      animation: {
+        fadeOut: 'fadeOut 0.15s ease-in-out',
+        fadeIn: 'fadeIn 0.15s ease-in-out',
+      },
+
+      // that is actual animation
+      keyframes: (theme) => ({
+        fadeOut: {
+          '0%': { opacity: 0 },
+          '100%': { opacity: 1 },
+        },
+        fadeIn: {
+          '0%': { opacity: 1 },
+          '100%': { opacity: 0 },
+        },
+      }),
     },
   },
   plugins: [],

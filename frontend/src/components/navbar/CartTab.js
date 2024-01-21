@@ -22,7 +22,7 @@ const CartTab = () => {
   ];
   return (
     <>
-      <div className="w-[360px] shadow-2xl mr-2 rounded-lg bg-[#ffffff]">
+      <div className="w-[360px] shadow-2xl mr-2 rounded-lg bg-[#ffffff] animate-fadeOut">
         <p className="font-medium p-4 px-6 border-b border-[#e6e6e6]">Cart</p>
         <div className="p-6">
           {items &&
