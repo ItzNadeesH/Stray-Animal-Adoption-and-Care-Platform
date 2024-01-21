@@ -1,6 +1,27 @@
-import React from 'react';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { useState } from 'react';
+import { login } from '../actions/auth';
+import Alert from '../components/common/Alert';
+import PropTypes from 'prop-types';
 
-const Login = () => {
+const Login = ({ login }) => {
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const { email, password } = formData;
+
+    login(email, password);
+  };
   return (
     <>
       <div className="max-w-screen-xl mx-auto">
@@ -14,7 +35,8 @@ const Login = () => {
           <p className="mb-4 text-center text-[14px]">
             Please enter your credentials to access your account.
           </p>
-          <form>
+          <Alert />
+          <form onSubmit={handleSubmit}>
             <div>
               <label
                 className="block mb-2 text-[14px] font-bold"
@@ -29,6 +51,8 @@ const Login = () => {
                 autoComplete="email"
                 name="email"
                 id="email"
+                value={formData.email}
+                onChange={handleChange}
               />
             </div>
             <div>
@@ -44,7 +68,8 @@ const Login = () => {
                 placeholder="Password"
                 name="password"
                 id="password"
-                minLength={6}
+                value={formData.password}
+                onChange={handleChange}
               />
             </div>
             <button className="block py-3 w-full bg-cyan-blue text-[#ffffff] rounded-full hover:bg-[#000000] transition">
@@ -52,10 +77,10 @@ const Login = () => {
             </button>
           </form>
           <p className="mt-4 text-[14px] text-center">
-            Don't have an Account
-            <a className="ml-2 text-cyan-blue font-medium" href="#">
+            Don't have an Account?
+            <Link className="ml-2 text-cyan-blue font-medium" to="/signup">
               Signup
-            </a>
+            </Link>
           </p>
         </div>
       </div>
@@ -63,4 +88,8 @@ const Login = () => {
   );
 };
 
-export default Login;
+Login.porpTypes = {
+  login: PropTypes.func.isRequired,
+};
+
+export default connect(null, { Alert, login })(Login);
