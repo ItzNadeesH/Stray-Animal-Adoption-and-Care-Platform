@@ -1,6 +1,7 @@
 import React from 'react';
 import bokdok from '../../assets/bok-dok.jpg';
 import deleteIcon from '../../assets/icons/icon-delete.svg';
+import { Link } from 'react-router-dom';
 
 const CartTab = () => {
   const items = [
@@ -53,9 +54,18 @@ const CartTab = () => {
               </div>
             ))}
           {items.length !== 0 ? (
-            <button className="mt-2 w-full py-2 text-[14px] text-[#ffffff] bg-cyan-blue hover:bg-[#000000] transition rounded-md">
-              Checkout
-            </button>
+            <div>
+              <Link to="/cart">
+                <button className="mt-2 w-full py-2 text-[14px] text-cyan-blue bg-[#ffffff] border border-cyan-blue hover:text-[#000000] rounded-md">
+                  View Cart
+                </button>
+              </Link>
+              <Link to="/checkout">
+                <button className="mt-2 w-full py-2 text-[14px] text-[#ffffff] bg-cyan-blue hover:bg-[#000000] transition rounded-md">
+                  Checkout
+                </button>
+              </Link>
+            </div>
           ) : (
             <p className="text-[14px] text-[#767676] font-medium text-center p-10">
               Your cart is empty!

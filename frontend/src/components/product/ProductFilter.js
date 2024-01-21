@@ -6,7 +6,7 @@ const ProductFilter = () => {
   const productCategories = ['All', 'Food', 'Supplement', 'Accessories'];
   return (
     <>
-      <div className="max-w-[300px] mx-auto md:w-[300px] sm:mx-auto">
+      <div className="max-w-[300px] mx-auto md:w-[300px]">
         <p className="mb-6 text-[12px] text-[#767676]">Home / Store</p>
         <h2 className="mb-4 text-[24px] border-b border-[#e6e6e6]">Products</h2>
         <div className="flex justify-between mb-4">
