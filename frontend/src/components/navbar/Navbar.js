@@ -6,6 +6,7 @@ import { FaHome, FaInfoCircle, FaStore } from 'react-icons/fa';
 import { IoMdContacts } from 'react-icons/io';
 import { Link, useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { FaUserCircle } from 'react-icons/fa';
 import PropTypes from 'prop-types';
 import ProfileDropdown from './ProfileDropdown';
 
@@ -74,8 +75,8 @@ const Navbar = ({ isAuthenticated }) => {
       <div className="absolute top-10 right-[-36px] z-10">
         {isCartOpen && <CartTab />}
       </div>
-      <button onClick={handleProfileClick} className="w-8">
-        <img src={avatar} alt="avatar" />
+      <button onClick={handleProfileClick} className="">
+        <FaUserCircle color="#000000" size={26} />
       </button>
       <div className="absolute top-6 right-[-24px] z-10">
         {isProfileMenuOpen && <ProfileDropdown />}
