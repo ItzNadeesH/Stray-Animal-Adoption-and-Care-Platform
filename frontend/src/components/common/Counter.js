@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { LuPlus, LuMinus } from 'react-icons/lu';
 
 const Counter = ({ initialValue }) => {

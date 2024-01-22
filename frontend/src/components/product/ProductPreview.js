@@ -1,4 +1,3 @@
-import React from 'react';
 import bokdok from '../../assets/bok-dok.jpg';
 import Cart from '../../assets/icons/icon-cart.svg';
 import Counter from '../common/Counter';

@@ -1,16 +1,18 @@
-import { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Store from './pages/Store';
-import Product from './pages/Product';
-import Home from './pages/Home';
-import Signup from './pages/Signup';
-import Login from './pages/Login';
-import Cart from './pages/Cart';
-import Checkout from './pages/Checkout';
-import OrderComplete from './pages/OrderComplete';
+import { useEffect } from 'react';
 import { loadUser } from './actions/auth';
 import setAuthToken from './utils/setAuthToken';
 import store from './store';
+
+// Pages
+import Signup from './pages/Signup';
+import Login from './pages/Login';
+import Home from './pages/Home';
+import Store from './pages/Store';
+import Product from './pages/Product';
+import Cart from './pages/Cart';
+import Checkout from './pages/Checkout';
+import OrderComplete from './pages/OrderComplete';
 import PageNotFound from './pages/PageNotFound';
 
 if (localStorage.token) {

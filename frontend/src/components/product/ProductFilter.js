@@ -1,4 +1,3 @@
-import React from 'react';
 import Dropdown from '../common/Dropdown';
 
 const ProductFilter = () => {

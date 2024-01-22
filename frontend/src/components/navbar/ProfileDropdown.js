@@ -1,9 +1,8 @@
-import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { logout } from '../../actions/auth';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import { loadUser } from '../../actions/auth';
+import PropTypes from 'prop-types';
 import store from '../../store';
 import setAuthToken from '../../utils/setAuthToken';
 

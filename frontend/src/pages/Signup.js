@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import { register } from '../actions/auth';
+import PropTypes from 'prop-types';
+
+// Components
 import Alert from '../components/common/Alert';
-import { useNavigate } from 'react-router-dom';
 
 const Signup = ({ register, isAuthenticated }) => {
   const [formData, setFormData] = useState({

@@ -1,13 +1,17 @@
-import React, { useEffect, useRef, useState } from 'react';
-import menu from '../../assets/icons/icon-menu.svg';
-import CartTab from './CartTab';
-import { FaHome, FaInfoCircle, FaStore } from 'react-icons/fa';
-import { IoMdContacts } from 'react-icons/io';
+import { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { FaUserCircle } from 'react-icons/fa';
+
+// Components
 import PropTypes from 'prop-types';
+import CartTab from './CartTab';
 import ProfileDropdown from './ProfileDropdown';
+
+// Icons
+import { FaHome, FaInfoCircle, FaStore } from 'react-icons/fa';
+import { IoMdContacts } from 'react-icons/io';
+import { FaUserCircle } from 'react-icons/fa';
+import menu from '../../assets/icons/icon-menu.svg';
 
 const Navbar = ({ isAuthenticated }) => {
   const [isCartOpen, setIsCartOpen] = useState(false);

@@ -1,27 +1,23 @@
-import { useState, useEffect } from 'react';
-import LoadingScreen from './LoadingScreen';
+import Layout from './Layout';
+import Loader from '../utils/Loader';
+
+// Components
 import ProductGrid from '../components/product/ProductGrid';
 import ProductFilter from '../components/product/ProductFilter';
-import Layout from './Layout';
 
-const Products = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 800);
-  }, []);
-  if (isLoading) return <LoadingScreen />;
+const Store = () => {
   return (
     <>
-      <Layout>
-        <div className="max-w-screen-xl mx-auto xl:flex">
-          <ProductFilter />
-          <ProductGrid />
-        </div>
-      </Layout>
+      <Loader>
+        <Layout>
+          <div className="max-w-screen-xl mx-auto xl:flex">
+            <ProductFilter />
+            <ProductGrid />
+          </div>
+        </Layout>
+      </Loader>
     </>
   );
 };
 
-export default Products;
+export default Store;

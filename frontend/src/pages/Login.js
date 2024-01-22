@@ -1,9 +1,11 @@
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { useEffect, useState } from 'react';
 import { login } from '../actions/auth';
-import Alert from '../components/common/Alert';
 import PropTypes from 'prop-types';
+
+// Components
+import Alert from '../components/common/Alert';
 
 const Login = ({ login, isAuthenticated }) => {
   const [formData, setFormData] = useState({

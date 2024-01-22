@@ -1,4 +1,3 @@
-import React from 'react';
 import bokdok from '../../assets/bok-dok.jpg';
 import { Link } from 'react-router-dom';
 

@@ -1,4 +1,3 @@
-import React from 'react';
 import CartItem from './CartItem';
 import bokdok from '../../assets/bok-dok.jpg';
 
