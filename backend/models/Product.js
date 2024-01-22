@@ -17,8 +17,12 @@ const ProductSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  category: {
+  petTypes: {
     type: [String],
+    required: true,
+  },
+  category: {
+    type: String,
     required: true,
   },
 });

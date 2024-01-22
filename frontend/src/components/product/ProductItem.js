@@ -2,24 +2,23 @@ import React from 'react';
 import bokdok from '../../assets/bok-dok.jpg';
 import { Link } from 'react-router-dom';
 
-const ProductItem = () => {
+const ProductItem = ({ product }) => {
   return (
     <>
-      <div className="m-4 px-6 py-4 max-w-[270px] border border-solid border-[#e6e6e6] shadow-lg rounded-md">
+      <div className="m-4 px-6 py-4 w-[270px] min-h-[290px] border border-solid border-[#e6e6e6] shadow-lg rounded-md">
         <img className="w-[150px] mx-auto" src={bokdok} alt="Product-item" />
-        <p>Bok dok</p>
+        <p className="mb-1">{product.name}</p>
         <p className="text-[12px] text-[#8d8d8d] mb-2">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum,
+          {product.manufacturer}
         </p>
-
         <hr className="my-2 border-solid border-[#e6e6e6]" />
-        <div className="flex justify-between align-center">
+        <div className="flex justify-between align-center mt-4">
           <Link to="/store/product">
             <button className="px-4 py-1 text-[14px] text-[#ffffff] bg-cyan-blue hover:bg-[#000000] transition rounded-full">
               View Product
             </button>
           </Link>
-          <p className="mt-0.5">11300LKR</p>
+          <p className="mt-0.5">{product.price}.00LKR</p>
         </div>
       </div>
     </>
