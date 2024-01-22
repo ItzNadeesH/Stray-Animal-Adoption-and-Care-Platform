@@ -1,11 +1,10 @@
-import bokdok from '../../assets/bok-dok.jpg';
 import { Link } from 'react-router-dom';
 
-const ProductItem = ({ product }) => {
+const ProductItem = ({ product, image }) => {
   return (
     <>
       <div className="m-4 px-6 py-4 w-[270px] min-h-[290px] border border-solid border-[#e6e6e6] shadow-lg rounded-md">
-        <img className="w-[150px] mx-auto" src={bokdok} alt="Product-item" />
+        <img className="w-[150px] mx-auto" src={image} alt="Product-item" />
         <p className="mb-1">{product.name}</p>
         <p className="text-[12px] text-[#8d8d8d] mb-2">
           {product.manufacturer}
