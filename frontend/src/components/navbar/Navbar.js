@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import menu from '../../assets/icons/icon-menu.svg';
-import avatar from '../../assets/icons/image-avatar.png';
 import CartTab from './CartTab';
 import { FaHome, FaInfoCircle, FaStore } from 'react-icons/fa';
 import { IoMdContacts } from 'react-icons/io';

@@ -11,6 +11,7 @@ import OrderComplete from './pages/OrderComplete';
 import { loadUser } from './actions/auth';
 import setAuthToken from './utils/setAuthToken';
 import store from './store';
+import PageNotFound from './pages/PageNotFound';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -34,6 +35,7 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/ordercomplete" element={<OrderComplete />} />
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       </Router>
     </>

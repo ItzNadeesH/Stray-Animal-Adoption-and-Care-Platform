@@ -1,6 +1,5 @@
-import React from 'react';
-import { TailSpin } from 'react-loader-spinner';
 import Layout from './Layout';
+import { TailSpin } from 'react-loader-spinner';
 import { MdPets } from 'react-icons/md';
 
 const LoadingScreen = () => {
