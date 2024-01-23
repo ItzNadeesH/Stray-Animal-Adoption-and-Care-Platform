@@ -13,8 +13,8 @@ const ProductSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  petTypes: {
-    type: [String],
+  petType: {
+    type: String,
     required: true,
   },
   price: {

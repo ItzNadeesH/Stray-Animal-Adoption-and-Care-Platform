@@ -33,7 +33,7 @@ router.post(
       description,
       price,
       manufacturer,
-      petTypes,
+      petType,
       category,
     } = req.body;
 
@@ -42,7 +42,7 @@ router.post(
         name: productName,
         image,
         category,
-        petTypes,
+        petType,
         price,
         manufacturer,
         description,
