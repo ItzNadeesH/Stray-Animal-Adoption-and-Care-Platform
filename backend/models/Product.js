@@ -5,8 +5,16 @@ const ProductSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  description: {
+  image: {
     type: String,
+    required: true,
+  },
+  category: {
+    type: String,
+    required: true,
+  },
+  petTypes: {
+    type: [String],
     required: true,
   },
   price: {
@@ -17,11 +25,7 @@ const ProductSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  petTypes: {
-    type: [String],
-    required: true,
-  },
-  category: {
+  description: {
     type: String,
     required: true,
   },

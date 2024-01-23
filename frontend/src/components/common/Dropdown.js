@@ -6,7 +6,11 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-export default function Dropdown({ items, width = '[200px]' }) {
+export default function Dropdown({
+  items,
+  width = '[200px]',
+  setSelectedProp,
+}) {
   const [selected, setSelected] = useState('Select an option');
   return (
     <Menu as="div" className={` relative inline-block text-left w-${width}`}>
@@ -34,15 +38,18 @@ export default function Dropdown({ items, width = '[200px]' }) {
             {items.map((item, index) => (
               <Menu.Item key={index}>
                 {({ active }) => (
-                  <button
-                    onClick={(e) => setSelected(item)}
+                  <p
+                    onClick={(e) => {
+                      setSelected(item);
+                      setSelectedProp(item);
+                    }}
                     className={classNames(
                       active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                       'block w-full text-left px-4 py-2 text-sm'
                     )}
                   >
                     {item}
-                  </button>
+                  </p>
                 )}
               </Menu.Item>
             ))}

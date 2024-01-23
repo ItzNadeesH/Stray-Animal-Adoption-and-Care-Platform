@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
 
-const ProductItem = ({ product, image }) => {
+const ProductItem = ({ product }) => {
   return (
     <>
       <div className="m-4 px-6 py-4 w-[270px] min-h-[290px] border border-solid border-[#e6e6e6] shadow-lg rounded-md animate-fadeOut">
         <img
           className="w-[150px] h-[150px] mx-auto"
-          src={image}
+          src={product.image}
           alt="Product-item"
         />
         <p className="mb-1">{product.name}</p>
@@ -20,7 +20,7 @@ const ProductItem = ({ product, image }) => {
               View Product
             </button>
           </Link>
-          <p className="mt-0.5">{product.price}.00LKR</p>
+          <p className="mt-0.5">{product.price}LKR</p>
         </div>
       </div>
     </>

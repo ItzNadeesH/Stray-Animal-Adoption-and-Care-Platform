@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
-const Dropzone = () => {
+const Dropzone = ({ setImageProp }) => {
   const [image, setImage] = useState();
 
   // Image input handle
@@ -12,6 +12,7 @@ const Dropzone = () => {
 
       reader.onload = (e) => {
         setImage(e.target.result);
+        setImageProp(e.target.result);
       };
 
       reader.readAsDataURL(file);
@@ -61,6 +62,7 @@ const Dropzone = () => {
           <input
             id="dropzone-file"
             type="file"
+            name="image"
             className="hidden"
             onChange={handleChange}
           />

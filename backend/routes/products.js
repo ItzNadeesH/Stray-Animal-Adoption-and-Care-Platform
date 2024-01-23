@@ -1,5 +1,4 @@
 const express = require('express');
-const config = require('config');
 const { check, validationResult } = require('express-validator');
 const auth = require('../middleware/auth');
 
@@ -12,14 +11,15 @@ const router = express.Router();
 // @access  Private - Admin
 router.post(
   '/',
+
   [
-    [
-      check('name', 'name is required').not().isEmpty(),
-      check('description', 'description is required').not().isEmpty(),
-      check('price', 'price is required').not().isEmpty(),
-      check('manufacturer', 'manufacturer is required').not().isEmpty(),
-      check('category', 'category is required').not().isEmpty(),
-    ],
+    check('productName', 'product name is required').not().isEmpty(),
+    check('image', 'image is required').not().isEmpty(),
+    check('description', 'description is required').not().isEmpty(),
+    check('price', 'price is required').not().isEmpty(),
+    check('manufacturer', 'manufacturer is required').not().isEmpty(),
+    check('category', 'category is required').not().isEmpty(),
+    check('petType', 'pet type is required').not().isEmpty(),
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -27,17 +27,25 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { name, description, price, manufacturer, petTypes, category } =
-      req.body;
+    const {
+      productName,
+      image,
+      description,
+      price,
+      manufacturer,
+      petTypes,
+      category,
+    } = req.body;
 
     try {
       let product = new Product({
-        name,
-        description,
+        name: productName,
+        image,
+        category,
+        petTypes,
         price,
         manufacturer,
-        petTypes,
-        category,
+        description,
       });
 
       await product.save();

@@ -1,13 +1,68 @@
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 import Dropdown from '../common/Dropdown';
 import Dropzone from '../common/Dropzone';
 
 const AddProductForm = () => {
-  const categories = ['Food', 'Suppliment', 'Accessories'];
-  const petType = ['Any', 'Cat', 'Dog'];
+  const [image, setImage] = useState();
+  const [category, setCategory] = useState('');
+  const [petType, setPetType] = useState('');
+  const [formData, setFormData] = useState({
+    productName: '',
+    image: '',
+    category: '',
+    petType: '',
+    price: '',
+    manufacturer: '',
+    description: '',
+  });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  useEffect(() => {
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      image: image,
+      category: category,
+      petType: petType,
+    }));
+  }, [image, category, petType]);
+
+  const categories = ['Food', 'Suppliment', 'Accessories'];
+  const petTypes = ['Any', 'Cat', 'Dog'];
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
+  const { productName, price, manufacturer, description } = formData;
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    const body = JSON.stringify({
+      productName,
+      image,
+      category,
+      petType,
+      price,
+      manufacturer,
+      description,
+    });
+
+    try {
+      await axios.post('/api/products', body, config);
+
+      console.log('Success');
+    } catch (error) {
+      const errors = error.response.data.errors;
+      console.log(errors);
+    }
+  };
+
   return (
     <>
       <div className="max-w-screen-lg bg-[#f6f6f6] p-2">
@@ -19,27 +74,37 @@ const AddProductForm = () => {
           >
             <div className="p-5 border border-[#e6e6e6] rounded-md mb-4 md:mb-0 w-full md:w-[49%]">
               <p className="mb-4 text-[14px]">Add Images</p>
-              <Dropzone />
+              <Dropzone setImageProp={setImage} />
             </div>
             <div className="p-5 border border-[#e6e6e6] rounded-md w-full md:w-[49%]">
               <div className="mb-3">
-                <label className="block text-[12px] mb-2" htmlFor="productname">
+                <label className="block text-[12px] mb-2" htmlFor="productName">
                   Product Name
                 </label>
                 <input
                   className="text-[14px] px-4 py-2.5 h-[40px] border border-[#000000] rounded-md w-full placeholder:text-[#00000080] outline-0"
                   type="text"
-                  name="productname"
-                  id="productname"
+                  name="productName"
+                  id="productName"
+                  onChange={handleChange}
+                  value={formData.productName}
                 />
               </div>
               <div className="mb-3">
                 <p className="block text-[12px] mb-2">Category</p>
-                <Dropdown items={categories} width="full" />
+                <Dropdown
+                  items={categories}
+                  width="full"
+                  setSelectedProp={setCategory}
+                />
               </div>
               <div className="mb-3">
                 <p className="block text-[12px] mb-2">Pet Type</p>
-                <Dropdown items={petType} width="full" />
+                <Dropdown
+                  items={petTypes}
+                  width="full"
+                  setSelectedProp={setPetType}
+                />
               </div>
               <div className="mb-3">
                 <label className="block text-[12px] mb-2" htmlFor="price">
@@ -50,6 +115,9 @@ const AddProductForm = () => {
                   type="number"
                   name="price"
                   id="price"
+                  min={0}
+                  onChange={handleChange}
+                  value={formData.price}
                 />
               </div>
               <div className="mb-3">
@@ -64,6 +132,8 @@ const AddProductForm = () => {
                   type="text"
                   name="manufacturer"
                   id="manufacturer"
+                  onChange={handleChange}
+                  value={formData.manufacturer}
                 />
               </div>
               <div>
@@ -79,6 +149,8 @@ const AddProductForm = () => {
                   id="description"
                   cols="30"
                   rows="10"
+                  onChange={handleChange}
+                  value={formData.description}
                 ></textarea>
               </div>
             </div>

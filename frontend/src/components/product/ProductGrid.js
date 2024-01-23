@@ -1,7 +1,6 @@
 import ProductItem from './ProductItem';
 import { useProducts } from '../../hooks/useProducts';
 import ProductItemSkelton from './ProductItemSkelton';
-import bokdok from '../../assets/bok-dok.jpg';
 
 const ProductGrid = () => {
   const { data, isLoading, error } = useProducts();
@@ -20,9 +19,7 @@ const ProductGrid = () => {
           </>
         ) : (
           data &&
-          data.map((item) => (
-            <ProductItem key={item._id} product={item} image={bokdok} />
-          ))
+          data.map((item) => <ProductItem key={item._id} product={item} />)
         )}
         {error && <div className="error">{error}</div>}
       </div>
