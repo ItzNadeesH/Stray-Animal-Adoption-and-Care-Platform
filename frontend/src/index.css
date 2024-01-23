@@ -27,3 +27,43 @@ body {
     margin: 0;
   }
 }
+
+/* Entering */
+.fade-enter {
+  opacity: 0.01;
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 200ms ease-in;
+}
+
+/* Exiting */
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit-active {
+  opacity: 0.01;
+  transition: opacity 200ms ease-in;
+}
+
+/* Entering */
+.height-enter {
+  max-height: 0;
+}
+
+.height-enter-active {
+  max-height: 100vh;
+  transition: max-height 500ms ease-in;
+}
+
+/* Exiting */
+.height-exit {
+  max-height: 100vh;
+}
+
+.height-exit-active {
+  max-height: 0;
+  transition: max-height 500ms ease-in;
+}

@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 
@@ -6,12 +6,13 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-export default function Dropdown({ items }) {
+export default function Dropdown({ items, width = '[200px]' }) {
+  const [selected, setSelected] = useState('Select an option');
   return (
-    <Menu as="div" className="relative inline-block text-left w-[200px]">
+    <Menu as="div" className={` relative inline-block text-left w-${width}`}>
       <div>
-        <Menu.Button className="inline-flex w-full justify-between gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm text-gray-900 shadow-sm ring-1 ring-inset ring-cyan-blue hover:bg-gray-50">
-          All
+        <Menu.Button className="h-10 inline-flex w-full justify-between items-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm text-gray-900 shadow-sm ring-1 ring-inset ring-cyan-blue hover:bg-gray-50">
+          {selected}
           <ChevronDownIcon
             className="-mr-1 h-5 w-5 text-gray-400"
             aria-hidden="true"
@@ -28,18 +29,19 @@ export default function Dropdown({ items }) {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-[#ffffff] shadow-lg ring-1 ring-[#000000] ring-opacity-5 focus:outline-none">
+        <Menu.Items className="absolute w-full right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-[#ffffff] shadow-lg ring-1 ring-[#000000] ring-opacity-5 focus:outline-none">
           <div className="py-1">
-            {items.map((pet, index) => (
+            {items.map((item, index) => (
               <Menu.Item key={index}>
                 {({ active }) => (
                   <button
+                    onClick={(e) => setSelected(item)}
                     className={classNames(
                       active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                      'block px-4 py-2 text-sm'
+                      'block w-full text-left px-4 py-2 text-sm'
                     )}
                   >
-                    {pet}
+                    {item}
                   </button>
                 )}
               </Menu.Item>

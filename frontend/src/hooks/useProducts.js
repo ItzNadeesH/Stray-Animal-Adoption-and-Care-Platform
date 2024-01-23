@@ -7,6 +7,9 @@ export const useProducts = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    setIsLoading(true);
+    setError(false);
+
     const fetchData = async () => {
       setIsLoading(true);
       setError(false);
@@ -18,7 +21,8 @@ export const useProducts = () => {
       const res = await axios.get('/api/products', config);
       if (res.status >= 200 && res.status < 300) {
         setData(res.data);
-        setTimeout(() => setIsLoading(false), 1500);
+        setIsLoading(false);
+        setError(false);
       } else {
         setIsLoading(false);
         setError(res);
