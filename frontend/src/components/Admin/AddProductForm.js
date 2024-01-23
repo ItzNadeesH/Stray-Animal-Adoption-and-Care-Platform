@@ -65,18 +65,18 @@ const AddProductForm = () => {
 
   return (
     <>
-      <div className="max-w-screen-lg bg-[#f6f6f6] p-2">
+      <div className="max-w-screen-full bg-[#f6f6f6] p-2">
         <div className="p-5 bg-white rounded-lg shadow-lg">
           <p className="mb-2">Add Product</p>
           <form
             className="flex flex-wrap justify-between"
             onSubmit={handleSubmit}
           >
-            <div className="p-5 border border-[#e6e6e6] rounded-md mb-4 md:mb-0 w-full md:w-[49%]">
+            <div className="p-5 border border-[#e6e6e6] rounded-md mb-4 md:mb-0 w-full xl:w-[49%]">
               <p className="mb-4 text-[14px]">Add Images</p>
               <Dropzone setImageProp={setImage} />
             </div>
-            <div className="p-5 border border-[#e6e6e6] rounded-md w-full md:w-[49%]">
+            <div className="p-5 border border-[#e6e6e6] rounded-md w-full xl:w-[49%]">
               <div className="mb-3">
                 <label className="block text-[12px] mb-2" htmlFor="productName">
                   Product Name
