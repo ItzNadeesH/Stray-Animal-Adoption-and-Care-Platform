@@ -11,7 +11,7 @@ const SuccessMessage = ({ navigate, active, setActive }) => {
           !active && 'hidden'
         } overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full bg-[#00000080]`}
       >
-        <div className="absolute absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-4 w-full max-w-md h-full md:h-auto">
+        <div className="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-4 w-full max-w-md h-full md:h-auto">
           <div className="relative p-4 text-center bg-white rounded-lg shadow sm:p-5">
             <button
               onClick={() => setActive(false)}

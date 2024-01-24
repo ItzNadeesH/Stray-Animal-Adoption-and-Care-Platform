@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
+import DeleteMessage from '../common/DeleteMessage';
 
 const ProductRow = ({ item }) => {
+  const [isVisible, setIsVisible] = useState(false);
   const [active, setActive] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -16,6 +18,10 @@ const ProductRow = ({ item }) => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
+
+  const handleDelete = () => {
+    setIsVisible(!isVisible);
+  };
   return (
     <>
       <tr className="border-b">
@@ -100,7 +106,12 @@ const ProductRow = ({ item }) => {
                 </button>
               </li>
               <li>
+                <DeleteMessage
+                  visibility={isVisible}
+                  setVisibility={setIsVisible}
+                />
                 <button
+                  onClick={handleDelete}
                   type="button"
                   data-modal-target="deleteModal"
                   data-modal-toggle="deleteModal"
