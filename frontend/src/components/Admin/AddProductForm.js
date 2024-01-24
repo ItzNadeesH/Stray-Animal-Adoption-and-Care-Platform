@@ -3,6 +3,7 @@ import axios from 'axios';
 import Dropdown from '../common/Dropdown';
 import Dropzone from '../common/Dropzone';
 import SuccessMessage from '../common/SuccessMessage';
+import { IoArrowBack } from 'react-icons/io5';
 
 const AddProductForm = ({ onSelect }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -81,7 +82,14 @@ const AddProductForm = ({ onSelect }) => {
     <>
       <div className="max-w-screen-full bg-[#f6f6f6] p-2">
         <div className="p-5 bg-white rounded-lg shadow-lg">
-          <p className="mb-2">Add Product</p>
+          <div className="flex">
+            <IoArrowBack
+              onClick={() => onSelect('Products')}
+              size={24}
+              className="cursor-pointer"
+            />
+            <p className="mb-2 ml-2">Add Product</p>
+          </div>
           <form
             className="flex flex-wrap justify-between"
             onSubmit={handleSubmit}
