@@ -109,7 +109,7 @@ const ProductList = ({ onSelect }) => {
               </div>
             </div>
             <div className="overflow-x-auto">
-              <table className="w-full text-sm text-left">
+              <table className="w-full text-sm text-left pb-5">
                 <thead className="text-xs text-white uppercase bg-cyan-blue">
                   <tr>
                     <th scope="col" className="px-4 py-4">
@@ -135,10 +135,12 @@ const ProductList = ({ onSelect }) => {
                       <ProductRow
                         key={index}
                         item={product}
-                        onSelect={onSelect}
                         onRemove={handleOnRemove}
                       />
                     ))}
+                  <tr>
+                    <td className="pb-[120px]"></td>
+                  </tr>
                 </tbody>
               </table>
             </div>

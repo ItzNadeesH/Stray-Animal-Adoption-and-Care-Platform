@@ -2,13 +2,17 @@ import React, { useState, useRef, useEffect } from 'react';
 import DeleteMessage from '../common/DeleteMessage';
 import axios from 'axios';
 
-const ProductRow = ({ item, onSelect, onRemove }) => {
+const ProductRow = ({ item, onRemove }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [active, setActive] = useState(false);
   const dropdownRef = useRef(null);
 
   const handleClickOutside = (event) => {
-    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+    if (
+      dropdownRef.current &&
+      !dropdownRef.current.contains(event.target) &&
+      !event.target.closest('button')
+    ) {
       setActive(false);
     }
   };
