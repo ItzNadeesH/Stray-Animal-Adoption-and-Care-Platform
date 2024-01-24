@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Sidebar from '../components/Admin/Sidebar';
 import { useSpring, animated } from '@react-spring/web';
 import ProductList from '../components/Admin/ProductList';
+import AddProductForm from '../components/Admin/AddProductForm';
 
 const Dashboard = () => {
   const [selectedTab, setSelectedTab] = useState('Dashboard');
@@ -14,10 +15,18 @@ const Dashboard = () => {
     onRest: () => setResetAnimation(false),
   });
 
+  const handleTabSelect = (tab) => {
+    setResetAnimation(true);
+    setSelectedTab(tab);
+  };
+
   let content;
   switch (selectedTab) {
+    case 'Add Product':
+      content = <AddProductForm onSelect={handleTabSelect} />;
+      break;
     case 'Products':
-      content = <ProductList />;
+      content = <ProductList onSelect={handleTabSelect} />;
       break;
     case 'Users':
       content = <div>Users</div>;
@@ -26,11 +35,6 @@ const Dashboard = () => {
       content = <div>Dashboard</div>;
       break;
   }
-
-  const handleTabSelect = (tab) => {
-    setResetAnimation(true);
-    setSelectedTab(tab);
-  };
 
   return (
     <>

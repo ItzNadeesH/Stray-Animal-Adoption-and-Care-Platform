@@ -4,7 +4,7 @@ import Dropdown from '../common/Dropdown';
 import Dropzone from '../common/Dropzone';
 import SuccessMessage from '../common/SuccessMessage';
 
-const AddProductForm = () => {
+const AddProductForm = ({ onSelect }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErros] = useState(null);
@@ -68,6 +68,7 @@ const AddProductForm = () => {
       setPetType('Select an option');
       setIsLoading(false);
       setIsVisible(true);
+      //onSelect('Products');
     } catch (error) {
       const errors = error.response.data.errors;
       console.log(errors);
@@ -188,7 +189,11 @@ const AddProductForm = () => {
             ))}
         </div>
       </div>
-      <SuccessMessage active={isVisible} setActive={setIsVisible} />
+      <SuccessMessage
+        navigate={onSelect}
+        active={isVisible}
+        setActive={setIsVisible}
+      />
     </>
   );
 };

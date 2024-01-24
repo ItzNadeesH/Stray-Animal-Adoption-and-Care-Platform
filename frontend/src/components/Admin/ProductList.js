@@ -2,7 +2,7 @@ import React from 'react';
 import ProductRow from './ProductRow';
 import { useProducts } from '../../hooks/useProducts';
 
-const ProductList = () => {
+const ProductList = ({ onSelect }) => {
   const { data } = useProducts();
   return (
     <>
@@ -42,6 +42,9 @@ const ProductList = () => {
               </div>
               <div className="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
                 <button
+                  onClick={() => {
+                    onSelect('Add Product');
+                  }}
                   type="button"
                   id="createProductModalButton"
                   data-modal-target="createProductModal"
@@ -61,7 +64,7 @@ const ProductList = () => {
                       d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
                     />
                   </svg>
-                  Add product
+                  Add Product
                 </button>
                 <div className="flex items-center space-x-3 w-full md:w-auto">
                   <button

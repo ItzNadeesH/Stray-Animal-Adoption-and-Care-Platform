@@ -1,6 +1,6 @@
 import React from 'react';
 
-const SuccessMessage = ({ active, setActive }) => {
+const SuccessMessage = ({ navigate, active, setActive }) => {
   return (
     <>
       <div
@@ -54,7 +54,10 @@ const SuccessMessage = ({ active, setActive }) => {
               Product added successfully.
             </p>
             <button
-              onClick={() => setActive(false)}
+              onClick={() => {
+                setActive(false);
+                navigate('Products');
+              }}
               data-modal-toggle="successModal"
               type="button"
               className="py-2 px-3 text-sm font-normal text-center text-white rounded-lg bg-cyan-blue hover:bg-black outline-none transition-all"
