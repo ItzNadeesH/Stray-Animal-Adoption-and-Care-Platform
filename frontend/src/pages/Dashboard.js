@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Sidebar from '../components/Admin/Sidebar';
 import { useSpring, animated } from '@react-spring/web';
 import ProductList from '../components/Admin/ProductList';
@@ -19,6 +19,9 @@ const Dashboard = () => {
     setResetAnimation(true);
     setSelectedTab(tab);
   };
+  useEffect(() => {
+    handleTabSelect();
+  }, []);
 
   let content;
   switch (selectedTab) {

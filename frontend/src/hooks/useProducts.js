@@ -31,5 +31,5 @@ export const useProducts = () => {
     fetchData();
   }, []);
 
-  return { data, isLoading, error };
+  return { data, setData, isLoading, error };
 };

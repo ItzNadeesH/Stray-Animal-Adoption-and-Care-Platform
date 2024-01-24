@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import DeleteMessage from '../common/DeleteMessage';
+import axios from 'axios';
 
-const ProductRow = ({ item }) => {
+const ProductRow = ({ item, onSelect, onRemove }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [active, setActive] = useState(false);
   const dropdownRef = useRef(null);
@@ -19,8 +20,16 @@ const ProductRow = ({ item }) => {
     };
   }, []);
 
-  const handleDelete = () => {
-    setIsVisible(!isVisible);
+  const handleDelete = async () => {
+    try {
+      const res = await axios.delete('/api/products/' + item._id);
+      console.log(res.data);
+      setIsVisible(false);
+      setActive(false);
+      onRemove(item._id);
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <>
@@ -33,7 +42,8 @@ const ProductRow = ({ item }) => {
         <td className="px-4 py-3">{item.price}</td>
         <td className="relative px-4 py-3 flex items-center justify-center">
           <button
-            onClick={() => setActive((active) => !active)}
+            onClick={() => setActive(true)}
+            id="dropdown-button"
             className="inline-flex items-center text-sm font-medium hover:bg-[#e6e6e6] text-center p-1 rounded-full outline-none transition-all"
             type="button"
           >
@@ -109,9 +119,12 @@ const ProductRow = ({ item }) => {
                 <DeleteMessage
                   visibility={isVisible}
                   setVisibility={setIsVisible}
+                  onDelete={handleDelete}
                 />
                 <button
-                  onClick={handleDelete}
+                  onClick={() => {
+                    setIsVisible(true);
+                  }}
                   type="button"
                   data-modal-target="deleteModal"
                   data-modal-toggle="deleteModal"

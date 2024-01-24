@@ -3,7 +3,11 @@ import ProductRow from './ProductRow';
 import { useProducts } from '../../hooks/useProducts';
 
 const ProductList = ({ onSelect }) => {
-  const { data } = useProducts();
+  const { data, setData } = useProducts();
+
+  const handleOnRemove = (id) => {
+    setData(data.filter((data) => id !== data._id));
+  };
   return (
     <>
       <section className="bg-gray-50 p-3 sm:p-5 antialiased">
@@ -128,7 +132,12 @@ const ProductList = ({ onSelect }) => {
                 <tbody>
                   {data &&
                     data.map((product, index) => (
-                      <ProductRow key={index} item={product} />
+                      <ProductRow
+                        key={index}
+                        item={product}
+                        onSelect={onSelect}
+                        onRemove={handleOnRemove}
+                      />
                     ))}
                 </tbody>
               </table>

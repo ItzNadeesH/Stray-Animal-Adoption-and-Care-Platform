@@ -71,4 +71,18 @@ router.get('/', async (req, res) => {
   }
 });
 
+// @route   DELETE api/products/:id
+// @desc    Delete a product
+// @access  Private
+router.delete('/:id', async (req, res) => {
+  try {
+    await Product.findOneAndDelete({ _id: req.params.id });
+
+    res.status(200).json({ msg: 'Success' });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server error');
+  }
+});
+
 module.exports = router;
