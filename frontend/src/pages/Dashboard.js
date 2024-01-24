@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import Sidebar from '../components/Admin/Sidebar';
-import AddProductForm from '../components/Admin/AddProductForm';
 import { useSpring, animated } from '@react-spring/web';
+import ProductList from '../components/Admin/ProductList';
 
 const Dashboard = () => {
-  const [selectedTab, setSelectedTab] = useState('');
+  const [selectedTab, setSelectedTab] = useState('Dashboard');
   const [resetAnimation, setResetAnimation] = useState(false);
 
   const springs = useSpring({
@@ -17,7 +17,7 @@ const Dashboard = () => {
   let content;
   switch (selectedTab) {
     case 'Products':
-      content = <AddProductForm />;
+      content = <ProductList />;
       break;
     case 'Users':
       content = <div>Users</div>;
