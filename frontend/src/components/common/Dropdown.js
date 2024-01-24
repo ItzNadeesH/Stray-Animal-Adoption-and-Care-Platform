@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import { Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 
@@ -9,21 +9,20 @@ function classNames(...classes) {
 export default function Dropdown({
   items,
   width = '[200px]',
+  selectedProp,
   setSelectedProp,
 }) {
-  const [selected, setSelected] = useState('Select an option');
   return (
     <Menu as="div" className={` relative inline-block text-left w-${width}`}>
       <div>
         <Menu.Button className="h-10 inline-flex w-full justify-between items-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm text-gray-900 shadow-sm ring-1 ring-inset ring-cyan-blue hover:bg-gray-50">
-          {selected}
+          {selectedProp === '' ? 'Select an option' : selectedProp}
           <ChevronDownIcon
             className="-mr-1 h-5 w-5 text-gray-400"
             aria-hidden="true"
           />
         </Menu.Button>
       </div>
-
       <Transition
         as={Fragment}
         enter="transition ease-out duration-100"
@@ -39,8 +38,7 @@ export default function Dropdown({
               <Menu.Item key={index}>
                 {({ active }) => (
                   <p
-                    onClick={(e) => {
-                      setSelected(item);
+                    onClick={() => {
                       setSelectedProp(item);
                     }}
                     className={classNames(

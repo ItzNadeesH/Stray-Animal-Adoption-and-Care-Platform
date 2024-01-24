@@ -14,8 +14,6 @@ import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
 import OrderComplete from './pages/OrderComplete';
 import PageNotFound from './pages/PageNotFound';
-
-import AddProductForm from './components/Admin/AddProductForm';
 import Dashboard from './pages/Dashboard';
 
 if (localStorage.token) {
@@ -40,7 +38,6 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/ordercomplete" element={<OrderComplete />} />
-          <Route path="/addproduct" element={<AddProductForm />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>

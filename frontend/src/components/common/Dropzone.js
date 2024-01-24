@@ -1,8 +1,6 @@
-import { useState } from 'react';
+import React from 'react';
 
-const Dropzone = ({ setImageProp }) => {
-  const [image, setImage] = useState();
-
+const Dropzone = ({ imageProp, setImageProp }) => {
   // Image input handle
   const handleChange = (e) => {
     const file = e.target.files[0];
@@ -11,7 +9,6 @@ const Dropzone = ({ setImageProp }) => {
       const reader = new FileReader();
 
       reader.onload = (e) => {
-        setImage(e.target.result);
         setImageProp(e.target.result);
       };
 
@@ -21,11 +18,11 @@ const Dropzone = ({ setImageProp }) => {
   return (
     <>
       <div className="flex items-center justify-center w-full flex-wrap">
-        {image && (
+        {imageProp && (
           <div className="mb-6 border border-[#e6e6e6] rounded-lg overflow-hidden grow">
             <img
               className="my-2 mx-auto"
-              src={image}
+              src={imageProp}
               alt="Preview"
               style={{ width: '256px', height: '256px' }}
             />
