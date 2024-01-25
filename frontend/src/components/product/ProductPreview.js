@@ -48,7 +48,9 @@ const ProductPreview = () => {
               <div className="relative">
                 <button
                   onClick={() => {
-                    dispatch(ADD_TO_CART({ productId, value }));
+                    dispatch(
+                      ADD_TO_CART({ productId, value, price: data.price })
+                    );
                     setActive(true);
                   }}
                   className="mt-4 block bg-cyan-blue text-[#ffffff] shadow-lg w-[320px] h-[48px] rounded-lg hover:bg-[#000000] transition"

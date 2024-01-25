@@ -16,15 +16,17 @@ export const cartSlice = createSlice({
           {
             productId: action.payload.productId,
             quantity: action.payload.value,
+            price: action.payload.price,
           },
         ])
       );
-      console.log();
+
       return [
         ...state,
         {
           productId: action.payload.productId,
           quantity: action.payload.value,
+          price: action.payload.price,
         },
       ];
     },
@@ -34,6 +36,6 @@ export const cartSlice = createSlice({
   },
 });
 
-export const { ADD_TO_CART, removeFromCart } = cartSlice.actions;
+export const { ADD_TO_CART, REMOVE_FROM_CART } = cartSlice.actions;
 
 export default cartSlice.reducer;
