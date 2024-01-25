@@ -75,7 +75,7 @@ const Navbar = ({ isAuthenticated }) => {
           />
         </svg>
       </button>
-      <div className="absolute top-10 right-[-36px] z-10">
+      <div className="absolute top-10 right-[-24px] z-10">
         {isCartOpen && <CartTab />}
       </div>
       <button onClick={handleProfileClick} className="">
