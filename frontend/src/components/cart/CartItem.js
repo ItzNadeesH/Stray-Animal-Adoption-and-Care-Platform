@@ -2,14 +2,23 @@ import { LuPlus, LuMinus } from 'react-icons/lu';
 import deleteIcon from '../../assets/icons/icon-delete.svg';
 import { useProduct } from '../../hooks/useProduct';
 import { useDispatch } from 'react-redux';
-import { ADD_TO_CART } from '../../reducers/cartSlice';
-import DeleteMessage from '../common/DeleteMessage';
+import { ADD_TO_CART, REMOVE_FROM_CART } from '../../reducers/cartSlice';
 import { useState } from 'react';
 
-const CartItem = ({ item }) => {
+const CartItem = ({ item, onDelete }) => {
   const [quantity, setQuantity] = useState(item.quantity);
   const { data } = useProduct(item.productId);
   const dispatch = useDispatch();
+
+  const handleDelete = () => {
+    onDelete(item.productId);
+    dispatch(
+      REMOVE_FROM_CART({
+        productId: item.productId,
+      })
+    );
+  };
+
   return (
     <>
       {data && (
@@ -24,7 +33,7 @@ const CartItem = ({ item }) => {
             <form className="max-w-xs w-full">
               <div className="relative flex items-center ">
                 <button
-                  disabled={quantity < 2}
+                  disabled={quantity <= 1}
                   type="button"
                   id="decrement-button"
                   data-input-counter-decrement="quantity-input"
@@ -67,7 +76,7 @@ const CartItem = ({ item }) => {
             </form>
           </div>
           <p className="w-[96px]">{data.price}LKR</p>
-          <button onClick={() => <DeleteMessage />}>
+          <button onClick={handleDelete}>
             <img src={deleteIcon} alt="delete-icon" />
           </button>
         </div>

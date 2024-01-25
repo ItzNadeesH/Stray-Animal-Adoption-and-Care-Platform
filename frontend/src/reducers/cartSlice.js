@@ -30,8 +30,12 @@ export const cartSlice = createSlice({
         },
       ];
     },
-    REMOVE_FROM_CART: (state) => {
-      state.value -= 1;
+    REMOVE_FROM_CART: (state, action) => {
+      state = state.filter(
+        (item) => item.productId !== action.payload.productId
+      );
+      Cookies.set('cart', JSON.stringify(state));
+      return state;
     },
   },
 });
