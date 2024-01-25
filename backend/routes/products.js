@@ -71,6 +71,20 @@ router.get('/', async (req, res) => {
   }
 });
 
+// @route   GET api/products/:id
+// @desc    Get a product
+// @access  Public
+router.get('/:id', async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id);
+
+    res.status(200).json(product);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server error');
+  }
+});
+
 // @route   DELETE api/products/:id
 // @desc    Delete a product
 // @access  Private

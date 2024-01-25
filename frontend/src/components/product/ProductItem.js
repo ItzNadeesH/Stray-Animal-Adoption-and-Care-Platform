@@ -15,7 +15,7 @@ const ProductItem = ({ product }) => {
         </p>
         <hr className="my-2 border-solid border-[#e6e6e6]" />
         <div className="flex justify-between align-center mt-4">
-          <Link to="/store/product">
+          <Link to={`/store/product/${product._id}`}>
             <button className="px-4 py-1 text-[14px] text-[#ffffff] bg-cyan-blue hover:bg-[#000000] transition rounded-full">
               View Product
             </button>

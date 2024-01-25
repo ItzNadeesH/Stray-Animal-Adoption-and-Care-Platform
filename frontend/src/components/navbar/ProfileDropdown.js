@@ -27,7 +27,7 @@ const ProfileDropdown = ({ logout }) => {
         <ul className="py-2 " aria-labelledby="user-menu-button">
           <li>
             <Link
-              href="/"
+              to="/dashboard"
               className="block px-4 py-2 text-sm transition-all hover:bg-cyan-blue text-black hover:text-white"
             >
               Dashboard

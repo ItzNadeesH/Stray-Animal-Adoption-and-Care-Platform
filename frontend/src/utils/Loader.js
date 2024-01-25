@@ -7,7 +7,7 @@ const Loader = ({ children }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        await new Promise((resolve) => setTimeout(resolve, 800));
+        await new Promise((resolve) => setTimeout(resolve, 0));
         setIsLoading(false);
       } catch (error) {
         console.error('Error while fetching data:', error);

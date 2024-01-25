@@ -19,9 +19,6 @@ const Dashboard = () => {
     setResetAnimation(true);
     setSelectedTab(tab);
   };
-  useEffect(() => {
-    handleTabSelect();
-  }, []);
 
   let content;
   switch (selectedTab) {
