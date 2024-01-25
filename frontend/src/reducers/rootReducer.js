@@ -4,6 +4,7 @@ import signupAuth from './signupAuth';
 import loginAuth from './loginAuth';
 import userAuth from './userAuth';
 import logoutAuth from './logoutAuth';
+import cartReducer from './cartSlice';
 
 const rootReducer = combineReducers({
   alert,
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
   loginAuth,
   userAuth,
   logoutAuth,
+  cartReducer,
 });
 
 export default rootReducer;

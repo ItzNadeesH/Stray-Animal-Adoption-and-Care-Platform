@@ -3,10 +3,17 @@ import { useProduct } from '../../hooks/useProduct';
 import Counter from '../common/Counter';
 import { useParams } from 'react-router-dom';
 import { useSpring, animated } from '@react-spring/web';
+import { useDispatch } from 'react-redux';
+import { ADD_TO_CART } from '../../reducers/cartSlice';
+import { useState } from 'react';
+import SuccessMessage from '../common/SuccessMessage';
 
 const ProductPreview = () => {
+  const dispatch = useDispatch();
   const { productId } = useParams();
   const { data } = useProduct(productId);
+  const [value, setValue] = useState(1);
+  const [active, setActive] = useState(false);
 
   const springs = useSpring({
     opacity: 1,
@@ -37,16 +44,23 @@ const ProductPreview = () => {
               <h2 className="mb-4 text-[24px] tracking-wide">
                 {data.price}.00LKR
               </h2>
-              <Counter />
+              <Counter value={value} setValue={setValue} />
               <div className="relative">
-                <button className="mt-4 ml-2 mx-auto block bg-cyan-blue text-[#ffffff] shadow-lg w-[320px] h-[48px] rounded-lg hover:bg-[#000000] transition">
+                <button
+                  onClick={() => {
+                    dispatch(ADD_TO_CART({ productId, value }));
+                    setActive(true);
+                  }}
+                  className="mt-4 block bg-cyan-blue text-[#ffffff] shadow-lg w-[320px] h-[48px] rounded-lg hover:bg-[#000000] transition"
+                >
+                  <img
+                    className="absolute top-4 left-[80px] w-4"
+                    src={Cart}
+                    alt="cart"
+                  />
                   Add to Cart
                 </button>
-                <img
-                  className="absolute top-4 left-[100px] w-4"
-                  src={Cart}
-                  alt="cart"
-                />
+                <SuccessMessage active={active} setActive={setActive} />
               </div>
             </div>
           </div>

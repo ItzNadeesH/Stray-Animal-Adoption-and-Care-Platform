@@ -56,7 +56,7 @@ const SuccessMessage = ({ navigate, active, setActive }) => {
             <button
               onClick={() => {
                 setActive(false);
-                navigate('Products');
+                navigate && navigate();
               }}
               data-modal-toggle="successModal"
               type="button"

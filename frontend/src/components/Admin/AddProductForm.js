@@ -198,7 +198,7 @@ const AddProductForm = ({ onSelect }) => {
         </div>
       </div>
       <SuccessMessage
-        navigate={onSelect}
+        navigate={() => onSelect('Products')}
         active={isVisible}
         setActive={setIsVisible}
       />
