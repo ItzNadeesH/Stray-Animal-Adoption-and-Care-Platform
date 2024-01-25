@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Readex+Pro:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Readex+Pro:wght@300;400;500;700&display=swap');
 
 /* Typography */
 
@@ -12,9 +12,58 @@ h4,
 h5,
 h6 {
   font-family: 'Fredoka', sans-serif;
+  font-weight: 700;
 }
 
 body {
   font-family: 'Readex Pro', sans-serif;
   line-height: 1.5;
+}
+
+@layer base {
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
+/* Entering */
+.fade-enter {
+  opacity: 0.01;
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 200ms ease-in;
+}
+
+/* Exiting */
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit-active {
+  opacity: 0.01;
+  transition: opacity 200ms ease-in;
+}
+
+/* Entering */
+.height-enter {
+  max-height: 0;
+}
+
+.height-enter-active {
+  max-height: 100vh;
+  transition: max-height 500ms ease-in;
+}
+
+/* Exiting */
+.height-exit {
+  max-height: 100vh;
+}
+
+.height-exit-active {
+  max-height: 0;
+  transition: max-height 500ms ease-in;
 }
