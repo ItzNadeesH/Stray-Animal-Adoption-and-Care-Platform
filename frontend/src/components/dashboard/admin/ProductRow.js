@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import DeleteMessage from '../common/DeleteMessage';
+import DeleteMessage from '../../common/DeleteMessage';
 import axios from 'axios';
 
 const ProductRow = ({ item, onRemove }) => {

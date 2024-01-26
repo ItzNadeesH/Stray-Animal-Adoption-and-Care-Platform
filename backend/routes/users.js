@@ -50,4 +50,32 @@ router.post(
   }
 );
 
+// @route   GET api/users
+// @desc    Get all users
+// @access  Private
+router.get('/', async (req, res) => {
+  try {
+    const users = await User.find().sort({ createdAt: -1 });
+
+    res.status(200).json(users);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server error');
+  }
+});
+
+// @route   Delete api/users/:id
+// @desc    Delete a user
+// @access  Private
+router.delete('/:id', async (req, res) => {
+  try {
+    await User.findByIdAndDelete({ _id: req.params.id });
+
+    res.status(200).json({ msg: 'success' });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server error');
+  }
+});
+
 module.exports = router;

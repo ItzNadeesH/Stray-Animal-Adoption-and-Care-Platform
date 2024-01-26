@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import Sidebar from '../components/Admin/Sidebar';
 import { useSpring, animated } from '@react-spring/web';
-import ProductList from '../components/Admin/ProductList';
-import AddProductForm from '../components/Admin/AddProductForm';
-import Settings from '../components/Admin/Settings';
+import Sidebar from '../components/dashboard/admin/Sidebar';
+import ProductList from '../components/dashboard/admin/ProductList';
+import AddProductForm from '../components/dashboard/admin/AddProductForm';
+import Settings from '../components/dashboard/admin/Settings';
+import UsersList from '../components/dashboard/admin/UsersList';
 
 const Dashboard = () => {
   const [selectedTab, setSelectedTab] = useState('Dashboard');
@@ -33,7 +34,7 @@ const Dashboard = () => {
       content = <ProductList onSelect={handleTabSelect} />;
       break;
     case 'Users':
-      content = <div>Users</div>;
+      content = <UsersList />;
       break;
     default:
       content = <div>Dashboard</div>;

@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import Dropdown from '../common/Dropdown';
-import Dropzone from '../common/Dropzone';
-import SuccessMessage from '../common/SuccessMessage';
+import Dropdown from '../../common/Dropdown';
+import Dropzone from '../../common/Dropzone';
+import SuccessMessage from '../../common/SuccessMessage';
 import { IoArrowBack } from 'react-icons/io5';
 
 const AddProductForm = ({ onSelect }) => {

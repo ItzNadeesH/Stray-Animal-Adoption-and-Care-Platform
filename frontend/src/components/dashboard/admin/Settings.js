@@ -1,5 +1,5 @@
 import React from 'react';
-import avatar from '../../assets/icons/image-avatar.png';
+import avatar from '../../../assets/icons/image-avatar.png';
 
 const Settings = () => {
   return (

@@ -1,6 +1,6 @@
 import React from 'react';
 import ProductRow from './ProductRow';
-import { useProducts } from '../../hooks/useProducts';
+import { useProducts } from '../../../hooks/useProducts';
 
 const ProductList = ({ onSelect }) => {
   const { data, setData } = useProducts();
@@ -131,9 +131,9 @@ const ProductList = ({ onSelect }) => {
                 </thead>
                 <tbody>
                   {data &&
-                    data.map((product, index) => (
+                    data.map((product) => (
                       <ProductRow
-                        key={index}
+                        key={product._id}
                         item={product}
                         onRemove={handleOnRemove}
                       />
