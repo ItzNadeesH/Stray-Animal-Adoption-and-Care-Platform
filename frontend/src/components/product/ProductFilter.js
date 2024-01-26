@@ -1,7 +1,10 @@
+import React, { useState } from 'react';
 import Dropdown from '../common/Dropdown';
 
 const ProductFilter = () => {
-  const petTypes = ['All', 'Cat', 'Dog'];
+  const [petType, setPetType] = useState('All');
+  const [category, setCategory] = useState('All');
+  const petTypes = ['All', 'Cat', 'Dog', 'Bird'];
   const productCategories = ['All', 'Food', 'Supplement', 'Accessories'];
   return (
     <>
@@ -10,11 +13,19 @@ const ProductFilter = () => {
         <h2 className="mb-4 text-[24px] border-b border-[#e6e6e6]">Products</h2>
         <div className="flex justify-between mb-4">
           <p className="mt-2 text-[14px]">Pet Type</p>
-          <Dropdown items={petTypes} />
+          <Dropdown
+            items={petTypes}
+            selectedProp={petType}
+            setSelectedProp={setPetType}
+          />
         </div>
         <div className="flex justify-between">
           <p className="mt-2 text-[14px]">Category</p>
-          <Dropdown items={productCategories} />
+          <Dropdown
+            items={productCategories}
+            selectedProp={category}
+            setSelectedProp={setCategory}
+          />
         </div>
       </div>
     </>

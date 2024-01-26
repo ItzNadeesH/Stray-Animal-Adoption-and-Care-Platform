@@ -3,6 +3,7 @@ import Sidebar from '../components/Admin/Sidebar';
 import { useSpring, animated } from '@react-spring/web';
 import ProductList from '../components/Admin/ProductList';
 import AddProductForm from '../components/Admin/AddProductForm';
+import Settings from '../components/Admin/Settings';
 
 const Dashboard = () => {
   const [selectedTab, setSelectedTab] = useState('Dashboard');
@@ -22,6 +23,9 @@ const Dashboard = () => {
 
   let content;
   switch (selectedTab) {
+    case 'Settings':
+      content = <Settings />;
+      break;
     case 'Add Product':
       content = <AddProductForm onSelect={handleTabSelect} />;
       break;
@@ -40,7 +44,7 @@ const Dashboard = () => {
     <>
       <div className="bg-[#f6f6f6] min-h-screen overflow-hidden">
         <Sidebar selected={selectedTab} onSelect={handleTabSelect} />
-        <div className="ml-[270px]">
+        <div className="md:ml-[270px]">
           <animated.div
             style={{
               ...springs,

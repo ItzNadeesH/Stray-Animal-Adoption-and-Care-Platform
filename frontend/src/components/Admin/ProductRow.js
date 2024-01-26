@@ -25,11 +25,11 @@ const ProductRow = ({ item, onRemove }) => {
   }, []);
 
   const handleDelete = async () => {
+    setActive(false);
     try {
       const res = await axios.delete('/api/products/' + item._id);
       console.log(res.data);
       setIsVisible(false);
-      setActive(false);
       onRemove(item._id);
     } catch (error) {
       console.log(error);
