@@ -2,6 +2,7 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const { check, validationResult } = require('express-validator');
 const User = require('../models/User');
+const auth = require('../middleware/auth');
 
 const router = express.Router();
 
@@ -67,9 +68,14 @@ router.get('/', async (req, res) => {
 // @route   Delete api/users/:id
 // @desc    Delete a user
 // @access  Private
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', auth, async (req, res) => {
+  if (req.user.id === req.params.id) {
+    return res
+      .status(300)
+      .json({ msg: 'Can not delete current logged in user' });
+  }
   try {
-    await User.findByIdAndDelete({ _id: req.params.id });
+    await User.findByIdAndDelete(req.params.id);
 
     res.status(200).json({ msg: 'success' });
   } catch (error) {
