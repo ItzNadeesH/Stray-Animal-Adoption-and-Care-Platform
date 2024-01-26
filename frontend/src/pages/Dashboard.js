@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useSpring, animated } from '@react-spring/web';
+import Layout from './Layout';
 import Sidebar from '../components/dashboard/admin/Sidebar';
 import ProductList from '../components/dashboard/admin/ProductList';
 import AddProductForm from '../components/dashboard/admin/AddProductForm';
 import Settings from '../components/dashboard/admin/Settings';
 import UsersList from '../components/dashboard/admin/UsersList';
+import DashboardHome from '../components/dashboard/admin/DashboardHome';
 
 const Dashboard = () => {
   const [selectedTab, setSelectedTab] = useState('Dashboard');
@@ -37,24 +39,29 @@ const Dashboard = () => {
       content = <UsersList />;
       break;
     default:
-      content = <div>Dashboard</div>;
+      content = <DashboardHome />;
       break;
   }
 
   return (
     <>
-      <div className="bg-[#f6f6f6] min-h-screen overflow-hidden">
-        <Sidebar selected={selectedTab} onSelect={handleTabSelect} />
-        <div className="md:ml-[270px]">
-          <animated.div
-            style={{
-              ...springs,
-            }}
-          >
-            {content}
-          </animated.div>
+      <Layout>
+        <div
+          className="bg-[#f6f6f6] min-h-screen overflow-hidden border-t border-[#e6e6e6] mt-[-1px]"
+          style={{ minHeight: 'calc(100vh - 80px)' }}
+        >
+          <Sidebar selected={selectedTab} onSelect={handleTabSelect} />
+          <div className="md:ml-[270px]">
+            <animated.div
+              style={{
+                ...springs,
+              }}
+            >
+              {content}
+            </animated.div>
+          </div>
         </div>
-      </div>
+      </Layout>
     </>
   );
 };
