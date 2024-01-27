@@ -30,6 +30,8 @@ const Signup = ({ register, isAuthenticated }) => {
     const { username, email, password } = formData;
 
     await register(username, email, password);
+
+    return navigate('/login');
   };
 
   return (
