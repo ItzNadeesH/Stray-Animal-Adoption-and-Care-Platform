@@ -9,6 +9,7 @@ import UsersList from '../components/dashboard/admin/UsersList';
 import DashboardHome from '../components/dashboard/admin/DashboardHome';
 
 const Dashboard = () => {
+  console.log('dashbaord');
   const [selectedTab, setSelectedTab] = useState('Dashboard');
   const [resetAnimation, setResetAnimation] = useState(false);
 

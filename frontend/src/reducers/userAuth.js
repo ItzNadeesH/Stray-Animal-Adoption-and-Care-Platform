@@ -6,6 +6,7 @@ import {
 const initialState = {
   token: null,
   isAuthenticated: null,
+  isLoading: true,
   user: null,
 };
 
@@ -18,6 +19,7 @@ const userAuth = (state = initialState, action) => {
         ...state,
         token: localStorage.getItem('token'),
         isAuthenticated: true,
+        isLoading: false,
         user: payload,
       };
     case AUTHENTICATION_FAILED:
@@ -26,6 +28,7 @@ const userAuth = (state = initialState, action) => {
         ...state,
         token: null,
         isAuthenticated: false,
+        isLoading: false,
         user: null,
       };
     default:

@@ -15,6 +15,7 @@ import Checkout from './pages/Checkout';
 import OrderComplete from './pages/OrderComplete';
 import PageNotFound from './pages/PageNotFound';
 import Dashboard from './pages/Dashboard';
+import PrivateRoute from './components/routing/PrivateRoute';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -38,7 +39,14 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/ordercomplete" element={<OrderComplete />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route
+            path="/dashboard"
+            element={
+              <PrivateRoute>
+                <Dashboard />
+              </PrivateRoute>
+            }
+          />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </Router>
