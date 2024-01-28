@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import Layout from './Layout';
 import { FaChevronRight } from 'react-icons/fa';
 import Loader from '../utils/Loader';
+import axios from 'axios';
 
 // Components
 import OrderDetails from '../components/checkout/OrderDetails';
@@ -13,7 +14,7 @@ const Checkout = () => {
   const cart = useSelector((state) => state.cartReducer);
 
   const products = cart.map((item) => ({
-    id: item.productId,
+    product: item.productId,
     quantity: item.quantity,
   }));
 
@@ -28,11 +29,31 @@ const Checkout = () => {
     notes: '',
     products: products,
     payment: '',
+    card: {
+      cardnumber: '',
+      expiredate: '',
+      cvv: '',
+    },
   });
+  const [error, setError] = useState(null);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+
+      const body = formData;
+
+      const res = await axios.post('/api/orders/checkout', body, config);
+
+      console.log(res.data.msg);
+    } catch (error) {
+      setError(error.response.data.msg);
+    }
   };
 
   return (
@@ -46,7 +67,12 @@ const Checkout = () => {
               Checkout
             </h1>
             <div className="lg:flex gap-10">
-              <CheckoutForm data={formData} setData={setFormData} />
+              <CheckoutForm
+                data={formData}
+                setData={setFormData}
+                error={error}
+                setError={setError}
+              />
               <div className="lg:mt-[92px] lg:max-w-[480px] mb-8 grow">
                 <OrderDetails />
                 <PaymentMethod
