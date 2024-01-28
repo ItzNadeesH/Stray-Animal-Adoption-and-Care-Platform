@@ -4,9 +4,6 @@ import { connect } from 'react-redux';
 import { login } from '../actions/auth';
 import PropTypes from 'prop-types';
 
-// Components
-import Alert from '../components/common/Alert';
-
 const Login = ({ login, isAuthenticated }) => {
   const [formData, setFormData] = useState({
     email: '',
@@ -44,7 +41,6 @@ const Login = ({ login, isAuthenticated }) => {
           <p className="mb-4 text-center text-[14px]">
             Please enter your credentials to access your account.
           </p>
-          <Alert />
           <form onSubmit={handleSubmit}>
             <div>
               <label
@@ -106,4 +102,4 @@ const mapStateToProps = (state) => ({
   isAuthenticated: state.userAuth.isAuthenticated,
 });
 
-export default connect(mapStateToProps, { Alert, login })(Login);
+export default connect(mapStateToProps, { login })(Login);

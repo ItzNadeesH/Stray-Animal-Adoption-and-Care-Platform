@@ -1,9 +1,15 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { connect, useSelector } from 'react-redux';
 import axios from 'axios';
+import { loadProfile } from '../../actions/auth';
+import PropTypes from 'prop-types';
 import avatar from '../../assets/icons/image-avatar.png';
 
-const Settings = () => {
+const Settings = ({ loadProfile }) => {
+  useEffect(() => {
+    loadProfile();
+  }, [loadProfile]);
+
   const user = useSelector((state) => state.userAuth.user);
   const { username, email } = user;
 
@@ -17,6 +23,14 @@ const Settings = () => {
   });
 
   const { firstname, lastname, address, city, postcode, phone } = formData;
+
+  const profile = useSelector((state) => state.profileAuth.profile);
+
+  useEffect(() => {
+    if (profile) {
+      setFormData(profile);
+    }
+  }, [profile]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -34,6 +48,8 @@ const Settings = () => {
       const body = { firstname, lastname, address, city, postcode, phone };
 
       await axios.post('/api/profiles', body, config);
+
+      loadProfile();
     } catch (error) {
       console.log(error);
     }
@@ -203,4 +219,8 @@ const Settings = () => {
   );
 };
 
-export default Settings;
+Settings.propTypes = {
+  loadProfile: PropTypes.func.isRequired,
+};
+
+export default connect(null, { loadProfile })(Settings);

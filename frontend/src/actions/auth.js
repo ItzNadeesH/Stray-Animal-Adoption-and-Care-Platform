@@ -1,4 +1,3 @@
-import { setAlert } from '../actions/alert';
 import setAuthToken from '../utils/setAuthToken';
 import axios from 'axios';
 import {
@@ -59,9 +58,7 @@ export const login = (email, password) => async (dispatch) => {
   } catch (error) {
     const errors = error.response.data.errors;
 
-    if (errors) {
-      dispatch(setAlert(errors[0].msg, 'danger'));
-    }
+    console.log(errors);
 
     dispatch({ type: LOGIN_FAILED });
   }
@@ -83,9 +80,7 @@ export const register = (username, email, password) => async (dispatch) => {
   } catch (error) {
     const errors = error.response.data.errors;
 
-    if (errors) {
-      dispatch(setAlert(errors[0].msg, 'danger'));
-    }
+    console.log(errors);
 
     dispatch({ type: REGISTER_FAILED });
   }

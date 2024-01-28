@@ -4,9 +4,6 @@ import { connect } from 'react-redux';
 import { register } from '../actions/auth';
 import PropTypes from 'prop-types';
 
-// Components
-import Alert from '../components/common/Alert';
-
 const Signup = ({ register, isAuthenticated }) => {
   const [formData, setFormData] = useState({
     username: '',
@@ -49,7 +46,6 @@ const Signup = ({ register, isAuthenticated }) => {
             throughout this website, to manage access to your account, and for
             other purposes described in our privacy policy.
           </p>
-          <Alert />
           <form onSubmit={handleSubmit}>
             <div>
               <label
