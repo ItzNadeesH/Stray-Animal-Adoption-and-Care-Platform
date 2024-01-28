@@ -44,6 +44,28 @@ const OrderSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  email: {
+    type: String,
+    required: true,
+  },
+  notes: {
+    type: String,
+  },
+  payment: {
+    type: String,
+    required: true,
+  },
+  card: {
+    cardnumber: {
+      type: String,
+    },
+    expiredate: {
+      type: String,
+    },
+    cvv: {
+      type: String,
+    },
+  },
   date: {
     type: Date,
     default: Date.now,
