@@ -4,6 +4,7 @@ import axios from 'axios';
 import {
   AUTHENTICATION_FAILED,
   AUTHENTICATION_SUCCESS,
+  GET_PROFILE,
   LOGIN_FAILED,
   LOGIN_SUCCESS,
   LOGOUT_FAILED,
@@ -28,6 +29,16 @@ export const loadUser = () => async (dispatch) => {
     dispatch({
       type: AUTHENTICATION_FAILED,
     });
+  }
+};
+
+// Load Profile
+export const loadProfile = () => async (dispatch) => {
+  try {
+    const res = await axios.get('api/profiles/me');
+    dispatch({ type: GET_PROFILE, payload: res.data });
+  } catch (error) {
+    console.log(error);
   }
 };
 

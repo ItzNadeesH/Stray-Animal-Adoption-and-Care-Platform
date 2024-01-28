@@ -4,7 +4,7 @@ const Profile = require('../models/Profile');
 
 const router = express.Router();
 
-// @route   PUT api/profiles
+// @route   POST api/profiles
 // @desc    Edit Profile
 // @access  Private
 router.post('/', auth, async (req, res) => {
@@ -36,6 +36,26 @@ router.post('/', auth, async (req, res) => {
     await profile.save();
 
     res.status(200).json('Updated Successfully');
+  } catch (error) {
+    console.error(error.meesage);
+    res.status(500).send('Server Error');
+  }
+});
+
+// @route   GET api/profiles
+// @desc    Get current profile
+// @access  Private
+router.get('/me', auth, async (req, res) => {
+  try {
+    const profile = await Profile.findOne({ user: req.user.id });
+
+    if (!profile) {
+      return res
+        .status(400)
+        .json({ msg: 'Threre is no profile for this user' });
+    }
+
+    res.status(200).json(profile);
   } catch (error) {
     console.error(error.meesage);
     res.status(500).send('Server Error');

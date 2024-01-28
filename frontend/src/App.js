@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 import { loadUser } from './actions/auth';
 import setAuthToken from './utils/setAuthToken';
 import store from './store';
-
 // Pages
 import Signup from './pages/Signup';
 import Login from './pages/Login';
