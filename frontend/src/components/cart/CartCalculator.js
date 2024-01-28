@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const CartCalculator = () => {
   const cart = useSelector((state) => state.cartReducer);
@@ -24,9 +25,11 @@ const CartCalculator = () => {
           <p className="font-medium text-[14px]">Total</p>
           <p className="font-medium text-[14px]">{total + 650}.00LKR</p>
         </div>
-        <button className="mt-4 text-[14px] mx-auto block bg-cyan-blue text-[#ffffff] shadow-lg w-full h-[48px] rounded-full hover:bg-[#000000] transition">
-          Proceed to Checkout
-        </button>
+        <Link to="/checkout">
+          <button className="mt-4 text-[14px] mx-auto block bg-cyan-blue text-[#ffffff] shadow-lg w-full h-[48px] rounded-full hover:bg-[#000000] transition">
+            Proceed to Checkout
+          </button>
+        </Link>
       </div>
     </>
   );
