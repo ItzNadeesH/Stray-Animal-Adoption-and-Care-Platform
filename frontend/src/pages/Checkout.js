@@ -1,3 +1,5 @@
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import Layout from './Layout';
 import { FaChevronRight } from 'react-icons/fa';
 import Loader from '../utils/Loader';
@@ -8,6 +10,31 @@ import CheckoutForm from '../components/checkout/CheckoutForm';
 import PaymentMethod from '../components/checkout/PaymentMethod';
 
 const Checkout = () => {
+  const cart = useSelector((state) => state.cartReducer);
+
+  const products = cart.map((item) => ({
+    id: item.productId,
+    quantity: item.quantity,
+  }));
+
+  const [formData, setFormData] = useState({
+    firstname: '',
+    lastname: '',
+    address: '',
+    city: '',
+    postcode: '',
+    phone: '',
+    email: '',
+    notes: '',
+    products: products,
+    payment: '',
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData);
+  };
+
   return (
     <>
       <Loader>
@@ -19,10 +46,14 @@ const Checkout = () => {
               Checkout
             </h1>
             <div className="lg:flex gap-10">
-              <CheckoutForm />
+              <CheckoutForm data={formData} setData={setFormData} />
               <div className="lg:mt-[92px] lg:max-w-[480px] mb-8 grow">
                 <OrderDetails />
-                <PaymentMethod />
+                <PaymentMethod
+                  data={formData}
+                  setData={setFormData}
+                  onSubmit={handleSubmit}
+                />
               </div>
             </div>
           </div>

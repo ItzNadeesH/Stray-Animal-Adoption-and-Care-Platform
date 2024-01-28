@@ -1,22 +1,23 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import CreditCardForm from '../common/CreditCardForm';
 
-const PaymentMethod = () => {
+const PaymentMethod = ({ data, setData, onSubmit }) => {
+  const [agree, setAgree] = useState(true);
   const [selectedOption, setSelectedOption] = useState('');
 
   const handleRadioChange = (event) => {
     setSelectedOption(event.target.value);
     if (event.target.value === 'cash') {
-      console.log('!');
+      setData({ ...data, payment: 'cash' });
     }
     if (event.target.value === 'card') {
-      console.log('!');
+      setData({ ...data, payment: 'card' });
     }
   };
   return (
     <>
       <div className="p-5 lg:p-10 mt-5 border border-[#e6e6e6]">
-        <form>
+        <div>
           <div className="flex items-center mb-2">
             <input
               className="mr-2 cursor-pointer"
@@ -59,7 +60,7 @@ const PaymentMethod = () => {
               selectedOption === 'card' && 'h-[104px]'
             }`}
           >
-            <CreditCardForm />
+            <CreditCardForm data={data} setData={setData} />
           </div>
           <p className="text-[12px] my-2">
             Your personal data will be used to process your order, support your
@@ -72,16 +73,21 @@ const PaymentMethod = () => {
               type="checkbox"
               name="terms"
               id="terms"
+              onClick={() => setAgree(!agree)}
               required
             />
             <label className="text-[14px] cursor-pointer" htmlFor="terms">
               I have read and agree to the website terms and conditions *
             </label>
           </div>
-          <button className="mt-4 text-[14px] mx-auto block bg-cyan-blue text-[#ffffff] shadow-lg w-full h-[48px] rounded-full hover:bg-[#000000] transition">
+          <button
+            disabled={agree}
+            onClick={onSubmit}
+            className="mt-4 text-[14px] mx-auto block bg-cyan-blue text-[#ffffff] shadow-lg w-full h-[48px] rounded-full hover:bg-[#000000] transition"
+          >
             Place Order
           </button>
-        </form>
+        </div>
       </div>
     </>
   );
