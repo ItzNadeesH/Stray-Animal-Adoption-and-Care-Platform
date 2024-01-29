@@ -9,7 +9,9 @@ const router = express.Router();
 // @access  Private
 router.get('/', auth, async (req, res) => {
   try {
-    const orders = await Order.find({ customer: req.user.id });
+    const orders = await Order.find({ customer: req.user.id })
+      .select('products address payment card date')
+      .sort({ date: -1 });
 
     res.status(200).json(orders);
   } catch (error) {
@@ -52,7 +54,6 @@ router.post('/checkout', auth, async (req, res) => {
     ) {
       throw Error('All fields must be filled');
     }
-
     if (
       payment === 'card' &&
       (!card.cardnumber || !card.expiredate || !card.cvv)

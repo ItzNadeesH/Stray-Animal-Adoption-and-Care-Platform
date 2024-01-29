@@ -13,11 +13,6 @@ import PaymentMethod from '../components/checkout/PaymentMethod';
 const Checkout = () => {
   const cart = useSelector((state) => state.cartReducer);
 
-  const products = cart.map((item) => ({
-    product: item.productId,
-    quantity: item.quantity,
-  }));
-
   const [formData, setFormData] = useState({
     firstname: '',
     lastname: '',
@@ -27,7 +22,7 @@ const Checkout = () => {
     phone: '',
     email: '',
     notes: '',
-    products: products,
+    products: cart,
     payment: '',
     card: {
       cardnumber: '',

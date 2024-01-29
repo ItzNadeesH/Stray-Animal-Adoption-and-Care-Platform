@@ -10,8 +10,7 @@ const MyOrders = () => {
     <>
       <div className="max-w-screen-full">
         <div>
-          <Order />
-          <Order />
+          {data && data.map((item) => <Order key={item._id} order={item} />)}
         </div>
       </div>
     </>

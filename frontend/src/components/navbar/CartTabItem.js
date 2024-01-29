@@ -33,7 +33,9 @@ const CartTabItem = ({ product }) => {
               alt="bokdok"
             />
             <div className="ml-6">
-              <p className="text-[14px] font-medium">{data.name}</p>
+              <p className="text-[14px] max-w-[200px] font-medium">
+                {data.name}
+              </p>
               <p className="text-[14px] font-medium">
                 <span className="text-[#767676] font-normal">
                   {data.price}LKR x {product.quantity} ={' '}
