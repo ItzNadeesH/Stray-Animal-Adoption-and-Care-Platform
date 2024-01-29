@@ -4,6 +4,19 @@ const Order = require('../models/Order');
 
 const router = express.Router();
 
+// @route   POST api/orders/:id
+// @desc    Get orders
+// @access  Private
+router.get('/', auth, async (req, res) => {
+  try {
+    const orders = await Order.find({ customer: req.user.id });
+
+    res.status(200).json(orders);
+  } catch (error) {
+    res.status(400).json({ msg: error.message });
+  }
+});
+
 // @route   POST api/orders
 // @desc    Buy products
 // @access  Private
