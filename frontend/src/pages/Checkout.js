@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useSelector, connect } from 'react-redux';
 import Layout from './Layout';
 import { FaChevronRight } from 'react-icons/fa';
 import Loader from '../utils/Loader';
+import { loadProfile } from '../actions/auth';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 
 // Components
@@ -10,7 +12,23 @@ import OrderDetails from '../components/checkout/OrderDetails';
 import CheckoutForm from '../components/checkout/CheckoutForm';
 import PaymentMethod from '../components/checkout/PaymentMethod';
 
-const Checkout = () => {
+const Checkout = ({ loadProfile }) => {
+  useEffect(() => {
+    loadProfile();
+  }, [loadProfile]);
+
+  const profile = useSelector((state) => state.profileAuth.profile);
+
+  useEffect(() => {
+    if (profile) {
+      const { _id, user, date, __v, avatar, ...profileWithoutAvatar } = profile;
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        ...profileWithoutAvatar,
+      }));
+    }
+  }, [profile]);
+
   const cart = useSelector((state) => state.cartReducer);
 
   const [formData, setFormData] = useState({
@@ -84,4 +102,8 @@ const Checkout = () => {
   );
 };
 
-export default Checkout;
+Checkout.propTypes = {
+  loadProfile: PropTypes.func.isRequired,
+};
+
+export default connect(null, { loadProfile })(Checkout);
