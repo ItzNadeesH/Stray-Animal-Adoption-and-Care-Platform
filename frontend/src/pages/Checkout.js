@@ -13,6 +13,7 @@ import OrderDetails from '../components/checkout/OrderDetails';
 import CheckoutForm from '../components/checkout/CheckoutForm';
 import PaymentMethod from '../components/checkout/PaymentMethod';
 import { CLEAR_CART } from '../reducers/cartSlice';
+import { COMPLETE_ORDER } from '../reducers/orderSlice';
 
 const Checkout = ({ loadProfile }) => {
   useEffect(() => {
@@ -68,6 +69,7 @@ const Checkout = ({ loadProfile }) => {
 
       await axios.post('/api/orders/checkout', body, config);
       dispatch(CLEAR_CART());
+      dispatch(COMPLETE_ORDER());
       return navigate('/ordercomplete');
     } catch (error) {
       setError(error.response.data.msg);
