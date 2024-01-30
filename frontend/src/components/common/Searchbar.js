@@ -37,7 +37,7 @@ const Searchbar = ({ data, results, setResult }) => {
           <input
             type="text"
             id="simple-search"
-            className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:border-cyan-blue block w-full pl-10 p-2 outline-0 transition-all"
+            className="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full pl-10 p-2 outline-0 transition-all"
             placeholder="Search"
             onChange={handleSearch}
             value={keyword}
