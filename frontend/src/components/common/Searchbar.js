@@ -1,9 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const Searchbar = () => {
+const Searchbar = ({ data, results, setResult }) => {
+  const [keyword, setKeyword] = useState('');
+
+  const handleSearch = (e) => {
+    setKeyword(e.target.value);
+
+    setResult(
+      data.filter((item) =>
+        item.name.toLowerCase().includes(e.target.value.toLowerCase())
+      )
+    );
+  };
   return (
     <>
-      <form className="flex items-center">
+      <div className="flex items-center">
         <label htmlFor="simple-search" className="sr-only">
           Search
         </label>
@@ -28,9 +39,11 @@ const Searchbar = () => {
             id="simple-search"
             className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:border-cyan-blue block w-full pl-10 p-2 outline-0 transition-all"
             placeholder="Search"
+            onChange={handleSearch}
+            value={keyword}
           />
         </div>
-      </form>
+      </div>
     </>
   );
 };

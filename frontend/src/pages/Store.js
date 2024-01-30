@@ -12,7 +12,9 @@ const Store = () => {
         <Layout>
           <div className="max-w-screen-xl mx-auto xl:flex mt-4">
             <ProductFilter />
-            <ProductGrid />
+            <div className="ml-4 grow">
+              <ProductGrid />
+            </div>
           </div>
         </Layout>
       </Loader>
