@@ -38,6 +38,7 @@ export const cartSlice = createSlice({
       return state;
     },
     CLEAR_CART: (state) => {
+      Cookies.remove('cart');
       state = [];
       return state;
     },

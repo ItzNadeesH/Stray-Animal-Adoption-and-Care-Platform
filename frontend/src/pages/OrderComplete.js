@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import Loader from '../utils/Loader';
 import Layout from './Layout';
 import { FaChevronRight } from 'react-icons/fa';
@@ -21,9 +22,12 @@ const OrderComplete = () => {
             </h1>
             <p className="mt-5 text-[14px] text-center">
               Track Your Order - Head Back to{' '}
-              <span className="text-cyan-blue font-medium cursor-pointer">
-                Orders
-              </span>{' '}
+              <Link
+                to="/dashboard"
+                className="text-cyan-blue font-medium cursor-pointer"
+              >
+                My Orders
+              </Link>{' '}
               and Stay Updated on Your Recent Purchase! 📦🔍
             </p>
           </div>

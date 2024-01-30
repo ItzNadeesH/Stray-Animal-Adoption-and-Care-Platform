@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector, connect } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useSelector, connect, useDispatch } from 'react-redux';
 import Layout from './Layout';
 import { FaChevronRight } from 'react-icons/fa';
 import Loader from '../utils/Loader';
@@ -11,11 +12,15 @@ import axios from 'axios';
 import OrderDetails from '../components/checkout/OrderDetails';
 import CheckoutForm from '../components/checkout/CheckoutForm';
 import PaymentMethod from '../components/checkout/PaymentMethod';
+import { CLEAR_CART } from '../reducers/cartSlice';
 
 const Checkout = ({ loadProfile }) => {
   useEffect(() => {
     loadProfile();
   }, [loadProfile]);
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const profile = useSelector((state) => state.profileAuth.profile);
 
@@ -61,9 +66,9 @@ const Checkout = ({ loadProfile }) => {
 
       const body = formData;
 
-      const res = await axios.post('/api/orders/checkout', body, config);
-
-      console.log(res.data.msg);
+      await axios.post('/api/orders/checkout', body, config);
+      dispatch(CLEAR_CART());
+      return navigate('/ordercomplete');
     } catch (error) {
       setError(error.response.data.msg);
     }
