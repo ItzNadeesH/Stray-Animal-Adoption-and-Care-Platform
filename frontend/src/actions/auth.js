@@ -3,6 +3,7 @@ import axios from 'axios';
 import {
   AUTHENTICATION_FAILED,
   AUTHENTICATION_SUCCESS,
+  CLEAR_PROFILE,
   GET_PROFILE,
   LOGIN_FAILED,
   LOGIN_SUCCESS,
@@ -86,9 +87,11 @@ export const register = (username, email, password) => async (dispatch) => {
   }
 };
 
+// Logout
 export const logout = () => async (dispatch) => {
   if (localStorage.getItem('token')) {
     dispatch({ type: LOGOUT_SUCCESS });
+    dispatch({ type: CLEAR_PROFILE });
   } else {
     dispatch({ type: LOGOUT_FAILED });
   }

@@ -1,4 +1,4 @@
-import { GET_PROFILE } from '../actions/types';
+import { CLEAR_PROFILE, GET_PROFILE } from '../actions/types';
 
 const initialState = {
   profile: null,
@@ -13,6 +13,12 @@ const profileAuth = (state = initialState, action) => {
       return {
         ...state,
         profile: payload,
+        isLoading: false,
+      };
+    case CLEAR_PROFILE:
+      return {
+        ...state,
+        profile: null,
         isLoading: false,
       };
     default:

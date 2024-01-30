@@ -8,16 +8,18 @@ const router = express.Router();
 // @desc    Edit Profile
 // @access  Private
 router.post('/', auth, async (req, res) => {
-  const { firstname, lastname, address, city, postcode, phone } = req.body;
+  const { avatar, firstname, lastname, address, city, postcode, phone } =
+    req.body;
 
   const profileFields = {};
   profileFields.user = req.user.id;
-  if (firstname) profileFields.firstname = firstname;
-  if (lastname) profileFields.lastname = lastname;
-  if (address) profileFields.address = address;
-  if (city) profileFields.city = city;
-  if (postcode) profileFields.postcode = postcode;
-  if (phone) profileFields.phone = phone;
+  profileFields.avatar = avatar;
+  profileFields.firstname = firstname;
+  profileFields.lastname = lastname;
+  profileFields.address = address;
+  profileFields.city = city;
+  profileFields.postcode = postcode;
+  profileFields.phone = phone;
 
   try {
     let profile = await Profile.findOne({ user: req.user.id });

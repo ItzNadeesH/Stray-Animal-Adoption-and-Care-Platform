@@ -3,7 +3,7 @@ import { connect, useSelector } from 'react-redux';
 import axios from 'axios';
 import { loadProfile } from '../../actions/auth';
 import PropTypes from 'prop-types';
-import avatar from '../../assets/icons/image-avatar.png';
+import avatar from '../../assets/icons/avatar.jpg';
 
 const Settings = ({ loadProfile }) => {
   useEffect(() => {
@@ -14,6 +14,7 @@ const Settings = ({ loadProfile }) => {
   const { username, email } = user;
 
   const [formData, setFormData] = useState({
+    avatar: '',
     firstname: '',
     lastname: '',
     address: '',
@@ -21,8 +22,6 @@ const Settings = ({ loadProfile }) => {
     postcode: '',
     phone: '',
   });
-
-  const { firstname, lastname, address, city, postcode, phone } = formData;
 
   const profile = useSelector((state) => state.profileAuth.profile);
 
@@ -45,7 +44,7 @@ const Settings = ({ loadProfile }) => {
           'Content-Type': 'application/json',
         },
       };
-      const body = { firstname, lastname, address, city, postcode, phone };
+      const body = formData;
 
       await axios.post('/api/profiles', body, config);
 
@@ -54,6 +53,21 @@ const Settings = ({ loadProfile }) => {
       console.log(error);
     }
   };
+
+  const handleChangeAvatar = (e) => {
+    const file = e.target.files[0];
+
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        setFormData((prevData) => ({ ...prevData, avatar: e.target.result }));
+      };
+
+      reader.readAsDataURL(file);
+    }
+  };
+
   return (
     <>
       <div className="max-w-screen-full bg-[#f6f6f6] p-2">
@@ -61,21 +75,31 @@ const Settings = ({ loadProfile }) => {
           <p className="mb-2">Edit Profile</p>
           <div className="flex flex-wrap justify-between">
             <div className="p-5 border border-[#e6e6e6] rounded-md mb-4 xl:mb-0 w-full xl:w-[49%]">
-              <div className="flex flex-col sm:flex-row sm:items-center mb-5">
-                <img
-                  className="block w-[100px] h-[100px]"
-                  src={avatar}
-                  alt="avatar"
-                />
-                <div className="sm:ml-8">
-                  <p>{username}</p>
-                  <p>{email}</p>
-                  <button className="mt-1 h-8 px-6 text-[12px] text-white bg-cyan-blue rounded-md hover:bg-black transition-all">
-                    Change Picture
-                  </button>
-                </div>
-              </div>
               <form onSubmit={handleSubmit}>
+                <div className="flex flex-col sm:flex-row sm:items-center mb-5">
+                  <img
+                    className="block w-[100px] h-[100px] rounded-full"
+                    src={formData.avatar === '' ? avatar : formData.avatar}
+                    alt="avatar"
+                  />
+                  <div className="sm:ml-8">
+                    <p>{username}</p>
+                    <p className="mb-2">{email}</p>
+                    <label className="cursor-pointer" htmlFor="dropzone-file">
+                      <div className="inline mt-1 h-8 px-6 py-2 text-[12px] text-white bg-cyan-blue rounded-md hover:bg-black transition-all">
+                        Change Picture
+                      </div>
+                      <input
+                        id="dropzone-file"
+                        type="file"
+                        name="avatar"
+                        accept="image/*"
+                        className="hidden"
+                        onChange={handleChangeAvatar}
+                      />
+                    </label>
+                  </div>
+                </div>
                 <div className="mb-3">
                   <label className="block text-[12px] mb-2" htmlFor="firstname">
                     First Name
