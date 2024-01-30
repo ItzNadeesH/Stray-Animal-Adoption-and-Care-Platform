@@ -12,6 +12,7 @@ import {
   REGISTER_FAILED,
   REGISTER_SUCCESS,
 } from './types';
+import { CLEAR_CART } from '../reducers/cartSlice';
 
 // Load user
 export const loadUser = () => async (dispatch) => {
@@ -92,6 +93,7 @@ export const logout = () => async (dispatch) => {
   if (localStorage.getItem('token')) {
     dispatch({ type: LOGOUT_SUCCESS });
     dispatch({ type: CLEAR_PROFILE });
+    dispatch(CLEAR_CART());
   } else {
     dispatch({ type: LOGOUT_FAILED });
   }
