@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const Searchbar = ({ data, setResult, filters }) => {
   const [keyword, setKeyword] = useState('');
@@ -10,11 +10,16 @@ const Searchbar = ({ data, setResult, filters }) => {
       data.filter(
         (item) =>
           item.name.toLowerCase().includes(e.target.value.toLowerCase()) &&
-          item.petType === filters.petType &&
-          item.category === filters.category
+          (filters.petType === 'All' || item.petType === filters.petType) &&
+          (filters.category === 'All' || item.category === filters.category)
       )
     );
   };
+
+  useEffect(() => {
+    setKeyword('');
+  }, [filters.category, filters.petType]);
+
   return (
     <>
       <div className="flex items-center">
