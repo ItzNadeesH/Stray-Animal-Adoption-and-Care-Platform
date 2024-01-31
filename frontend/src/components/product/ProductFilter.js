@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Dropdown from '../common/Dropdown';
 
-const ProductFilter = () => {
-  const [petType, setPetType] = useState('All');
-  const [category, setCategory] = useState('All');
+const ProductFilter = ({ petType, setPetType, category, setCategory }) => {
   const petTypes = ['All', 'Cat', 'Dog', 'Bird'];
   const productCategories = ['All', 'Food', 'Supplement', 'Accessories'];
   return (

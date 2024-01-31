@@ -81,8 +81,6 @@ router.post(
     const { name, image, description, price, manufacturer, petType, category } =
       req.body;
 
-    console.log(req.body);
-
     const productFields = {
       name,
       image,

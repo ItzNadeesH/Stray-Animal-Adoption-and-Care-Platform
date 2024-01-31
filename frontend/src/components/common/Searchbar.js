@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 
-const Searchbar = ({ data, results, setResult }) => {
+const Searchbar = ({ data, setResult, filters }) => {
   const [keyword, setKeyword] = useState('');
 
   const handleSearch = (e) => {
     setKeyword(e.target.value);
 
     setResult(
-      data.filter((item) =>
-        item.name.toLowerCase().includes(e.target.value.toLowerCase())
+      data.filter(
+        (item) =>
+          item.name.toLowerCase().includes(e.target.value.toLowerCase()) &&
+          item.petType === filters.petType &&
+          item.category === filters.category
       )
     );
   };
