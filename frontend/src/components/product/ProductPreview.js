@@ -1,15 +1,19 @@
 import Cart from '../../assets/icons/icon-cart.svg';
 import { useProduct } from '../../hooks/useProduct';
 import Counter from '../common/Counter';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useSpring, animated } from '@react-spring/web';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { ADD_TO_CART } from '../../reducers/cartSlice';
 import { useState } from 'react';
 import SuccessMessage from '../common/SuccessMessage';
 
 const ProductPreview = () => {
+  const isAuthenticated = useSelector(
+    (state) => state.userAuth.isAuthenticated
+  );
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { productId } = useParams();
   const { data } = useProduct(productId);
   const [value, setValue] = useState(1);
@@ -18,7 +22,7 @@ const ProductPreview = () => {
   const springs = useSpring({
     opacity: 1,
     from: { opacity: 0 },
-    config: { duration: 1000 },
+    config: { delay: 1000, duration: 500 },
   });
 
   return (
@@ -42,21 +46,27 @@ const ProductPreview = () => {
                 {data.description}
               </p>
               <h2 className="mb-4 text-[24px] tracking-wide">
-                {data.price}.00LKR
+                Rs.{data.price}.00
               </h2>
-              <Counter value={value} setValue={setValue} />
-              <div className="relative">
+              <div className="flex justify-center">
+                <Counter value={value} setValue={setValue} />
+              </div>
+              <div className="flex justify-center">
                 <button
                   onClick={() => {
-                    dispatch(
-                      ADD_TO_CART({ productId, value, price: data.price })
-                    );
-                    setActive(true);
+                    if (!isAuthenticated) {
+                      return navigate('/login');
+                    } else {
+                      dispatch(
+                        ADD_TO_CART({ productId, value, price: data.price })
+                      );
+                      setActive(true);
+                    }
                   }}
-                  className="mt-4 block bg-cyan-blue text-[#ffffff] shadow-lg w-[320px] h-[48px] rounded-lg hover:bg-[#000000] transition"
+                  className="relative mt-4 block bg-cyan-blue text-[#ffffff] shadow-lg w-[320px] h-[48px] rounded-lg hover:bg-[#000000] transition"
                 >
                   <img
-                    className="absolute top-4 left-[80px] w-4"
+                    className="absolute top-4 left-[88px] w-4"
                     src={Cart}
                     alt="cart"
                   />

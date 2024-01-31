@@ -36,7 +36,14 @@ function App() {
           <Route path="/store" element={<Store />} />
           <Route path="/store/product/:productId" element={<Product />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/checkout" element={<Checkout />} />
+          <Route
+            path="/checkout"
+            element={
+              <PrivateRoute>
+                <Checkout />
+              </PrivateRoute>
+            }
+          />
           <Route path="/ordercomplete" element={<OrderComplete />} />
           <Route
             path="/dashboard"
