@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import DeleteMessage from '../../common/DeleteMessage';
 import axios from 'axios';
 
-const ProductRow = ({ item, onRemove }) => {
+const ProductRow = ({ item, onRemove, onSelect, setRowData }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [active, setActive] = useState(false);
   const dropdownRef = useRef(null);
@@ -43,7 +43,7 @@ const ProductRow = ({ item, onRemove }) => {
         </th>
         <td className="px-4 py-3">{item.category}</td>
         <td className="px-4 py-3">{item.manufacturer}</td>
-        <td className="px-4 py-3">{item.price}</td>
+        <td className="px-4 py-3">Rs.{item.price}.00</td>
         <td className="relative px-4 py-3 flex items-center justify-center">
           <button
             onClick={() => setActive(true)}
@@ -73,6 +73,10 @@ const ProductRow = ({ item, onRemove }) => {
             >
               <li>
                 <button
+                  onClick={() => {
+                    setRowData(item);
+                    onSelect('Edit Product');
+                  }}
                   type="button"
                   data-modal-target="updateProductModal"
                   data-modal-toggle="updateProductModal"
@@ -93,30 +97,6 @@ const ProductRow = ({ item, onRemove }) => {
                     />
                   </svg>
                   Edit
-                </button>
-              </li>
-              <li>
-                <button
-                  type="button"
-                  data-modal-target="readProductModal"
-                  data-modal-toggle="readProductModal"
-                  className="flex w-full items-center py-2 px-4 hover:bg-gray-200"
-                >
-                  <svg
-                    className="w-4 h-4 mr-2"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
-                    <path
-                      fillRule="evenodd"
-                      clipRule="evenodd"
-                      d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
-                    />
-                  </svg>
-                  Preview
                 </button>
               </li>
               <li>

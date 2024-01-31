@@ -9,6 +9,7 @@ import Settings from '../components/dashboard/Settings';
 import UsersList from '../components/dashboard/admin/UsersList';
 import DashboardHome from '../components/dashboard/admin/DashboardHome';
 import MyOrders from '../components/dashboard/user/MyOrders';
+import EditProductForm from '../components/dashboard/admin/EditProductForm';
 
 const Dashboard = () => {
   const [selectedTab, setSelectedTab] = useState('');
@@ -35,17 +36,21 @@ const Dashboard = () => {
     setSelectedTab(tab);
   };
 
+  const [rowData, setRowData] = useState({});
+
   const content =
     selectedTab === 'Settings' ? (
       <Settings />
     ) : selectedTab === 'Add Product' ? (
       <AddProductForm onSelect={handleTabSelect} />
     ) : selectedTab === 'Products' ? (
-      <ProductList onSelect={handleTabSelect} />
+      <ProductList onSelect={handleTabSelect} setRowData={setRowData} />
     ) : selectedTab === 'Users' ? (
       <UsersList />
     ) : selectedTab === 'My Orders' ? (
       <MyOrders />
+    ) : selectedTab === 'Edit Product' ? (
+      <EditProductForm onSelect={handleTabSelect} data={rowData} />
     ) : (
       <DashboardHome />
     );

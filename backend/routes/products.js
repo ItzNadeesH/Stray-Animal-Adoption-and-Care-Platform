@@ -57,6 +57,61 @@ router.post(
   }
 );
 
+// @route   POST api/products
+// @desc    Edit a product
+// @access  Private - Admin
+router.post(
+  '/:id',
+
+  [
+    check('name', 'product name is required').not().isEmpty(),
+    check('image', 'image is required').not().isEmpty(),
+    check('description', 'description is required').not().isEmpty(),
+    check('price', 'price is required').not().isEmpty(),
+    check('manufacturer', 'manufacturer is required').not().isEmpty(),
+    check('category', 'category is required').not().isEmpty(),
+    check('petType', 'pet type is required').not().isEmpty(),
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const { name, image, description, price, manufacturer, petType, category } =
+      req.body;
+
+    console.log(req.body);
+
+    const productFields = {
+      name,
+      image,
+      description,
+      price,
+      manufacturer,
+      petType,
+      category,
+    };
+
+    try {
+      let product = await Product.findByIdAndUpdate(
+        { _id: req.params.id },
+        { $set: productFields },
+        { new: true }
+      );
+
+      if (!product) {
+        return res.status(500).send('Database error');
+      }
+
+      res.status(200).json(product);
+    } catch (error) {
+      console.error(error.message);
+      res.status(500).send('Server error');
+    }
+  }
+);
+
 // @route   GET api/products
 // @desc    Get all products
 // @access  Public

@@ -1,27 +1,18 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Dropdown from '../../common/Dropdown';
 import Dropzone from '../../common/Dropzone';
 import SuccessMessage from '../../common/SuccessMessage';
 import { IoArrowBack } from 'react-icons/io5';
 
-const AddProductForm = ({ onSelect }) => {
+const EditProductForm = ({ onSelect, data }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErros] = useState(null);
-  const [image, setImage] = useState('');
-  const [category, setCategory] = useState('');
-  const [petType, setPetType] = useState('');
-  const initialState = {
-    productName: '',
-    image: '',
-    category: '',
-    petType: '',
-    price: '',
-    manufacturer: '',
-    description: '',
-  };
-  const [formData, setFormData] = useState(initialState);
+  const [image, setImage] = useState(data.image);
+  const [category, setCategory] = useState(data.category);
+  const [petType, setPetType] = useState(data.petType);
+  const [formData, setFormData] = useState(data);
 
   useEffect(() => {
     setFormData((prevFormData) => ({
@@ -39,7 +30,7 @@ const AddProductForm = ({ onSelect }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const { productName, price, manufacturer, description } = formData;
+  const { name, price, manufacturer, description } = formData;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -51,7 +42,7 @@ const AddProductForm = ({ onSelect }) => {
     };
 
     const body = JSON.stringify({
-      productName,
+      name,
       image,
       category,
       petType,
@@ -61,12 +52,8 @@ const AddProductForm = ({ onSelect }) => {
     });
 
     try {
-      await axios.post('/api/products', body, config);
+      await axios.post('/api/products/' + data._id, body, config);
 
-      setFormData(initialState);
-      setImage(null);
-      setCategory('Select an option');
-      setPetType('Select an option');
       setIsLoading(false);
       setIsVisible(true);
     } catch (error) {
@@ -79,7 +66,7 @@ const AddProductForm = ({ onSelect }) => {
 
   return (
     <>
-      <div className="max-w-screen-full bg-[#f6f6f6] p-2">
+      <div className="absolute max-w-screen-full bg-[#f6f6f6] p-2">
         <div className="p-5 bg-white rounded-lg shadow-lg">
           <div className="flex">
             <IoArrowBack
@@ -87,7 +74,7 @@ const AddProductForm = ({ onSelect }) => {
               size={24}
               className="cursor-pointer"
             />
-            <p className="mb-2 ml-2">Add Product</p>
+            <p className="mb-2 ml-2">Edit Product</p>
           </div>
           <form
             className="flex flex-wrap justify-between"
@@ -105,10 +92,10 @@ const AddProductForm = ({ onSelect }) => {
                 <input
                   className="text-[14px] px-4 py-2.5 h-[40px] border border-[#000000] rounded-md w-full placeholder:text-[#00000080] outline-0"
                   type="text"
-                  name="productName"
+                  name="name"
                   id="productName"
                   onChange={handleChange}
-                  value={formData.productName}
+                  value={formData.name}
                 />
               </div>
               <div className="mb-3">
@@ -182,7 +169,7 @@ const AddProductForm = ({ onSelect }) => {
                 disabled={isLoading}
                 className="mt-3 h-9 px-4 text-[12px] text-white bg-cyan-blue rounded-md hover:bg-black transition-all"
               >
-                Publish Product
+                Save
               </button>
             </div>
           </form>
@@ -205,4 +192,4 @@ const AddProductForm = ({ onSelect }) => {
   );
 };
 
-export default AddProductForm;
+export default EditProductForm;

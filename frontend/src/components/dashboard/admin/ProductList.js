@@ -2,7 +2,7 @@ import React from 'react';
 import ProductRow from './ProductRow';
 import { useProducts } from '../../../hooks/useProducts';
 
-const ProductList = ({ onSelect }) => {
+const ProductList = ({ onSelect, setRowData }) => {
   const { data, setData } = useProducts();
 
   const handleOnRemove = (id) => {
@@ -136,6 +136,8 @@ const ProductList = ({ onSelect }) => {
                         key={product._id}
                         item={product}
                         onRemove={handleOnRemove}
+                        onSelect={onSelect}
+                        setRowData={setRowData}
                       />
                     ))}
                   <tr>
