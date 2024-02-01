@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useAllOrders } from '../../../hooks/useAllOrders';
 import TablePaginator from '../../common/TablePaginator';
 import OrderRow from './OrderRow';
+import Loader from '../../../utils/Loader';
 
 const OrderList = () => {
   const { data } = useAllOrders();
@@ -9,6 +10,11 @@ const OrderList = () => {
 
   return (
     <>
+      {!currentData && (
+        <div className="mt-[-80px]">
+          <Loader />
+        </div>
+      )}
       <section className="bg-gray-50 p-3 sm:p-5 antialiased">
         <div className="mx-auto max-w-screen-full">
           <div className="bg-white relative shadow-md sm:rounded-lg overflow-hidden">

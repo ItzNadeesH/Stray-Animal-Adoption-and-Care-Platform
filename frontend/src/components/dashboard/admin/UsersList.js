@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useUsers } from '../../../hooks/useUsers';
 import TablePaginator from '../../common/TablePaginator';
 import UserRow from './UserRow';
+import Loader from '../../../utils/Loader';
 
 const UsersList = () => {
   const { data, setData } = useUsers();
@@ -12,6 +13,11 @@ const UsersList = () => {
   };
   return (
     <>
+      {!currentData && (
+        <div className="mt-[-80px]">
+          <Loader />
+        </div>
+      )}
       <section className="bg-gray-50 p-3 sm:p-5 antialiased">
         <div className="mx-auto max-w-screen-full">
           <div className="bg-white relative shadow-md sm:rounded-lg overflow-hidden">

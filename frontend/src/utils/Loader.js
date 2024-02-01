@@ -3,10 +3,13 @@ import React from 'react';
 const Loader = () => {
   return (
     <>
-      <div role="status">
+      <div
+        className="flex w-full items-center justify-center min-h-screen"
+        role="status"
+      >
         <svg
           aria-hidden="true"
-          class="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+          className="w-10 h-10 text-gray-200 animate-spin fill-cyan-blue"
           viewBox="0 0 100 101"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -20,7 +23,7 @@ const Loader = () => {
             fill="currentFill"
           />
         </svg>
-        <span class="sr-only">Loading...</span>
+        <span className="sr-only">Loading...</span>
       </div>
     </>
   );

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Layout from './Layout';
-import Loader from '../utils/Loader';
 
 // Components
 import ProductGrid from '../components/product/ProductGrid';

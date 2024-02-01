@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import Layout from './Layout';
-import Loader from '../utils/Loader';
 
 const PageNotFound = () => {
   return (

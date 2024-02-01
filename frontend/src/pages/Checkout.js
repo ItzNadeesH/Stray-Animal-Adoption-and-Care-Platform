@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector, connect, useDispatch } from 'react-redux';
 import Layout from './Layout';
 import { FaChevronRight } from 'react-icons/fa';
-import Loader from '../utils/Loader';
 import { loadProfile } from '../actions/auth';
 import PropTypes from 'prop-types';
 import axios from 'axios';

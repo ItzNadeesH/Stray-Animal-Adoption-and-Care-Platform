@@ -1,5 +1,4 @@
 import Layout from './Layout';
-import Loader from '../utils/Loader';
 
 // Components
 import CartItemList from '../components/cart/CartItemList';

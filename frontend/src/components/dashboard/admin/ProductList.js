@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import ProductRow from './ProductRow';
 import { useProducts } from '../../../hooks/useProducts';
 import TablePaginator from '../../common/TablePaginator';
+import Loader from '../../../utils/Loader';
 
 const ProductList = ({ onSelect, setRowData }) => {
   const { data, setData } = useProducts();
@@ -12,6 +13,11 @@ const ProductList = ({ onSelect, setRowData }) => {
   };
   return (
     <>
+      {!currentData && (
+        <div className="mt-[-80px]">
+          <Loader />
+        </div>
+      )}
       <section className="bg-gray-50 p-3 sm:p-4 antialiased">
         <div className="mx-auto max-w-screen-full">
           <div className="bg-white relative shadow-md sm:rounded-lg overflow-hidden">

@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import Loader from '../utils/Loader';
 import Layout from './Layout';
 import { FaChevronRight } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
