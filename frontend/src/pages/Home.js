@@ -4,9 +4,7 @@ import Loader from '../utils/Loader';
 const Home = () => {
   return (
     <>
-      <Loader>
-        <Layout></Layout>
-      </Loader>
+      <Layout></Layout>
     </>
   );
 };

@@ -11,21 +11,19 @@ const Store = () => {
   const [category, setCategory] = useState('All');
   return (
     <>
-      <Loader>
-        <Layout>
-          <div className="max-w-screen-xl mx-auto xl:flex mt-4">
-            <ProductFilter
-              petType={petType}
-              setPetType={setPetType}
-              category={category}
-              setCategory={setCategory}
-            />
-            <div className="ml-4 grow">
-              <ProductGrid category={category} petType={petType} />
-            </div>
+      <Layout>
+        <div className="max-w-screen-xl mx-auto xl:flex mt-4">
+          <ProductFilter
+            petType={petType}
+            setPetType={setPetType}
+            category={category}
+            setCategory={setCategory}
+          />
+          <div className="ml-4 grow">
+            <ProductGrid category={category} petType={petType} />
           </div>
-        </Layout>
-      </Loader>
+        </div>
+      </Layout>
     </>
   );
 };

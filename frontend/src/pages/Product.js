@@ -7,11 +7,9 @@ import ProductPreview from '../components/product/ProductPreview';
 const Product = () => {
   return (
     <>
-      <Loader>
-        <Layout>
-          <ProductPreview />
-        </Layout>
-      </Loader>
+      <Layout>
+        <ProductPreview />
+      </Layout>
     </>
   );
 };

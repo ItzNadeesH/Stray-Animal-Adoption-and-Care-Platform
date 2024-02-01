@@ -78,33 +78,31 @@ const Checkout = ({ loadProfile }) => {
 
   return (
     <>
-      <Loader>
-        <Layout>
-          <div className="max-w-screen-xl mx-auto px-5">
-            <h1 className="flex justify-center items-center text-[24px] sm:text-[36px] my-6">
-              Cart
-              <FaChevronRight size={16} color="#767676" className="mx-2 mt-1" />
-              Checkout
-            </h1>
-            <div className="lg:flex gap-10">
-              <CheckoutForm
+      <Layout>
+        <div className="max-w-screen-xl mx-auto px-5">
+          <h1 className="flex justify-center items-center text-[24px] sm:text-[36px] my-6">
+            Cart
+            <FaChevronRight size={16} color="#767676" className="mx-2 mt-1" />
+            Checkout
+          </h1>
+          <div className="lg:flex gap-10">
+            <CheckoutForm
+              data={formData}
+              setData={setFormData}
+              error={error}
+              setError={setError}
+            />
+            <div className="lg:mt-[92px] lg:max-w-[480px] mb-8 grow">
+              <OrderDetails />
+              <PaymentMethod
                 data={formData}
                 setData={setFormData}
-                error={error}
-                setError={setError}
+                onSubmit={handleSubmit}
               />
-              <div className="lg:mt-[92px] lg:max-w-[480px] mb-8 grow">
-                <OrderDetails />
-                <PaymentMethod
-                  data={formData}
-                  setData={setFormData}
-                  onSubmit={handleSubmit}
-                />
-              </div>
             </div>
           </div>
-        </Layout>
-      </Loader>
+        </div>
+      </Layout>
     </>
   );
 };
