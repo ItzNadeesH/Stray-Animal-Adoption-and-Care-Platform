@@ -14,7 +14,7 @@ const Order = ({ order }) => {
       <div className="py-4 md:mr-[13px]">
         <div className="px-4 md:px-0 pb-4">
           <p className="font-bold text-[24px] md:text-[30px]">
-            Order#{order._id.toString().substr(-6).toUpperCase()}
+            Order#{parseInt(order._id.substr(-5).toUpperCase(), 16)}
           </p>
           <p className="mt-2 text-[14px] text-[#767676]">
             Order placed <span className="text-black">{formattedDate}</span>

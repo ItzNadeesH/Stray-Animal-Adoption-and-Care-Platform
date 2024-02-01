@@ -1,13 +1,10 @@
 import React from 'react';
-import { useUsers } from '../../../hooks/useUsers';
-import UserRow from './UserRow';
+import { useAllOrders } from '../../../hooks/useAllOrders';
+import OrderRow from './OrderRow';
 
-const UsersList = () => {
-  const { data, setData } = useUsers();
+const OrderList = () => {
+  const { data } = useAllOrders();
 
-  const handleOnRemove = (id) => {
-    setData(data.filter((data) => id !== data._id));
-  };
   return (
     <>
       <section className="bg-gray-50 p-3 sm:p-5 antialiased">
@@ -88,16 +85,22 @@ const UsersList = () => {
                 <thead className="text-xs text-white uppercase bg-cyan-blue">
                   <tr>
                     <th scope="col" className="px-4 py-4">
-                      Username
+                      Order ID
                     </th>
                     <th scope="col" className="px-4 py-3">
-                      Email
+                      Name
                     </th>
                     <th scope="col" className="px-4 py-3">
-                      Role
+                      Address
                     </th>
                     <th scope="col" className="px-4 py-3">
-                      Created date
+                      Phone
+                    </th>
+                    <th scope="col" className="px-4 py-3">
+                      Date
+                    </th>
+                    <th scope="col" className="px-4 py-3 text-center">
+                      Status
                     </th>
                     <th scope="col" className="px-4 py-3 text-center">
                       Action
@@ -106,13 +109,7 @@ const UsersList = () => {
                 </thead>
                 <tbody>
                   {data &&
-                    data.map((user) => (
-                      <UserRow
-                        key={user._id}
-                        user={user}
-                        onRemove={handleOnRemove}
-                      />
-                    ))}
+                    data.map((item) => <OrderRow key={item._id} item={item} />)}
                   <tr>
                     <td className="pb-[120px]"></td>
                   </tr>
@@ -222,4 +219,4 @@ const UsersList = () => {
   );
 };
 
-export default UsersList;
+export default OrderList;

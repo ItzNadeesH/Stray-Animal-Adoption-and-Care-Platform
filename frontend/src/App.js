@@ -35,7 +35,14 @@ function App() {
           <Route path="/contat" element={<Home />} />
           <Route path="/store" element={<Store />} />
           <Route path="/store/product/:productId" element={<Product />} />
-          <Route path="/cart" element={<Cart />} />
+          <Route
+            path="/cart"
+            element={
+              <PrivateRoute>
+                <Cart />
+              </PrivateRoute>
+            }
+          />
           <Route
             path="/checkout"
             element={

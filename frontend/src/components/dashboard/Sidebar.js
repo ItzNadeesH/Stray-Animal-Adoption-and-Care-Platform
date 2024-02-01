@@ -53,6 +53,27 @@ const Sidebar = ({ selected, onSelect }) => {
       </li>
       <li>
         <div
+          onClick={() => onSelect('Orders')}
+          className={`${
+            selected === 'Orders' && 'bg-cyan-blue text-white'
+          } flex items-center p-2 text-cyan-blue rounded-lg cursor-pointer font-light transition-all group`}
+        >
+          <svg
+            className={`${
+              selected === 'Orders' && 'text-white'
+            } flex-shrink-0 w-5 h-5 text-cyan-blue transition duration-75 `}
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            viewBox="0 0 528 512"
+          >
+            <path d="M264.4 116.3l-132 84.3 132 84.3-132 84.3L0 284.1l132.3-84.3L0 116.3 132.3 32l132.1 84.3zM131.6 395.7l132-84.3 132 84.3-132 84.3-132-84.3zm132.8-111.6l132-84.3-132-83.6L395.7 32 528 116.3l-132.3 84.3L528 284.8l-132.3 84.3-131.3-85z" />
+          </svg>
+          <span className="flex-1 ms-3 whitespace-nowrap">Orders</span>
+        </div>
+      </li>
+      <li>
+        <div
           onClick={() => onSelect('Products')}
           className={`${
             selected === 'Products' && 'bg-cyan-blue text-white'

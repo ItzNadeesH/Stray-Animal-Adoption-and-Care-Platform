@@ -10,6 +10,7 @@ import UsersList from '../components/dashboard/admin/UsersList';
 import DashboardHome from '../components/dashboard/admin/DashboardHome';
 import MyOrders from '../components/dashboard/user/MyOrders';
 import EditProductForm from '../components/dashboard/admin/EditProductForm';
+import OrderList from '../components/dashboard/admin/OrderList';
 
 const Dashboard = () => {
   const [selectedTab, setSelectedTab] = useState('');
@@ -49,6 +50,8 @@ const Dashboard = () => {
       <UsersList />
     ) : selectedTab === 'My Orders' ? (
       <MyOrders />
+    ) : selectedTab === 'Orders' ? (
+      <OrderList />
     ) : selectedTab === 'Edit Product' ? (
       <EditProductForm onSelect={handleTabSelect} data={rowData} />
     ) : (
