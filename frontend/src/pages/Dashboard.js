@@ -66,7 +66,7 @@ const Dashboard = () => {
           style={{ minHeight: 'calc(100vh - 80px)' }}
         >
           <Sidebar selected={selectedTab} onSelect={handleTabSelect} />
-          <div className="md:ml-[270px]">
+          <div className="md:ml-[256px]">
             <animated.div
               style={{
                 ...springs,
