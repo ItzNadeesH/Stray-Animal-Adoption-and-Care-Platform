@@ -9,6 +9,7 @@ const Order = ({ order }) => {
     (accumulator, item) => accumulator + item.quantity * item.price,
     0
   );
+
   return (
     <>
       <div className="py-4 md:mr-[13px]">
@@ -49,7 +50,7 @@ const Order = ({ order }) => {
             </div>
             <div className="w-[33%] text-center">
               <p>Delivery Status</p>
-              <p className="mt-3 text-[#767676]">Pennding</p>
+              <p className="mt-3 text-[#767676]">{order.status}</p>
             </div>
           </div>
           <div className="flex justify-between border-b border-[#e6e6e6] pb-4 mt-8">

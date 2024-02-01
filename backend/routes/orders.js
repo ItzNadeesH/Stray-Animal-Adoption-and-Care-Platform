@@ -17,16 +17,29 @@ router.post('/', auth, async (req, res) => {
   }
 });
 
-// @route   GET api/orders/:id
+// @route   GET api/orders
 // @desc    Get orders
 // @access  Private
 router.get('/', auth, async (req, res) => {
   try {
     const orders = await Order.find({ customer: req.user.id })
-      .select('products address payment card date')
+      .select('products address payment card date status')
       .sort({ date: -1 });
 
     res.status(200).json(orders);
+  } catch (error) {
+    res.status(400).json({ msg: error.message });
+  }
+});
+
+// @route   GET api/orders/:id
+// @desc    Get a order
+// @access  Private
+router.get('/:id', auth, async (req, res) => {
+  try {
+    const order = await Order.findById({ _id: req.params.id });
+
+    res.status(200).json(order);
   } catch (error) {
     res.status(400).json({ msg: error.message });
   }
