@@ -6,6 +6,7 @@ import { FaChevronRight } from 'react-icons/fa';
 import { loadProfile } from '../actions/auth';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import Loader from '../utils/Loader';
 
 // Components
 import OrderDetails from '../components/checkout/OrderDetails';
@@ -78,6 +79,11 @@ const Checkout = ({ loadProfile }) => {
   return (
     <>
       <Layout>
+        {!profile && (
+          <div className="mt-[-80px]">
+            <Loader />
+          </div>
+        )}
         <div className="max-w-screen-xl mx-auto px-5">
           <h1 className="flex justify-center items-center text-[24px] sm:text-[36px] my-6">
             Cart

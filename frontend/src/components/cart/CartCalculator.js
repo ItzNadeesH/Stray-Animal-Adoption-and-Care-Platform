@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Loader from '../../utils/Loader';
 
 const CartCalculator = () => {
   const cart = useSelector((state) => state.cartReducer);
@@ -11,6 +12,7 @@ const CartCalculator = () => {
 
   return (
     <>
+      {!cart && <Loader />}
       <div className="w-[480px] mx-auto p-10 border border-[#e6e6e6] mt-[64px]">
         <h2 className="text-[24px] sm:text-[32px]">Cart Totals</h2>
         <div className="flex justify-between py-5 border-b border-[#e6e6e6]">
