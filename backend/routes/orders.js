@@ -4,6 +4,37 @@ const Order = require('../models/Order');
 
 const router = express.Router();
 
+// @route   GET api/orders
+// @desc    Get orders report
+// @access  Private
+router.get('/report', auth, async (req, res) => {
+  try {
+    const ordersByDate = await Order.aggregate([
+      {
+        $unwind: '$products',
+      },
+      {
+        $group: {
+          _id: { $dateToString: { format: '%Y-%m-%d', date: '$date' } },
+          Sales: {
+            $sum: { $multiply: ['$products.price', '$products.quantity'] },
+          },
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+          date: '$_id',
+          Sales: 1,
+        },
+      },
+    ]).sort({ date: 1 });
+    res.status(200).json(ordersByDate);
+  } catch (error) {
+    res.status(400).json({ msg: error.message });
+  }
+});
+
 // @route   POST api/orders
 // @desc    Get all orders
 // @access  Private
