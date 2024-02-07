@@ -9,8 +9,6 @@ import {
   LOGIN_SUCCESS,
   LOGOUT_FAILED,
   LOGOUT_SUCCESS,
-  REGISTER_FAILED,
-  REGISTER_SUCCESS,
 } from './types';
 import { CLEAR_CART } from '../reducers/cartSlice';
 
@@ -63,28 +61,6 @@ export const login = (email, password) => async (dispatch) => {
     console.log(errors);
 
     dispatch({ type: LOGIN_FAILED });
-  }
-};
-
-// Signup
-export const register = (username, email, password) => async (dispatch) => {
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  };
-  const body = JSON.stringify({ username, email, password });
-
-  try {
-    await axios.post('/api/users', body, config);
-
-    dispatch({ type: REGISTER_SUCCESS });
-  } catch (error) {
-    const errors = error.response.data.errors;
-
-    console.log(errors);
-
-    dispatch({ type: REGISTER_FAILED });
   }
 };
 
