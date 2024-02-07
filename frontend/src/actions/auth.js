@@ -5,8 +5,6 @@ import {
   AUTHENTICATION_SUCCESS,
   CLEAR_PROFILE,
   GET_PROFILE,
-  LOGIN_FAILED,
-  LOGIN_SUCCESS,
   LOGOUT_FAILED,
   LOGOUT_SUCCESS,
 } from './types';
@@ -38,29 +36,6 @@ export const loadProfile = () => async (dispatch) => {
     dispatch({ type: GET_PROFILE, payload: res.data });
   } catch (error) {
     console.log(error);
-  }
-};
-
-// Login
-export const login = (email, password) => async (dispatch) => {
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  };
-  const body = JSON.stringify({ email, password });
-
-  try {
-    const res = await axios.post('/api/auth', body, config);
-
-    dispatch({ type: LOGIN_SUCCESS, payload: res.data.token });
-    dispatch(loadUser());
-  } catch (error) {
-    const errors = error.response.data.errors;
-
-    console.log(errors);
-
-    dispatch({ type: LOGIN_FAILED });
   }
 };
 
