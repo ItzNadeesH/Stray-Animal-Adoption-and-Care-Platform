@@ -20,6 +20,7 @@ router.post(
     check('manufacturer', 'manufacturer is required').not().isEmpty(),
     check('category', 'category is required').not().isEmpty(),
     check('petType', 'pet type is required').not().isEmpty(),
+    check('profit', 'profit is required').not().isEmpty(),
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -35,6 +36,7 @@ router.post(
       manufacturer,
       petType,
       category,
+      profit,
     } = req.body;
 
     try {
@@ -46,6 +48,7 @@ router.post(
         price,
         manufacturer,
         description,
+        profit,
       });
 
       await product.save();
@@ -71,6 +74,7 @@ router.post(
     check('manufacturer', 'manufacturer is required').not().isEmpty(),
     check('category', 'category is required').not().isEmpty(),
     check('petType', 'pet type is required').not().isEmpty(),
+    check('profit', 'profit is required').not().isEmpty(),
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -78,8 +82,16 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { name, image, description, price, manufacturer, petType, category } =
-      req.body;
+    const {
+      name,
+      image,
+      description,
+      price,
+      manufacturer,
+      petType,
+      category,
+      profit,
+    } = req.body;
 
     const productFields = {
       name,
@@ -89,6 +101,7 @@ router.post(
       manufacturer,
       petType,
       category,
+      profit,
     };
 
     try {

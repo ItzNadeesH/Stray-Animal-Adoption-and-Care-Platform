@@ -30,7 +30,7 @@ const EditProductForm = ({ onSelect, data }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const { name, price, manufacturer, description } = formData;
+  const { name, price, manufacturer, description, profit } = formData;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -49,6 +49,7 @@ const EditProductForm = ({ onSelect, data }) => {
       price,
       manufacturer,
       description,
+      profit,
     });
 
     try {
@@ -128,6 +129,20 @@ const EditProductForm = ({ onSelect, data }) => {
                   min={0}
                   onChange={handleChange}
                   value={formData.price}
+                />
+              </div>
+              <div className="mb-3">
+                <label className="block text-[12px] mb-2" htmlFor="profit">
+                  Profit (LKR)
+                </label>
+                <input
+                  className="text-[14px] px-4 py-2.5 h-[40px] border border-[#000000] rounded-md w-full placeholder:text-[#00000080] outline-0"
+                  type="number"
+                  name="profit"
+                  id="profit"
+                  min={0}
+                  onChange={handleChange}
+                  value={formData.profit}
                 />
               </div>
               <div className="mb-3">

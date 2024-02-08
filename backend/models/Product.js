@@ -29,6 +29,10 @@ const ProductSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  profit: {
+    type: String,
+    required: true,
+  },
   date: {
     type: Date,
     default: Date.now,
