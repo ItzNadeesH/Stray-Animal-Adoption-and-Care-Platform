@@ -8,7 +8,6 @@ import {
   Grid,
   Icon,
   Metric,
-  ProgressBar,
   Tab,
   TabGroup,
   TabList,
@@ -18,7 +17,9 @@ import {
   Title,
 } from '@tremor/react';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+
+import axios from 'axios';
 
 const usNumberformatter = (number, decimals = 0) =>
   Intl.NumberFormat('us', {
@@ -37,11 +38,10 @@ const formatters = {
 
 const Kpis = {
   Sales: 'Sales',
-  Profit: 'Profit',
   Customers: 'Customers',
 };
 
-const kpiList = [Kpis.Sales, Kpis.Profit, Kpis.Customers];
+const kpiList = [Kpis.Sales, Kpis.Customers];
 
 const kpiData = [
   {
@@ -70,40 +70,22 @@ const kpiData = [
   },
 ];
 
-const performance = [
-  {
-    date: '2023-05-01',
-    Sales: 900.73,
-    Profit: 173,
-    Customers: 73,
-  },
-  {
-    date: '2023-05-02',
-    Sales: 1000.74,
-    Profit: 174.6,
-    Customers: 74,
-  },
-  {
-    date: '2023-05-03',
-    Sales: 1100.93,
-    Profit: 293.1,
-    Customers: 293,
-  },
-  {
-    date: '2023-05-04',
-    Sales: 1200.9,
-    Profit: 290.2,
-    Customers: 29,
-  },
-];
-
 const Overview = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const selectedKpi = kpiList[selectedIndex];
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await axios.post('/api/reports');
+      setData(res.data);
+    };
+    fetchData();
+  }, []);
 
   const areaChartArgs = {
     className: 'mt-5 h-72',
-    data: performance,
+    data: data,
     index: 'date',
     categories: [selectedKpi],
     colors: ['blue'],
@@ -116,7 +98,7 @@ const Overview = () => {
     <>
       <main className="p-5">
         <Title>Dashboard</Title>
-        <Text>Lorem ipsum dolor sit amet, consetetur sadipscing elitr.</Text>
+        <Text>Welcome to your Dashboard Overview</Text>
         <TabGroup className="mt-6">
           <TabList>
             <Tab>Overview</Tab>
@@ -135,11 +117,6 @@ const Overview = () => {
                         {item.delta}
                       </BadgeDelta>
                     </Flex>
-                    <Flex className="mt-4 space-x-2">
-                      <Text className="truncate">{`${item.progress}% (${item.metric})`}</Text>
-                      <Text className="truncate">{item.target}</Text>
-                    </Flex>
-                    <ProgressBar value={item.progress} className="mt-2" />
                   </Card>
                 ))}
               </Grid>
@@ -169,24 +146,13 @@ const Overview = () => {
                         >
                           <TabList color="gray" variant="solid">
                             <Tab>Sales</Tab>
-                            <Tab>Profit</Tab>
                             <Tab>Customers</Tab>
                           </TabList>
                         </TabGroup>
                       </div>
                     </div>
-                    {/* web */}
-                    <div className="mt-8 hidden sm:block">
+                    <div className="mt-8">
                       <AreaChart {...areaChartArgs} />
-                    </div>
-                    {/* mobile */}
-                    <div className="mt-8 sm:hidden">
-                      <AreaChart
-                        {...areaChartArgs}
-                        startEndOnly={true}
-                        showGradient={false}
-                        showYAxis={false}
-                      />
                     </div>
                   </>
                 </Card>
