@@ -112,9 +112,6 @@ const OrderList = () => {
                         <th scope="col" className="px-4 py-3 text-center">
                           Status
                         </th>
-                        <th scope="col" className="px-4 py-3 text-center">
-                          Action
-                        </th>
                       </tr>
                     </thead>
                     <tbody>

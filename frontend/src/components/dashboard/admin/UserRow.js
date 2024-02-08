@@ -1,8 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import DeleteMessage from '../../common/DeleteMessage';
+import { format } from 'date-fns';
 import axios from 'axios';
 
 const UserRow = ({ user, onRemove }) => {
+  const formattedDate = format(new Date(user.date), 'MMMM d, yyyy');
   const [isVisible, setIsVisible] = useState(false);
   const [active, setActive] = useState(false);
   const dropdownRef = useRef(null);
@@ -43,7 +45,7 @@ const UserRow = ({ user, onRemove }) => {
         </th>
         <td className="px-4 py-3">{user.email}</td>
         <td className="px-4 py-3">{user.email}</td>
-        <td className="px-4 py-3">{user.date}</td>
+        <td className="px-4 py-3">{formattedDate}</td>
         <td className="relative px-4 py-3 flex items-center justify-center">
           <button
             onClick={() => setActive(true)}

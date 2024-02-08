@@ -2,7 +2,6 @@ import { InformationCircleIcon } from '@heroicons/react/solid';
 
 import {
   AreaChart,
-  BadgeDelta,
   Card,
   Flex,
   Grid,
@@ -100,9 +99,6 @@ const Overview = () => {
         <Title>Dashboard</Title>
         <Text>Welcome to your Dashboard Overview</Text>
         <TabGroup className="mt-6">
-          <TabList>
-            <Tab>Overview</Tab>
-          </TabList>
           <TabPanels>
             <TabPanel>
               <Grid numItemsMd={2} numItemsLg={3} className="mt-6 gap-6">
@@ -113,9 +109,6 @@ const Overview = () => {
                         <Text>{item.title}</Text>
                         <Metric className="truncate">{item.metric}</Metric>
                       </div>
-                      <BadgeDelta deltaType={item.deltaType}>
-                        {item.delta}
-                      </BadgeDelta>
                     </Flex>
                   </Card>
                 ))}

@@ -40,7 +40,7 @@ router.get('/report', auth, async (req, res) => {
 // @access  Private
 router.post('/', auth, async (req, res) => {
   try {
-    const orders = await Order.find().sort({ data: -1 });
+    const orders = await Order.find().sort({ date: -1 });
 
     res.status(200).json(orders);
   } catch (error) {
