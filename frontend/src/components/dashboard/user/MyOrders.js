@@ -8,7 +8,7 @@ const MyOrders = () => {
   const { data } = useOrders(user);
   return (
     <>
-      <div className="max-w-screen-full">
+      <div className="max-w-screen-full px-2">
         <div>
           {data && data.map((item) => <Order key={item._id} order={item} />)}
         </div>

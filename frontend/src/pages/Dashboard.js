@@ -7,7 +7,7 @@ import ProductList from '../components/dashboard/admin/ProductList';
 import AddProductForm from '../components/dashboard/admin/AddProductForm';
 import Settings from '../components/dashboard/Settings';
 import UsersList from '../components/dashboard/admin/UsersList';
-import DashboardHome from '../components/dashboard/admin/DashboardHome';
+import Overview from '../components/dashboard/admin/Overview';
 import MyOrders from '../components/dashboard/user/MyOrders';
 import EditProductForm from '../components/dashboard/admin/EditProductForm';
 import OrderList from '../components/dashboard/admin/OrderList';
@@ -55,7 +55,7 @@ const Dashboard = () => {
     ) : selectedTab === 'Edit Product' ? (
       <EditProductForm onSelect={handleTabSelect} data={rowData} />
     ) : (
-      <DashboardHome />
+      <Overview />
     );
 
   return (
