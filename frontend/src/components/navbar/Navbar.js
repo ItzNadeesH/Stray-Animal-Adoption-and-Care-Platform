@@ -110,10 +110,10 @@ const Navbar = ({ isAuthenticated }) => {
               <Link to="/">Home</Link>
             </li>
             <li className="mx-4">
-              <Link href="/">About Us</Link>
+              <Link to="/about">About Us</Link>
             </li>
             <li className="mx-4">
-              <Link href="/">Contact</Link>
+              <Link to="/contact">Contact</Link>
             </li>
             <li className="mx-4">
               <Link to="/store">Store</Link>

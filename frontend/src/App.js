@@ -15,6 +15,7 @@ import OrderComplete from './pages/OrderComplete';
 import PageNotFound from './pages/PageNotFound';
 import Dashboard from './pages/Dashboard';
 import PrivateRoute from './components/routing/PrivateRoute';
+import Contact from './pages/Contact';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -32,7 +33,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<Home />} />
-          <Route path="/contat" element={<Home />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="/store" element={<Store />} />
           <Route path="/store/product/:productId" element={<Product />} />
           <Route
