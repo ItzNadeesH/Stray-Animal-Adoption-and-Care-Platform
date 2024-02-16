@@ -13,13 +13,16 @@ const Order = ({ order }) => {
   return (
     <>
       <div className="py-4 md:mr-[13px]">
-        <div className="pb-4">
+        <div className="px-1 pb-2">
           <p className="font-bold text-[24px] md:text-[30px]">
             Order#{parseInt(order._id.substr(-5).toUpperCase(), 16)}
           </p>
           <p className="mt-2 text-[14px] text-[#767676]">
             Order placed <span className="text-black">{formattedDate}</span>
           </p>
+          <button className="underline text-cyan-blue text-[14px]">
+            View Invoice
+          </button>
         </div>
         {products &&
           products.map((item) => (

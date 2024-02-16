@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useEffect } from 'react';
 import { loadUser } from './actions/auth';
 import setAuthToken from './utils/setAuthToken';
+import PrivateRoute from './components/routing/PrivateRoute';
 import store from './store';
 // Pages
 import Signup from './pages/Signup';
@@ -14,8 +15,8 @@ import Checkout from './pages/Checkout';
 import OrderComplete from './pages/OrderComplete';
 import PageNotFound from './pages/PageNotFound';
 import Dashboard from './pages/Dashboard';
-import PrivateRoute from './components/routing/PrivateRoute';
 import Contact from './pages/Contact';
+import Invoice from './components/dashboard/user/Invoice';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -29,6 +30,7 @@ function App() {
     <>
       <Router>
         <Routes>
+          <Route path="/invoice" element={<Invoice />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Home />} />
