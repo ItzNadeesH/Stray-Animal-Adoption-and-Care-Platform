@@ -1,18 +1,16 @@
 import { combineReducers } from '@reduxjs/toolkit';
-import alert from './alert';
-import signupAuth from './signupAuth';
-import loginAuth from './loginAuth';
 import userAuth from './userAuth';
 import logoutAuth from './logoutAuth';
 import cartReducer from './cartSlice';
+import profileAuth from './profileAuth';
+import orderReducer from './orderSlice';
 
 const rootReducer = combineReducers({
-  alert,
-  signupAuth,
-  loginAuth,
+  cartReducer,
   userAuth,
   logoutAuth,
-  cartReducer,
+  profileAuth,
+  orderReducer,
 });
 
 export default rootReducer;

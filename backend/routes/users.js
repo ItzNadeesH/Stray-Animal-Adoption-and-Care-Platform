@@ -2,6 +2,7 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const { check, validationResult } = require('express-validator');
 const User = require('../models/User');
+const auth = require('../middleware/auth');
 
 const router = express.Router();
 
@@ -49,5 +50,38 @@ router.post(
     }
   }
 );
+
+// @route   GET api/users
+// @desc    Get all users
+// @access  Private
+router.get('/', async (req, res) => {
+  try {
+    const users = await User.find().sort({ createdAt: -1 });
+
+    res.status(200).json(users);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server error');
+  }
+});
+
+// @route   Delete api/users/:id
+// @desc    Delete a user
+// @access  Private
+router.delete('/:id', auth, async (req, res) => {
+  if (req.user.id === req.params.id) {
+    return res
+      .status(300)
+      .json({ msg: 'Can not delete current logged in user' });
+  }
+  try {
+    await User.findByIdAndDelete(req.params.id);
+
+    res.status(200).json({ msg: 'success' });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server error');
+  }
+});
 
 module.exports = router;

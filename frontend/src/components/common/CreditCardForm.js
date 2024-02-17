@@ -1,4 +1,12 @@
-const CreditCardForm = () => {
+import React from 'react';
+
+const CreditCardForm = ({ data, setData }) => {
+  const handleChange = (e) => {
+    setData({
+      ...data,
+      card: { ...data.card, [e.target.name]: e.target.value },
+    });
+  };
   return (
     <>
       <div className="max-w-sm mx-auto">
@@ -8,10 +16,11 @@ const CreditCardForm = () => {
         <div className="relative">
           <input
             type="text"
+            name="cardnumber"
             id="card-number-input"
             className="border-2 border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 placeholder:text-[#00000080] outline-0"
             placeholder="4242 4242 4242 4242"
-            pattern="^4[0-9]{12}(?:[0-9]{3})?$"
+            onChange={handleChange}
           />
         </div>
         <div className="grid grid-cols-3 gap-4 my-4">
@@ -31,13 +40,13 @@ const CreditCardForm = () => {
               Card expiration date:
             </label>
             <input
-              datepicker="true"
-              datepicker-format="mm/yy"
               id="card-expiration-input"
+              name="expiredate"
               type="text"
               className="border-2 border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 placeholder:text-[#00000080] outline-0"
               placeholder="12/23"
               maxLength={5}
+              onChange={handleChange}
             />
           </div>
           <div className="col-span-1">
@@ -45,13 +54,14 @@ const CreditCardForm = () => {
               Card CVV code:
             </label>
             <input
-              type="number"
+              type="text"
               id="cvv-input"
+              name="cvv"
               aria-describedby="helper-text-explanation"
               className="border-2 border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 placeholder:text-[#00000080] outline-0"
               placeholder="CVV"
-              min={100}
-              max={999}
+              maxLength={3}
+              onChange={handleChange}
             />
           </div>
         </div>

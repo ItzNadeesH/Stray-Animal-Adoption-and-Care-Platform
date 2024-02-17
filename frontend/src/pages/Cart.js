@@ -1,5 +1,4 @@
 import Layout from './Layout';
-import Loader from '../utils/Loader';
 
 // Components
 import CartItemList from '../components/cart/CartItemList';
@@ -8,19 +7,15 @@ import CartCalculator from '../components/cart/CartCalculator';
 const Cart = () => {
   return (
     <>
-      <Loader>
-        <Layout>
-          <div className="max-w-screen-xl mx-auto">
-            <h1 className="text-center text-[24px] sm:text-[36px] my-6">
-              Cart
-            </h1>
-            <div className="px-4 flex flex-wrap">
-              <CartItemList />
-              <CartCalculator />
-            </div>
+      <Layout>
+        <div className="max-w-screen-xl mx-auto">
+          <h1 className="text-center text-[24px] sm:text-[36px] my-6">Cart</h1>
+          <div className="px-4 flex flex-wrap">
+            <CartItemList />
+            <CartCalculator />
           </div>
-        </Layout>
-      </Loader>
+        </div>
+      </Layout>
     </>
   );
 };

@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import Dropdown from '../common/Dropdown';
-import Dropzone from '../common/Dropzone';
-import SuccessMessage from '../common/SuccessMessage';
+import Dropdown from '../../common/Dropdown';
+import Dropzone from '../../common/Dropzone';
+import SuccessMessage from '../../common/SuccessMessage';
 import { IoArrowBack } from 'react-icons/io5';
 
 const AddProductForm = ({ onSelect }) => {
@@ -20,6 +20,7 @@ const AddProductForm = ({ onSelect }) => {
     price: '',
     manufacturer: '',
     description: '',
+    profit: '',
   };
   const [formData, setFormData] = useState(initialState);
 
@@ -39,7 +40,7 @@ const AddProductForm = ({ onSelect }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const { productName, price, manufacturer, description } = formData;
+  const { productName, price, manufacturer, description, profit } = formData;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -58,6 +59,7 @@ const AddProductForm = ({ onSelect }) => {
       price,
       manufacturer,
       description,
+      profit,
     });
 
     try {
@@ -69,7 +71,6 @@ const AddProductForm = ({ onSelect }) => {
       setPetType('Select an option');
       setIsLoading(false);
       setIsVisible(true);
-      //onSelect('Products');
     } catch (error) {
       const errors = error.response.data.errors;
       console.log(errors);
@@ -142,6 +143,20 @@ const AddProductForm = ({ onSelect }) => {
                   min={0}
                   onChange={handleChange}
                   value={formData.price}
+                />
+              </div>
+              <div className="mb-3">
+                <label className="block text-[12px] mb-2" htmlFor="profit">
+                  Profit (LKR)
+                </label>
+                <input
+                  className="text-[14px] px-4 py-2.5 h-[40px] border border-[#000000] rounded-md w-full placeholder:text-[#00000080] outline-0"
+                  type="number"
+                  name="profit"
+                  id="profit"
+                  min={0}
+                  onChange={handleChange}
+                  value={formData.profit}
                 />
               </div>
               <div className="mb-3">

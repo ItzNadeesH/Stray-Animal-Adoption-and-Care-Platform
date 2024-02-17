@@ -30,7 +30,7 @@ const CartItem = ({ item, onDelete }) => {
           />
           <p className="w-[150px]">{data.name}</p>
           <div className="w-[96px]">
-            <form className="max-w-xs w-full">
+            <div className="max-w-xs w-full">
               <div className="relative flex items-center ">
                 <button
                   disabled={quantity <= 1}
@@ -73,7 +73,7 @@ const CartItem = ({ item, onDelete }) => {
                   <LuPlus />
                 </button>
               </div>
-            </form>
+            </div>
           </div>
           <p className="w-[96px]">{data.price}LKR</p>
           <button onClick={handleDelete}>

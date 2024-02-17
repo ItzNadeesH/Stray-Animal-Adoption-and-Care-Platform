@@ -1,12 +1,13 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { logout } from '../../actions/auth';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { loadUser } from '../../actions/auth';
 import PropTypes from 'prop-types';
 import store from '../../store';
 import setAuthToken from '../../utils/setAuthToken';
 
 const ProfileDropdown = ({ logout }) => {
+  const { username, email } = useSelector((state) => state.userAuth.user);
   const navigate = useNavigate();
   const handleSignout = () => {
     logout();
@@ -21,8 +22,8 @@ const ProfileDropdown = ({ logout }) => {
         id="user-dropdown"
       >
         <div className="px-4 py-3 select-none">
-          <span className="block text-sm">Bonnie Green</span>
-          <span className="block text-sm truncate">name@flowbite.com</span>
+          <span className="block text-sm">{username}</span>
+          <span className="block text-xs truncate">{email}</span>
         </div>
         <ul className="py-2 " aria-labelledby="user-menu-button">
           <li>

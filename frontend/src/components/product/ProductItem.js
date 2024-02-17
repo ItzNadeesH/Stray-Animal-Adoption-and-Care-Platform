@@ -20,7 +20,7 @@ const ProductItem = ({ product }) => {
               View Product
             </button>
           </Link>
-          <p className="mt-0.5">{product.price}LKR</p>
+          <p className="mt-0.5">Rs.{product.price}.00</p>
         </div>
       </div>
     </>

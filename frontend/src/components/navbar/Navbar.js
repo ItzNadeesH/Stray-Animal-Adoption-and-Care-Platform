@@ -99,7 +99,7 @@ const Navbar = ({ isAuthenticated }) => {
   );
   return (
     <>
-      <nav className="flex justify-between p-6 h-[80px] border-b border-[#e6e6e6] max-w-screen-xl mx-auto mb-4">
+      <nav className="flex justify-between p-6 h-[80px] border-b border-[#e6e6e6] max-w-screen-xl mx-auto">
         <div className="flex items-center">
           <button onClick={handleMenuClick} className="md:hidden mr-6">
             <img className="h-5" src={menu} alt="menu-icon" />
@@ -110,10 +110,10 @@ const Navbar = ({ isAuthenticated }) => {
               <Link to="/">Home</Link>
             </li>
             <li className="mx-4">
-              <Link href="/">About Us</Link>
+              <Link to="/about">About Us</Link>
             </li>
             <li className="mx-4">
-              <Link href="/">Contact</Link>
+              <Link to="/contact">Contact</Link>
             </li>
             <li className="mx-4">
               <Link to="/store">Store</Link>
