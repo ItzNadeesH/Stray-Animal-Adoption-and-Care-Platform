@@ -16,7 +16,6 @@ import OrderComplete from './pages/OrderComplete';
 import PageNotFound from './pages/PageNotFound';
 import Dashboard from './pages/Dashboard';
 import Contact from './pages/Contact';
-import Invoice from './components/dashboard/user/Invoice';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -30,7 +29,6 @@ function App() {
     <>
       <Router>
         <Routes>
-          <Route path="/invoice" element={<Invoice />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Home />} />
