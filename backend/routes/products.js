@@ -166,6 +166,20 @@ router.delete('/:id', auth, async (req, res) => {
   }
 });
 
+// @route   GET api/products/reviews/:id
+// @desc    get reviews
+// @access  Public
+router.get('/reviews/:id', async (req, res) => {
+  try {
+    const { reviews } = await Product.findById(req.params.id).select('reviews');
+
+    res.status(200).json(reviews);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server error');
+  }
+});
+
 // @route   POST api/products/review/:id
 // @desc    add a review
 // @access  Private
@@ -194,6 +208,7 @@ router.post(
 
       const newReview = {
         user: req.user.id,
+        name: user.username,
         avatar: user.avatar,
         rating: req.body.rating,
         comment: req.body.comment,
@@ -203,7 +218,7 @@ router.post(
 
       await product.save();
 
-      res.status(200).json(product);
+      res.status(200).json({ msg: 'Success' });
     } catch (error) {
       if (error.kind === 'ObjectId') {
         return res.status(404).json({ msg: 'product not found!' });
