@@ -3,6 +3,7 @@ const { check, validationResult } = require('express-validator');
 const auth = require('../middleware/auth');
 
 const Product = require('../models/Product');
+const User = require('../models/User');
 
 const router = express.Router();
 
@@ -154,7 +155,7 @@ router.get('/:id', async (req, res) => {
 // @route   DELETE api/products/:id
 // @desc    Delete a product
 // @access  Private
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', auth, async (req, res) => {
   try {
     await Product.findOneAndDelete({ _id: req.params.id });
 
@@ -164,5 +165,53 @@ router.delete('/:id', async (req, res) => {
     res.status(500).send('Server error');
   }
 });
+
+// @route   POST api/products/review/:id
+// @desc    add a review
+// @access  Private
+router.post(
+  '/review/:id',
+  [
+    auth,
+    [
+      check('rating', 'rating is required').not().isEmpty(),
+      check('comment', 'comment is required').not().isEmpty(),
+    ],
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    try {
+      const user = await User.findById(req.user.id).select('-password');
+      let product = await Product.findById({ _id: req.params.id }).select(
+        '-image'
+      );
+
+      if (!product) return res.status(404).json({ msg: 'product not found' });
+
+      const newReview = {
+        user: req.user.id,
+        avatar: user.avatar,
+        rating: req.body.rating,
+        comment: req.body.comment,
+      };
+
+      product.reviews.unshift(newReview);
+
+      await product.save();
+
+      res.status(200).json(product);
+    } catch (error) {
+      if (error.kind === 'ObjectId') {
+        return res.status(404).json({ msg: 'product not found!' });
+      }
+      console.error(error.message);
+      res.status(500).send('Server error');
+    }
+  }
+);
 
 module.exports = router;
