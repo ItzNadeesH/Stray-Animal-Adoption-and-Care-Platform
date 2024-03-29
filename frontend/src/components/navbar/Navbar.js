@@ -12,6 +12,7 @@ import { FaHome, FaInfoCircle, FaStore } from 'react-icons/fa';
 import { IoMdContacts } from 'react-icons/io';
 import { FaUserCircle } from 'react-icons/fa';
 import menu from '../../assets/icons/icon-menu.svg';
+import HoverDropdown from '../common/HoverDropdown';
 
 const Navbar = ({ isAuthenticated }) => {
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -116,7 +117,7 @@ const Navbar = ({ isAuthenticated }) => {
               <Link to="/contact">Contact</Link>
             </li>
             <li className="mx-4">
-              <Link to="/store">Store</Link>
+              <HoverDropdown />
             </li>
           </ul>
         </div>
