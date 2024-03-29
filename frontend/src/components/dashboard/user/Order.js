@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { format } from 'date-fns';
 import OrderDetails from './OrderDetails';
+import Invoice from './Invoice';
 
 const Order = ({ order }) => {
+  const [isVisible, setIsVisible] = useState(false);
   const formattedDate = format(new Date(order.date), 'MMMM d, yyyy');
   const { products } = order;
   const total = products.reduce(
@@ -13,13 +15,22 @@ const Order = ({ order }) => {
   return (
     <>
       <div className="py-4 md:mr-[13px]">
-        <div className="pb-4">
+        <div className="px-1 pb-2">
           <p className="font-bold text-[24px] md:text-[30px]">
             Order#{parseInt(order._id.substr(-5).toUpperCase(), 16)}
           </p>
           <p className="mt-2 text-[14px] text-[#767676]">
             Order placed <span className="text-black">{formattedDate}</span>
           </p>
+          <button
+            onClick={() => setIsVisible(!isVisible)}
+            className="underline text-cyan-blue text-[14px]"
+          >
+            View Invoice
+          </button>
+          <div className={isVisible ? 'block' : 'hidden'}>
+            <Invoice data={order} total={total} />
+          </div>
         </div>
         {products &&
           products.map((item) => (
