@@ -8,6 +8,7 @@ import { useState } from 'react';
 import SuccessMessage from '../common/SuccessMessage';
 import Loader from '../../utils/Loader';
 import { useReviews } from '../../hooks/useReviews';
+import Review from '../review/Review';
 
 const ProductPreview = () => {
   const isAuthenticated = useSelector(
@@ -20,7 +21,6 @@ const ProductPreview = () => {
   const { reviews } = useReviews(productId);
   const [value, setValue] = useState(1);
   const [active, setActive] = useState(false);
-  console.log(reviews);
 
   return (
     <>
@@ -74,6 +74,8 @@ const ProductPreview = () => {
               </div>
             </div>
           </div>
+          {reviews &&
+            reviews.map((review) => <Review key={review._id} data={review} />)}
         </div>
       )}
     </>

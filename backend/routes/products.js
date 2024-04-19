@@ -209,7 +209,6 @@ router.post(
       const newReview = {
         user: req.user.id,
         name: user.username,
-        avatar: user.avatar,
         rating: req.body.rating,
         comment: req.body.comment,
       };
