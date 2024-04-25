@@ -1,5 +1,6 @@
-import Layout from './Layout';
-import hero from '../assets/hero-image.svg';
+import Layout from "./Layout";
+import hero from "../assets/hero-image.svg";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
@@ -51,7 +52,9 @@ const Home = () => {
                 <h3 className="text-center">Volunteers</h3>
               </div>
               <div>
-                <h3 className="text-center">Donations</h3>
+                <Link to="/donationhome">
+                  <h3 className="text-center">Donations</h3>
+                </Link>
               </div>
               <div>
                 <h3 className="text-center">Feedbacks</h3>
