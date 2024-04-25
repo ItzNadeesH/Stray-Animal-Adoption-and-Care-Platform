@@ -1,22 +1,24 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { useEffect } from 'react';
-import { loadUser } from './actions/auth';
-import setAuthToken from './utils/setAuthToken';
-import PrivateRoute from './components/routing/PrivateRoute';
-import store from './store';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
+import { loadUser } from "./actions/auth";
+import setAuthToken from "./utils/setAuthToken";
+import PrivateRoute from "./components/routing/PrivateRoute";
+import store from "./store";
+import React from "react";
+
 // Pages
-import Signup from './pages/Signup';
-import Login from './pages/Login';
-import Home from './pages/Home';
-import Store from './pages/Store';
-import Product from './pages/Product';
-import Cart from './pages/Cart';
-import Checkout from './pages/Checkout';
-import OrderComplete from './pages/OrderComplete';
-import PageNotFound from './pages/PageNotFound';
-import Dashboard from './pages/Dashboard';
-import Contact from './pages/Contact';
-import About from './pages/About';
+import Signup from "./pages/Signup";
+import Login from "./pages/Login";
+import Home from "./pages/Home";
+import Store from "./pages/Store";
+import Product from "./pages/Product";
+import Cart from "./pages/Cart";
+import Checkout from "./pages/Checkout";
+import OrderComplete from "./pages/OrderComplete";
+import PageNotFound from "./pages/PageNotFound";
+import Dashboard from "./pages/Dashboard";
+import Contact from "./pages/Contact";
+import About from "./pages/About";
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
