@@ -5,7 +5,7 @@ const Donations = require("../Models/DonationModel");
 
 // Function definitions from DonationController.js
 const getAllDonations = async (req, res, next) => {
-  let Donation;
+  let donations;
 
   //get all donations
 

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import Layout from './Layout';
-import hero from '../assets/hero-image.svg';
-import { IoStorefrontOutline } from 'react-icons/io5';
+import Layout from "./Layout";
+import hero from "../assets/hero-image.svg";
+import { IoStorefrontOutline } from "react-icons/io5";
 
 const Home = () => {
   return (
@@ -71,10 +71,14 @@ const Home = () => {
                 <h3 className="text-center">Volunteers</h3>
               </div>
               <div>
-                <Link to="/donationhome">
-                  <h3 className="text-center">Donations</h3>
-                </Link>
+                <div className="flex justify-center">
+                  <IoStorefrontOutline size={56} />
+                </div>
+                <h3 className="text-center">
+                  <a href="/donationhome">Donations</a>
+                </h3>
               </div>
+
               <div>
                 <div className="flex justify-center">
                   <IoStorefrontOutline size={56} />
