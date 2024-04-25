@@ -44,7 +44,7 @@ const HoverDropdown = () => {
           </li>
           <li>
             <Link
-              to="/"
+              to="/donationhome"
               className="block px-4 py-2 text-black hover:bg-cyan-blue hover:text-white transition-all"
             >
               Donations
