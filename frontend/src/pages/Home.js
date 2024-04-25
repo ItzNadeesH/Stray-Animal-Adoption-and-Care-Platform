@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Layout from './Layout';
 import hero from '../assets/hero-image.svg';
 import { IoStorefrontOutline } from 'react-icons/io5';
@@ -70,10 +71,9 @@ const Home = () => {
                 <h3 className="text-center">Volunteers</h3>
               </div>
               <div>
-                <div className="flex justify-center">
-                  <IoStorefrontOutline size={56} />
-                </div>
-                <h3 className="text-center">Donations</h3>
+                <Link to="/donationhome">
+                  <h3 className="text-center">Donations</h3>
+                </Link>
               </div>
               <div>
                 <div className="flex justify-center">
