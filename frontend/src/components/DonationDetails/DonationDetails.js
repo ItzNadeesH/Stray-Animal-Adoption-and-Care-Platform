@@ -1,11 +1,9 @@
-import React, { useEffect, useState, useRef } from "react";
-import Nav from "../Nav/Nav";
-import axios from "axios";
-import Donationdisplay from "../DonationDisplay/DonationDisplay";
-import { useReactToPrint } from "react-to-print";
-import backgroundImage from "../DonationHomePage/background.png";
+import React, { useEffect, useState, useRef } from 'react';
+import Nav from '../Nav/Nav';
+import axios from 'axios';
+import Donationdisplay from '../DonationDisplay/DonationDisplay';
 
-const URL = "http://localhost:5000/donations";
+const URL = 'http://localhost:5000/donations';
 
 const fetchHandler = async () => {
   return await axios.get(URL).then((res) => res.data);
@@ -14,18 +12,12 @@ const fetchHandler = async () => {
 function DonationsDisplay() {
   const [donations, setDonations] = useState();
   const ComponentsRef = useRef();
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState('');
   const [noResults, setNoResults] = useState(false);
 
   useEffect(() => {
     fetchHandler().then((data) => setDonations(data.donations));
   }, []);
-
-  const handlePrint = useReactToPrint({
-    content: () => ComponentsRef.current,
-    DocumentTitle: "Donation Information",
-    onAfterPrint: () => alert("Donations report successfully downloaded"),
-  });
 
   const handleSearch = () => {
     fetchHandler().then((data) => {
@@ -41,7 +33,7 @@ function DonationsDisplay() {
 
   return (
     <div>
-      {" "}
+      {' '}
       <Nav />
       <div>
         <h1 className="text-center text-blue-500 text-3xl font-bold mb-8 mt-10">

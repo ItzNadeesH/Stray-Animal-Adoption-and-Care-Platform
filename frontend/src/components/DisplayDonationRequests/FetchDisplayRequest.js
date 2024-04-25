@@ -1,8 +1,8 @@
-import React, { useEffect, useState, useRef } from "react";
-import axios from "axios";
-import AdminNav from "../AdminNav/AdminNav";
-import DisplayRequest from "../DisplayDonationRequests/DisplayRequest";
-import { useReactToPrint } from "react-to-print";
+import React, { useEffect, useState, useRef } from 'react';
+import axios from 'axios';
+import AdminNav from '../AdminNav/AdminNav';
+import DisplayRequest from '../DisplayDonationRequests/DisplayRequest';
+import { useReactToPrint } from 'react-to-print';
 
 // Define totalAllocation variable outside the component
 let totalAllocation = 0;
@@ -10,17 +10,17 @@ let totalAllocation = 0;
 function FetchDisplayRequest() {
   const [requests, setRequests] = useState([]);
   const ComponentsRef = useRef();
-  const [accepted, setAccepted] = useState(false);
+  const [accepted] = useState(false);
 
   useEffect(() => {
     // Fetch donation requests data from backend
     axios
-      .get("http://localhost:5000/requrements")
+      .get('http://localhost:5000/requrements')
       .then((response) => {
         setRequests(response.data.maintanance);
       })
       .catch((error) => {
-        console.error("Error fetching donation requests:", error);
+        console.error('Error fetching donation requests:', error);
       });
   }, []);
 
@@ -42,8 +42,8 @@ function FetchDisplayRequest() {
 
   const handlePrint = useReactToPrint({
     content: () => ComponentsRef.current,
-    DocumentTitle: "Requests Information",
-    onAfterPrint: () => alert("Requests report successfully downloaded"),
+    DocumentTitle: 'Requests Information',
+    onAfterPrint: () => alert('Requests report successfully downloaded'),
   });
 
   return (

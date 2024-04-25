@@ -1,7 +1,6 @@
-import React, { useRef } from "react";
-import emailjs from "@emailjs/browser";
-import Nav from "../Nav/Nav"; // Import the Nav component
-import backgroundImage from "../DonationHomePage/background.png";
+import React, { useRef } from 'react';
+import emailjs from '@emailjs/browser';
+import Nav from '../Nav/Nav'; // Import the Nav component
 
 export const ContactDonationManager = () => {
   const form = useRef();
@@ -11,20 +10,20 @@ export const ContactDonationManager = () => {
 
     emailjs
       .sendForm(
-        "service_47pk29s",
-        "template_ldwy6bc",
+        'service_47pk29s',
+        'template_ldwy6bc',
         form.current,
-        "Y5qXf8UMJIDZB-235"
+        'Y5qXf8UMJIDZB-235'
       )
 
       .then(
         (result) => {
           console.log(result.text);
-          alert("SUCCESS!");
+          alert('SUCCESS!');
         },
         (error) => {
           console.log(error.text);
-          alert("error!");
+          alert('error!');
         }
       );
   };

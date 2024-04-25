@@ -1,12 +1,10 @@
 //this page display repeatedly (for each donation this will iterate)
 // DisplayRequest.js
 
-import React, { useState } from "react"; // Import useState hook
-import { useNavigate } from "react-router-dom";
+import React, { useState } from 'react'; // Import useState hook
 
 function DisplayRequest({ request, onAccept, onReject, accepted }) {
   const { _id, formID, date, description, amount } = request || {};
-  const history = useNavigate();
 
   // Define accepted state variable and its setter function
   const [isAccepted, setIsAccepted] = useState(accepted);
