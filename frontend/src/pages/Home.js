@@ -1,6 +1,15 @@
 import Layout from './Layout';
 import hero from '../assets/hero-image.svg';
-import { IoStorefrontOutline } from 'react-icons/io5';
+import { Link } from 'react-router-dom';
+//icons
+import { IoStorefront } from 'react-icons/io5';
+import { FaDog } from 'react-icons/fa';
+import { IoBagHandle } from 'react-icons/io5';
+import { MdVolunteerActivism } from 'react-icons/md';
+import { FaDonate } from 'react-icons/fa';
+import { MdFeedback } from 'react-icons/md';
+import { BiSolidInjection } from 'react-icons/bi';
+import { MdEventNote } from 'react-icons/md';
 
 const Home = () => {
   return (
@@ -19,10 +28,10 @@ const Home = () => {
               </p>
               <div className="flex mt-3">
                 <button className="block mr-2 py-1 w-full bg-cyan-blue text-[#ffffff] border border-cyan-blue rounded-full hover:bg-[#000000] transition">
-                  About Us
+                  <Link to="/about">About Us</Link>
                 </button>
                 <button className="block ml-2 py-1 w-full bg-white text-cyan-blue border border-cyan-blue rounded-full hover:bg-[#000000] hover:text-white transition">
-                  Contact
+                  <Link to="/contact">Contact</Link>
                 </button>
               </div>
             </div>
@@ -35,50 +44,49 @@ const Home = () => {
             <div className="grid grid-cols-4 gap-5 gap-y-10">
               <div>
                 <div className="flex justify-center">
-                  <IoStorefrontOutline size={56} />
+                  <FaDog size={56} />
                 </div>
                 <h3 className="text-center">Adoption</h3>
               </div>
               <div>
                 <div className="flex justify-center">
-                  <IoStorefrontOutline size={56} />
+                  <MdEventNote size={56} />
                 </div>
-                <h3 className="text-center">Lost and Found</h3>
+                <h3 className="text-center">Events</h3>
               </div>
               <div>
                 <div className="flex justify-center">
-                  <IoStorefrontOutline size={56} />
+                  <BiSolidInjection size={56} />
                 </div>
-                <h3 className="text-center">Adoption</h3>
+                <h3 className="text-center">Veterinary</h3>
               </div>
               <div>
                 <div className="flex justify-center">
-                  <IoStorefrontOutline size={56} />
+                  <IoBagHandle size={56} />
                 </div>
                 <h3 className="text-center">Store</h3>
               </div>
               <div>
                 <div className="flex justify-center">
-                  <IoStorefrontOutline size={56} />
+                  <IoStorefront size={56} />
                 </div>
                 <h3 className="text-center">Shelters</h3>
               </div>
               <div>
                 <div className="flex justify-center">
-                  <IoStorefrontOutline size={56} />
+                  <MdVolunteerActivism size={56} />
                 </div>
                 <h3 className="text-center">Volunteers</h3>
               </div>
               <div>
                 <div className="flex justify-center">
-                  <IoStorefrontOutline size={56} />
+                  <FaDonate size={56} />
                 </div>
                 <h3 className="text-center">Donations</h3>
               </div>
-
               <div>
                 <div className="flex justify-center">
-                  <IoStorefrontOutline size={56} />
+                  <MdFeedback size={56} />
                 </div>
                 <h3 className="text-center">Feedbacks</h3>
               </div>

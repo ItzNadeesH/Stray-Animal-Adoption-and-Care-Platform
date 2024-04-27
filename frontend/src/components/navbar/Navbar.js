@@ -106,7 +106,7 @@ const Navbar = ({ isAuthenticated }) => {
             <img className="h-5" src={menu} alt="menu-icon" />
           </button>
           <Link to="/">
-            <h1 className="inline-block">LOGO</h1>
+            <h1 className="inline-block text-[28px]">AWPA</h1>
           </Link>
           <ul className="ml-[56px] hidden md:flex">
             <li className="mx-4">

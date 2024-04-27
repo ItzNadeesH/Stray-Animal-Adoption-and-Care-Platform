@@ -39,7 +39,15 @@ const HoverDropdown = () => {
               to="/"
               className="block px-4 py-2 text-black hover:bg-cyan-blue hover:text-white transition-all"
             >
-              Lost and Found
+              Veterinaries
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/"
+              className="block px-4 py-2 text-black hover:bg-cyan-blue hover:text-white transition-all"
+            >
+              Events
             </Link>
           </li>
           <li>
@@ -50,6 +58,7 @@ const HoverDropdown = () => {
               Donations
             </Link>
           </li>
+
           <li>
             <Link
               to="/"

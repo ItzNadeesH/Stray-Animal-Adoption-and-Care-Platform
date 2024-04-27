@@ -8,8 +8,8 @@ import { useState } from 'react';
 import SuccessMessage from '../common/SuccessMessage';
 import Loader from '../../utils/Loader';
 import { useReviews } from '../../hooks/useReviews';
-import Review from '../review/Review';
-import ReviewForm from '../review/ReviewForm';
+// import Review from '../review/Review';
+// import ReviewForm from '../review/ReviewForm';
 
 const ProductPreview = () => {
   const isAuthenticated = useSelector(
@@ -75,9 +75,9 @@ const ProductPreview = () => {
               </div>
             </div>
           </div>
-          <ReviewForm />
+          {/* <ReviewForm />
           {reviews &&
-            reviews.map((review) => <Review key={review._id} data={review} />)}
+            reviews.map((review) => <Review key={review._id} data={review} />)} */}
         </div>
       )}
     </>
