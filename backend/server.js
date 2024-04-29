@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 //insert of route of donationrouter
 const router = require('./Routes/DonationRouter');
 const Maitanacerouter = require('./Routes/MaintananceRoute');
+const doctorfeedbackRouter = require('./Routes/DoctorfeedbackRoutes');
+const servicesRouter = require('./Routes/serviceFeedbackRoutes'); 
 const cors = require('cors');
 
 const app = express();
@@ -31,6 +33,9 @@ app.use(cors());
 app.use('/donations', router);
 app.use('/requrements', Maitanacerouter);
 app.use('/files', express.static('files'));
+
+app.use("/api/Doctorfeedback", doctorfeedbackRouter);
+app.use("/api/services", servicesRouter); 
 
 const PORT = process.env.PORT || 5000;
 

@@ -35,6 +35,17 @@ import DonationPreview from './components/DonationPreview/DonationPreview';
 import ContactDonationManager from './components/ContactDonationManager/ContactDonationManager';
 import FetchDisplayRequest from './components/DisplayDonationRequests/FetchDisplayRequest';
 
+// pasindu
+import AddFeedbackForm from "./components/feedback/AddFeedbackForm";
+import AllFeedback from "./components/feedback/AllFeedback";
+import EditFeedbackForm from "./components/feedback/EditFeedbackForm";
+import ActiveFeedbackForm from "./components/feedback/admin/ActiveFeedbackForm";
+import DisplayAllFeedback from "./components/feedback/admin/DisplayAllFeedback";
+import AllFeedbackService from "./components/services/AllFeedbackService";
+import ServiceFeedbackEdit from "./components/services/ServiceFeedbackEdit";
+import AddNewServiceFeedback from "./components/services/AddNewServiceFeedback";
+import Feedback from './pages/Feedback';
+
 if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
@@ -110,6 +121,15 @@ function App() {
             path="/acceptrejectrequest"
             element={<FetchDisplayRequest />}
           />
+          <Route path="/feedback" element={<Feedback />} />
+          <Route path="/add-feedback" element={<AddFeedbackForm />} />
+          <Route path="/add-services" element={<AddNewServiceFeedback />} />
+          <Route path="/ActiveFeedbackForm/:id" element={<ActiveFeedbackForm />} />
+          <Route path="/all-feedback" element={<AllFeedback />} />
+          <Route path="/all-servies" element={<AllFeedbackService />} />
+          <Route path="/Doctorfeedback/:id" element={<EditFeedbackForm />} />
+          <Route path="/ServiceFeedbackEdit/:id" element={<ServiceFeedbackEdit />} />
+          <Route path="/DisplayAllFeedback" element={<DisplayAllFeedback />} /> 
         </Routes>
       </Router>
     </>

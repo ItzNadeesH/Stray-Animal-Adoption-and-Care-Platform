@@ -77,7 +77,7 @@ const HoverDropdown = () => {
           </li>
           <li>
             <Link
-              to="/"
+              to="/all-feedback"
               className="block px-4 py-2 text-black hover:bg-cyan-blue hover:text-white transition-all"
             >
               Feedbacks
