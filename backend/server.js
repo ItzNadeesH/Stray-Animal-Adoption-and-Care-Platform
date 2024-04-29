@@ -16,6 +16,7 @@ connectDB();
 // Init Middleware
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: false }));
+app.use(cors());
 
 app.get('/', (req, res) => res.send('API Running'));
 
@@ -27,15 +28,36 @@ app.use('/api/profiles', require('./routes/profiles'));
 app.use('/api/orders', require('./routes/orders'));
 app.use('/api/reports', require('./routes/reports'));
 
-//middleware
-app.use(express.json());
-app.use(cors());
+//donation
 app.use('/donations', router);
 app.use('/requrements', Maitanacerouter);
 app.use('/files', express.static('files'));
 
+// feedback
 app.use("/api/Doctorfeedback", doctorfeedbackRouter);
-app.use("/api/services", servicesRouter); 
+app.use("/api/services", servicesRouter);
+
+// shelter maintainance management
+const formRouter = require("./routes/Form.js");
+app.use("/Form",formRouter);
+
+const fundRouter = require('./routes/fund.js');
+app.use('/Fund', fundRouter);
+
+const invoiceRoutes = require('./routes/receipt');
+app.use('/Receipts', invoiceRoutes);
+
+const invoicepdf = require('./routes/filepdf');
+app.use('/Invoices', invoicepdf);
+
+const requestform = require('./routes/requestForm');
+app.use('/requestforms', requestform);
+
+const donationForm = require('./routes/DonationForm');
+app.use('/donationforms', donationForm);
+
+const authfunction = require('./routes/auth.js');
+app.use('/authentication', authfunction);
 
 const PORT = process.env.PORT || 5000;
 
