@@ -33,7 +33,7 @@ const AddProductForm = ({ onSelect }) => {
     }));
   }, [image, category, petType]);
 
-  const categories = ['Food', 'Suppliment', 'Accessories'];
+  const categories = ['Food', 'Supplement', 'Accessories'];
   const petTypes = ['Any', 'Cat', 'Dog'];
 
   const handleChange = (e) => {

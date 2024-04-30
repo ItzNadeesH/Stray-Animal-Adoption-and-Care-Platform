@@ -6,13 +6,13 @@ import html2canvas from 'html2canvas';
 const Receipt = () => {
   const [invoiceDetails, setInvoiceDetails] = useState({
     date: '2023-05-01',
-    invoiceNumber: 'INV12345'
+    invoiceNumber: 'INV12345',
   });
 
   const [items, setItems] = useState([
-    { description: 'Product 1', amount: 100.00 },
-    { description: 'Product 2', amount: 50.00 },
-    { description: 'Product 3', amount: 75.00 }
+    { description: 'Product 1', amount: 100.0 },
+    { description: 'Product 2', amount: 50.0 },
+    { description: 'Product 3', amount: 75.0 },
   ]);
 
   const handleInvoiceChange = (e) => {
@@ -21,7 +21,15 @@ const Receipt = () => {
 
   const handleItemChange = (index, e) => {
     const updatedItems = items.map((item, i) =>
-      i === index ? { ...item, [e.target.name]: e.target.type === 'number' ? parseFloat(e.target.value) : e.target.value } : item
+      i === index
+        ? {
+            ...item,
+            [e.target.name]:
+              e.target.type === 'number'
+                ? parseFloat(e.target.value)
+                : e.target.value,
+          }
+        : item
     );
     setItems(updatedItems);
   };
@@ -46,12 +54,12 @@ const Receipt = () => {
         const pdf = new jsPDF({
           orientation: 'p',
           unit: 'px',
-          format: [canvas.width, canvas.height]
+          format: [canvas.width, canvas.height],
         });
         pdf.addImage(imgData, 'PNG', 0, 0, canvas.width, canvas.height);
         pdf.save('receipt.pdf');
       })
-      .catch(err => {
+      .catch((err) => {
         console.error('Error saving PDF:', err);
       });
   };
@@ -60,26 +68,30 @@ const Receipt = () => {
     const data = {
       invoiceNumber: invoiceDetails.invoiceNumber,
       date: invoiceDetails.date,
-      items: items
+      items: items,
     };
-  
-    axios.post('http://localhost:8070/Receipts/add', data)
-      .then(response => {
+
+    axios
+      .post('/Receipts/add', data)
+      .then((response) => {
         console.log('Saved successfully:', response.data);
         alert('Invoice saved successfully!');
       })
-      .catch(error => {
+      .catch((error) => {
         console.error('Error saving the invoice:', error);
         alert('Failed to save the invoice.');
       });
   };
-  
 
   return (
     <div id="pdf-content">
       <div className="bg-white border rounded-lg shadow-lg px-6 py-8 max-w-md mx-auto mt-8">
-        <h1 className="font-bold text-2xl my-4 text-center text-blue-600">Shelter Maintenance</h1>
-        <h1 className="font-bold text-1xl my-2 text-center text-blue-600">Fund Receipt</h1>
+        <h1 className="font-bold text-2xl my-4 text-center text-blue-600">
+          Shelter Maintenance
+        </h1>
+        <h1 className="font-bold text-1xl my-2 text-center text-blue-600">
+          Fund Receipt
+        </h1>
         <div className="flex justify-between mb-6">
           <div className="text-gray-700">
             <input
@@ -110,13 +122,30 @@ const Receipt = () => {
             {items.map((item, index) => (
               <tr key={index}>
                 <td className="text-left text-gray-700">
-                  <input type="text" name="description" className="p-1 w-full" value={item.description} onChange={(e) => handleItemChange(index, e)} />
+                  <input
+                    type="text"
+                    name="description"
+                    className="p-1 w-full"
+                    value={item.description}
+                    onChange={(e) => handleItemChange(index, e)}
+                  />
                 </td>
                 <td className="text-right text-gray-700">
-                  <input type="number" name="amount" className="p-1 w-full text-right" value={item.amount.toFixed(2)} onChange={(e) => handleItemChange(index, e)} />
+                  <input
+                    type="number"
+                    name="amount"
+                    className="p-1 w-full text-right"
+                    value={item.amount.toFixed(2)}
+                    onChange={(e) => handleItemChange(index, e)}
+                  />
                 </td>
                 <td>
-                  <button onClick={() => handleRemoveItem(index)} className="text-red-500">Remove</button>
+                  <button
+                    onClick={() => handleRemoveItem(index)}
+                    className="text-red-500"
+                  >
+                    Remove
+                  </button>
                 </td>
               </tr>
             ))}
@@ -124,15 +153,32 @@ const Receipt = () => {
           <tfoot>
             <tr>
               <td className="text-left font-bold text-gray-700">Total</td>
-              <td className="text-right font-bold text-gray-700">{calculateTotal().toFixed(2)}</td>
+              <td className="text-right font-bold text-gray-700">
+                {calculateTotal().toFixed(2)}
+              </td>
               <td></td>
             </tr>
           </tfoot>
         </table>
-        <button onClick={handleAddItem} className="bg-blue-500 text-white px-4 py-2 rounded">Add Item</button>
+        <button
+          onClick={handleAddItem}
+          className="bg-blue-500 text-white px-4 py-2 rounded"
+        >
+          Add Item
+        </button>
         <div className="flex justify-end mt-4 space-x-2">
-          <button onClick={savePdf} className="bg-green-500 text-white px-4 py-2 rounded">Save as PDF</button>
-          <button onClick={handleSave} className="bg-blue-500 text-white px-4 py-2 rounded">Save</button>
+          <button
+            onClick={savePdf}
+            className="bg-green-500 text-white px-4 py-2 rounded"
+          >
+            Save as PDF
+          </button>
+          <button
+            onClick={handleSave}
+            className="bg-blue-500 text-white px-4 py-2 rounded"
+          >
+            Save
+          </button>
         </div>
       </div>
     </div>
