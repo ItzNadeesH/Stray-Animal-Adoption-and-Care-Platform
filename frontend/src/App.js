@@ -36,14 +36,14 @@ import ContactDonationManager from './components/ContactDonationManager/ContactD
 import FetchDisplayRequest from './components/DisplayDonationRequests/FetchDisplayRequest';
 
 // pasindu
-import AddFeedbackForm from "./components/feedback/AddFeedbackForm";
-import AllFeedback from "./components/feedback/AllFeedback";
-import EditFeedbackForm from "./components/feedback/EditFeedbackForm";
-import ActiveFeedbackForm from "./components/feedback/admin/ActiveFeedbackForm";
-import DisplayAllFeedback from "./components/feedback/admin/DisplayAllFeedback";
-import AllFeedbackService from "./components/services/AllFeedbackService";
-import ServiceFeedbackEdit from "./components/services/ServiceFeedbackEdit";
-import AddNewServiceFeedback from "./components/services/AddNewServiceFeedback";
+import AddFeedbackForm from './components/feedback/AddFeedbackForm';
+import AllFeedback from './components/feedback/AllFeedback';
+import EditFeedbackForm from './components/feedback/EditFeedbackForm';
+import ActiveFeedbackForm from './components/feedback/admin/ActiveFeedbackForm';
+import DisplayAllFeedback from './components/feedback/admin/DisplayAllFeedback';
+import AllFeedbackService from './components/services/AllFeedbackService';
+import ServiceFeedbackEdit from './components/services/ServiceFeedbackEdit';
+import AddNewServiceFeedback from './components/services/AddNewServiceFeedback';
 import Feedback from './pages/Feedback';
 
 // osanda
@@ -140,28 +140,34 @@ function App() {
           <Route path="/feedback" element={<Feedback />} />
           <Route path="/add-feedback" element={<AddFeedbackForm />} />
           <Route path="/add-services" element={<AddNewServiceFeedback />} />
-          <Route path="/ActiveFeedbackForm/:id" element={<ActiveFeedbackForm />} />
+          <Route
+            path="/ActiveFeedbackForm/:id"
+            element={<ActiveFeedbackForm />}
+          />
           <Route path="/all-feedback" element={<AllFeedback />} />
           <Route path="/all-servies" element={<AllFeedbackService />} />
           <Route path="/Doctorfeedback/:id" element={<EditFeedbackForm />} />
-          <Route path="/ServiceFeedbackEdit/:id" element={<ServiceFeedbackEdit />} />
+          <Route
+            path="/ServiceFeedbackEdit/:id"
+            element={<ServiceFeedbackEdit />}
+          />
           <Route path="/DisplayAllFeedback" element={<DisplayAllFeedback />} />
 
           <Route path="/shelter" element={<MainLayout />}>
-                  <Route path="Dashboard" element={<ShelterDashBoard />} />
-                  <Route path="Form" element={<Form />} />
-                  <Route path="Dform" element={<DForm />} />
-                  <Route path="Formsection" element={<FormSection />} />
-                  <Route path="DFormsection" element={<DFormSection />} />
-                  <Route path="Editform/:formId" element={<EditForm />} />
-                  <Route path="EditDform/:id" element={<EditDForm />} />
-                  <Route path="addReceipt" element={<AddReceipt />} />
-                  <Route path="Sendreceipts" element={<SendRecsection />} />
-                  <Route path="Editreceipt/:id" element={<UpdateSendReceipt />} />
-                  <Route path="pdfrecsection" element={<PdfRecsection />} />
-                  <Route path="requestsection" element={<RequestSection />} />
-                  <Route path="donationform" element={<DonationFund />} />
-            </Route>
+            <Route path="Dashboard" element={<ShelterDashBoard />} />
+            <Route path="Form" element={<Form />} />
+            <Route path="Dform" element={<DForm />} />
+            <Route path="Formsection" element={<FormSection />} />
+            <Route path="DFormsection" element={<DFormSection />} />
+            <Route path="Editform/:formId" element={<EditForm />} />
+            <Route path="EditDform/:id" element={<EditDForm />} />
+            <Route path="addReceipt" element={<AddReceipt />} />
+            <Route path="Sendreceipts" element={<SendRecsection />} />
+            <Route path="Editreceipt/:id" element={<UpdateSendReceipt />} />
+            <Route path="pdfrecsection" element={<PdfRecsection />} />
+            <Route path="requestsection" element={<RequestSection />} />
+            <Route path="donationform" element={<DonationFund />} />
+          </Route>
         </Routes>
       </Router>
     </>
