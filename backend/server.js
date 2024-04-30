@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const router = require('./Routes/DonationRouter');
 const Maitanacerouter = require('./Routes/MaintananceRoute');
 const doctorfeedbackRouter = require('./Routes/DoctorfeedbackRoutes');
-const servicesRouter = require('./Routes/serviceFeedbackRoutes'); 
+const servicesRouter = require('./Routes/serviceFeedbackRoutes');
 const cors = require('cors');
 
 const app = express();
@@ -34,12 +34,12 @@ app.use('/requrements', Maitanacerouter);
 app.use('/files', express.static('files'));
 
 // feedback
-app.use("/api/Doctorfeedback", doctorfeedbackRouter);
-app.use("/api/services", servicesRouter);
+app.use('/api/Doctorfeedback', doctorfeedbackRouter);
+app.use('/api/services', servicesRouter);
 
 // shelter maintainance management
-const formRouter = require("./routes/Form.js");
-app.use("/Form",formRouter);
+const formRouter = require('./routes/Form.js');
+app.use('/Form', formRouter);
 
 const fundRouter = require('./routes/fund.js');
 app.use('/Fund', fundRouter);

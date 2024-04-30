@@ -8,7 +8,7 @@ import { IoArrowBack } from 'react-icons/io5';
 const AddProductForm = ({ onSelect }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [errors, setErros] = useState(null);
+  const [error, setError] = useState('');
   const [image, setImage] = useState('');
   const [category, setCategory] = useState('');
   const [petType, setPetType] = useState('');
@@ -72,9 +72,7 @@ const AddProductForm = ({ onSelect }) => {
       setIsLoading(false);
       setIsVisible(true);
     } catch (error) {
-      const errors = error.response.data.errors;
-      console.log(errors);
-      setErros(errors);
+      setError(error.response.data.errors[0].msg);
       setIsLoading(false);
     }
   };
@@ -100,6 +98,27 @@ const AddProductForm = ({ onSelect }) => {
               <Dropzone imageProp={image} setImageProp={setImage} />
             </div>
             <div className="p-5 border border-[#e6e6e6] rounded-md w-full xl:w-[49%]">
+              {error && (
+                <div
+                  className="mb-5 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+                  role="alert"
+                >
+                  <span className="block sm:inline">{error}</span>
+                  <span className="absolute top-0 bottom-0 right-0 px-4 py-3">
+                    <button onClick={() => setError(null)}>
+                      <svg
+                        className="fill-current h-6 w-6 text-red-500"
+                        role="button"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                      >
+                        <title>Close</title>
+                        <path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z" />
+                      </svg>
+                    </button>
+                  </span>
+                </div>
+              )}
               <div className="mb-3">
                 <label className="block text-[12px] mb-2" htmlFor="productName">
                   Product Name
@@ -202,14 +221,6 @@ const AddProductForm = ({ onSelect }) => {
               </button>
             </div>
           </form>
-        </div>
-        <div className="flex">
-          {errors &&
-            errors.map((error, index) => (
-              <div key={index} className="text-red">
-                {error.msg}
-              </div>
-            ))}
         </div>
       </div>
       <SuccessMessage
