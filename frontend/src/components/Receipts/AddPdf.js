@@ -12,7 +12,7 @@ const AddPdf = () => {
         formData.append("file", file); // Ensure 'file' is the name expected by backend
 
         try {
-            const result = await axios.post('http://localhost:8070/invoices/uploadpdf', formData, {
+            const result = await axios.post('http://localhost:5000/invoices/uploadpdf', formData, {
                 headers: { "Content-Type": "multipart/form-data" },
             });
             console.log(result);

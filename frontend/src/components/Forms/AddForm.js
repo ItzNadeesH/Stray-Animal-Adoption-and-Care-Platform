@@ -27,7 +27,7 @@ const AddForm = () => {
         const data = { formId, date, formFields };
 
         try {
-            await axios.post('http://localhost:8070/Form/add', data);
+            await axios.post('http://localhost:5000/Form/add', data);
             console.log("Data submitted successfully");
             alert("Form submitted successfully!");
             window.location.reload();

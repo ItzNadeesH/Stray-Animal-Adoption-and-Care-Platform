@@ -9,7 +9,7 @@ const PieChart = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:8070/Fund/getall');
+                const response = await axios.get('http://localhost:5000/Fund/getall');
                 const funds = response.data;
 
                 // Data processing logic

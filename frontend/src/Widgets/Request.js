@@ -5,13 +5,13 @@ const Request = () => {
     const [requestForms, setRequestForms] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:8070/requestforms/all')
+        axios.get('http://localhost:5000/requestforms/all')
             .then(response => setRequestForms(response.data))
             .catch(error => console.error('Error fetching request forms:', error));
     }, []);
 
     const handleAccept = (id) => {
-        axios.put(`http://localhost:8070/requestforms/accept/${id}`)
+        axios.put(`http://localhost:5000/requestforms/accept/${id}`)
             .then(response => {
                 alert(response.data.message);
                 window.location.reload();
@@ -23,7 +23,7 @@ const Request = () => {
     };
 
     const handleDecline = (id) => {
-        axios.put(`http://localhost:8070/requestforms/decline/${id}`)
+        axios.put(`http://localhost:5000/requestforms/decline/${id}`)
             .then(response => {
                 alert(response.data.message);
                 window.location.reload();

@@ -12,7 +12,7 @@ function DonFormcat() {
 
     const fetchForms = async () => {
         try {
-            const response = await axios.get('http://localhost:8070/donationforms/getall');
+            const response = await axios.get('http://localhost:5000/donationforms/getall');
             setForms(response.data);
         } catch (error) {
             console.error('Error fetching forms:', error);
@@ -21,7 +21,7 @@ function DonFormcat() {
 
     const handleDelete = async (formId) => {
         try {
-            await axios.delete(`http://localhost:8070/donationforms/delete/${formId}`);
+            await axios.delete(`http://localhost:5000/donationforms/delete/${formId}`);
             fetchForms(); // Refresh the forms list after deletion
         } catch (error) {
             console.error('Error deleting the form:', error);

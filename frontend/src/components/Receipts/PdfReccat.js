@@ -11,7 +11,7 @@ const PdfReccat = () => {
 
     const fetchPdfs = async () => {
         try {
-            const response = await axios.get('http://localhost:8070/invoices/getall');
+            const response = await axios.get('http://localhost:5000/invoices/getall');
             setPdfs(response.data);
         } catch (error) {
             console.error('Error fetching PDFs:', error);
@@ -20,7 +20,7 @@ const PdfReccat = () => {
 
     const deletePdf = async (id) => {
         try {
-            const response = await axios.delete(`http://localhost:8070/invoices/delete/${id}`);
+            const response = await axios.delete(`http://localhost:5000/invoices/delete/${id}`);
             if (response.status === 200) {
                 alert('File deleted successfully');
                 setPdfs(prevPdfs => prevPdfs.filter(pdf => pdf._id !== id));

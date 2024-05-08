@@ -13,7 +13,7 @@ function Formcat() {
 
     const fetchForms = async () => {
         try {
-            const response = await axios.get('http://localhost:8070/Form/get');
+            const response = await axios.get('http://localhost:5000/Form/get');
             setForms(response.data);
         } catch (error) {
             console.error('Error fetching forms:', error);
@@ -26,7 +26,7 @@ function Formcat() {
 
     const handleDelete = async (formId) => {
         try {
-            await axios.delete(`http://localhost:8070/Form/delete/${formId}`);
+            await axios.delete(`http://localhost:5000/Form/delete/${formId}`);
             fetchForms(); // Refresh the forms list after deletion
         } catch (error) {
             console.error('Error deleting the form:', error);

@@ -63,7 +63,7 @@ const Receipt = () => {
       items: items
     };
   
-    axios.post('http://localhost:8070/Receipts/add', data)
+    axios.post('http://localhost:5000/Receipts/add', data)
       .then(response => {
         console.log('Saved successfully:', response.data);
         alert('Invoice saved successfully!');

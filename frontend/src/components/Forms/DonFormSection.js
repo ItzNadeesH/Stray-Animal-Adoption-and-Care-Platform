@@ -5,13 +5,13 @@ const DonFormSection = () => {
     const [donationForms, setDonationForms] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:8070/donationforms/all')
+        axios.get('http://localhost:5000/donationforms/all')
             .then(response => setDonationForms(response.data))
             .catch(error => console.error('Error fetching donation forms:', error));
     }, []);
 
     const handleAccept = (id, totalAmount) => {
-        axios.put(`http://localhost:8070/donationforms/accept/${id}`)
+        axios.put(`http://localhost:5000/donationforms/accept/${id}`)
             .then(response => {
                 alert(response.data.message);
                 // Update state to remove accepted donation form

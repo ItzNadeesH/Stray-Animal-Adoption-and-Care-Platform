@@ -13,7 +13,7 @@ const AddDonationForm = () => {
         event.preventDefault();
         
         try {
-            await axios.post('http://localhost:8070/donationforms/add', formFields);
+            await axios.post('http://localhost:5000/donationforms/add', formFields);
             console.log("Data submitted successfully");
             alert("Form submitted successfully!");
         } catch (error) {

@@ -56,7 +56,7 @@ const UpdateForm = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            await axios.put(`http://localhost:8070/Form/update/${formId}`, formData);
+            await axios.put(`http://localhost:5000/Form/update/${formId}`, formData);
             navigate('/'); // Redirect to the homepage or list of forms after updating
         } catch (error) {
             console.error('Error updating form:', error);

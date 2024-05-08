@@ -15,7 +15,7 @@ const UpdateReceipt = () => {
     useEffect(() => {
         const fetchReceipt = async () => {
             try {
-                const response = await axios.get(`http://localhost:8070/Receipts/getdata/${id}`);
+                const response = await axios.get(`http://localhost:5000/Receipts/getdata/${id}`);
                 if (response.data) {
                     setReceipt({
                         invoiceNumber: response.data.invoiceNumber,
@@ -50,7 +50,7 @@ const UpdateReceipt = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        axios.put(`http://localhost:8070/Receipts/update/${id}`, receipt)
+        axios.put(`http://localhost:5000/Receipts/update/${id}`, receipt)
             .then(() => {
                 alert('Receipt updated successfully!');
                 navigate('/receipts'); // Navigate away after update

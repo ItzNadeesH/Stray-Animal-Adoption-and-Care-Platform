@@ -9,7 +9,7 @@ function UpdateDForm() {
     useEffect(() => {
         const fetchFormData = async () => {
             try {
-                const response = await axios.get(`http://localhost:8070/donationforms/get/${id}`);
+                const response = await axios.get(`http://localhost:5000/donationforms/get/${id}`);
                 setFormData(response.data);
             } catch (error) {
                 console.error('Error fetching form data:', error);
@@ -29,7 +29,7 @@ function UpdateDForm() {
         event.preventDefault();
         
         try {
-            await axios.put(`http://localhost:8070/donationforms/update/${id}`, formData);
+            await axios.put(`http://localhost:5000/donationforms/update/${id}`, formData);
             console.log("Form updated successfully");
             alert("Form updated successfully!");
         } catch (error) {
