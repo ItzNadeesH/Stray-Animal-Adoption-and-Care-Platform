@@ -6,7 +6,8 @@ const invoiceSchema = new mongoose.Schema({
   items: [{
     description: String,
     amount: Number
-  }]
+  }],
+  totalamount: Number
 });
 
 module.exports = mongoose.model('Invoice', invoiceSchema);

@@ -1,18 +1,17 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
+//import jsPDF from 'jspdf';
+//import html2canvas from 'html2canvas';
 
 const Receipt = () => {
   const [invoiceDetails, setInvoiceDetails] = useState({
-    date: '2023-05-01',
-    invoiceNumber: 'INV12345'
+    date: 'Add Date',
+    invoiceNumber: 'Invoice Number',
+    totalAmount: 0.00 // Fix typo here
   });
 
   const [items, setItems] = useState([
-    { description: 'Product 1', amount: 100.00 },
-    { description: 'Product 2', amount: 50.00 },
-    { description: 'Product 3', amount: 75.00 }
+    { description: 'Details here', amount: 0.00 },
   ]);
 
   const handleInvoiceChange = (e) => {
@@ -27,7 +26,7 @@ const Receipt = () => {
   };
 
   const handleAddItem = () => {
-    setItems([...items, { description: '', amount: 0 }]);
+    setItems([...items, { description: 'Details here', amount: 0 }]);
   };
 
   const handleRemoveItem = (index) => {
@@ -35,34 +34,37 @@ const Receipt = () => {
   };
 
   const calculateTotal = () => {
-    return items.reduce((acc, item) => acc + item.amount, 0);
+    return items.reduce((acc, item) => acc + parseFloat(item.amount), 0); // Adjusted calculation
   };
 
-  const savePdf = () => {
-    const input = document.getElementById('pdf-content');
-    html2canvas(input)
-      .then((canvas) => {
-        const imgData = canvas.toDataURL('image/png');
-        const pdf = new jsPDF({
-          orientation: 'p',
-          unit: 'px',
-          format: [canvas.width, canvas.height]
-        });
-        pdf.addImage(imgData, 'PNG', 0, 0, canvas.width, canvas.height);
-        pdf.save('receipt.pdf');
-      })
-      .catch(err => {
-        console.error('Error saving PDF:', err);
-      });
-  };
+  //const savePdf = () => {
+  //  const input = document.getElementById('pdf-content');
+  //  html2canvas(input)
+   //   .then((canvas) => {
+    //    const imgData = canvas.toDataURL('image/png');
+     //   const pdf = new jsPDF({
+     //     orientation: 'p',
+     //     unit: 'px',
+     //     format: [canvas.width, canvas.height]
+     //   });
+     //   pdf.addImage(imgData, 'PNG', 0, 0, canvas.width, canvas.height);
+      //  pdf.save('${invoiceDetails.invoiceNumber}.png');
+    //  })
+    //  .catch(err => {
+    //    console.error('Error saving PDF:', err);
+    //  });
+ // };
 
   const handleSave = () => {
+    const totalamount = calculateTotal(); // Calculate total amount
+
     const data = {
       invoiceNumber: invoiceDetails.invoiceNumber,
       date: invoiceDetails.date,
-      items: items
+      items: items,
+      totalAmount: totalamount // Assign the calculated total amount
     };
-  
+
     axios.post('http://localhost:5000/Receipts/add', data)
       .then(response => {
         console.log('Saved successfully:', response.data);
@@ -129,10 +131,9 @@ const Receipt = () => {
             </tr>
           </tfoot>
         </table>
-        <button onClick={handleAddItem} className="bg-blue-500 text-white px-4 py-2 rounded">Add Item</button>
         <div className="flex justify-end mt-4 space-x-2">
-          <button onClick={savePdf} className="bg-green-500 text-white px-4 py-2 rounded">Save as PDF</button>
-          <button onClick={handleSave} className="bg-blue-500 text-white px-4 py-2 rounded">Save</button>
+           <button onClick={handleAddItem} className="bg-green-500 text-white px-4 py-2 rounded">Add Item</button>
+          <button onClick={handleSave} className="bg-blue-500 text-white px-8 py-2 rounded">Save</button>
         </div>
       </div>
     </div>

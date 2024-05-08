@@ -39,6 +39,11 @@ const SendReccat = () => {
         navigate('/shelter/addReceipt');
     };
 
+    // Filter receipts based on search input
+    const filteredReceipts = receipts.filter(receipt =>
+        receipt.invoiceNumber.toLowerCase().includes(search.toLowerCase())
+    );
+
     return (
         <div className="container mx-auto mt-10 p-4 border border-gray-300 rounded-lg">
             <h1 className="text-3xl font-bold text-center mb-6">Send Receipts</h1>
@@ -58,7 +63,7 @@ const SendReccat = () => {
                 </button>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {receipts.map(receipt => (
+                {filteredReceipts.map(receipt => (
                     <ReceiptCard key={receipt._id} receipt={receipt} onDelete={handleDelete} onEdit={handleEdit} />
                 ))}
             </div>

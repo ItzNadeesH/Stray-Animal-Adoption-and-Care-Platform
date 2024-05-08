@@ -4,8 +4,8 @@ const Receipt = require('../models/Receipt');
 
 // Post an invoice
 router.post('/add', async (req, res) => {
-  const { invoiceNumber, date, items } = req.body;
-  const newReceipt = new Receipt({ invoiceNumber, date, items });
+  const { invoiceNumber, date, items, totalamount } = req.body;
+  const newReceipt = new Receipt({ invoiceNumber, date, items, totalamount });
 
   try {
     const savedReceipt = await newReceipt.save();
@@ -53,9 +53,9 @@ router.get('/getdata/:id', async (req, res) => {
 
 // Update a receipt
 router.put('/update/:id', async (req, res) => {
-    const { invoiceNumber, date, items } = req.body;
+    const { invoiceNumber, date, items, totalamount } = req.body;
     try {
-        const receipt = await Receipt.findByIdAndUpdate(req.params.id, { invoiceNumber, date, items }, { new: true });
+        const receipt = await Receipt.findByIdAndUpdate(req.params.id, { invoiceNumber, date, items, totalamount }, { new: true });
         if (!receipt) {
             return res.status(404).json({ message: 'Receipt not found!' });
         }
