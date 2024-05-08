@@ -4,6 +4,7 @@ import { Pie } from 'react-chartjs-2';
 
 const PieChart = () => {
     const [chartData, setChartData] = useState(null);
+    const [totalAmount, setTotalAmount] = useState(0);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -14,6 +15,7 @@ const PieChart = () => {
                 // Data processing logic
                 const donationFund = funds.filter(fund => fund.fundSource === 'Donation').reduce((total, fund) => total + fund.amount, 0);
                 const adoptionFund = funds.filter(fund => fund.fundSource === 'Adoption').reduce((total, fund) => total + fund.amount, 0);
+                const total = donationFund + adoptionFund;
 
                 setChartData({
                     labels: ['Donation Fund', 'Adoption Fund'],
@@ -24,8 +26,13 @@ const PieChart = () => {
                         hoverOffset: 4,
                     }]
                 });
+
+                setTotalAmount(total);
+
             } catch (error) {
                 console.error('Error fetching funds:', error);
+                setChartData(null); // Reset chartData to null in case of an error
+                setTotalAmount(0);
             }
         };
 
@@ -36,6 +43,8 @@ const PieChart = () => {
         <div style={{ width: '400px', height: '400px' }}>
             <h2>Funds Distribution</h2>
             {chartData && <Pie data={chartData} options={{ responsive: true }} />}
+            <div className="text-center font-bold text-s">Total Fund Amount</div>
+            <div className="text-center font-bold text-2xl">Rs.{totalAmount.toLocaleString()}.00</div>
         </div>
     );
 };

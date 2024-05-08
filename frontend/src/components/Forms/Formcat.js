@@ -21,7 +21,7 @@ function Formcat() {
     };
 
     const handleUpdate = (formId) => {
-        navigate(`/editform/${formId}`);
+        navigate(`/shelter/editform/${formId}`);
     };
 
     const handleDelete = async (formId) => {

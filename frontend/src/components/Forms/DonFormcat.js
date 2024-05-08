@@ -49,7 +49,7 @@ function DonFormcat() {
                 />
             </div>
             <div className="mb-4">
-                <Link to="/Dform" className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Add Form</Link>
+                <Link to="/shelter/Dform" className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Add Form</Link>
             </div>
             <div className="grid grid-cols-1 gap-4">
                 {filteredForms.map(form => (

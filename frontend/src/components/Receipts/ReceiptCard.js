@@ -5,7 +5,7 @@ const ReceiptCard = ({ receipt, onDelete }) => {
     const navigate = useNavigate();
 
     const handleEdit = () => {
-        navigate(`/Editreceipt/${receipt._id}`);
+        navigate(`/shelter/Editreceipt/${receipt._id}`);
     };
 
     const handleDelete = () => {

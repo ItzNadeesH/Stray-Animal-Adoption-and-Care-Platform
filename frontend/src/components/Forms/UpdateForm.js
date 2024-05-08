@@ -65,7 +65,7 @@ const UpdateForm = () => {
 
     return (
         <div className="max-w-4xl mx-auto p-5">
-            <h1 className="text-2xl font-bold mb-5">Edit Form: {formId}</h1>
+            <h1 className="text-2xl font-bold mb-5">Edit Form: {formData.formId}</h1>
             <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 border border-gray-300">
                 <div className="mb-4">
                     <label htmlFor="date" className="block text-gray-700 text-sm font-bold mb-2">Date:</label>

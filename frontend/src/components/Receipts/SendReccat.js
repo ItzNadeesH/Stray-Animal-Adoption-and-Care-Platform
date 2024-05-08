@@ -36,7 +36,7 @@ const SendReccat = () => {
     };
 
     const handleAddReceipt = () => {
-        navigate('/addReceipt');
+        navigate('/shelter/addReceipt');
     };
 
     return (

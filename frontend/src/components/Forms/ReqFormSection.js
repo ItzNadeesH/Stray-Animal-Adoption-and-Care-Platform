@@ -40,6 +40,7 @@ const ReqFormSection = () => {
             {requestForms.map(form => (
                 <div key={form._id} className="mb-6 p-4 bg-white rounded-lg shadow-md flex justify-between items-center">
                     <div>
+                        <p className="text-gray-600 mb-2">Event Details: ${form.events}</p>
                         <p className="text-gray-600 mb-2">Date: {new Date(form.date).toLocaleDateString()}</p>
                         <p className="text-gray-600 mb-2">Total Amount: ${form.totalAmount}</p>
                         <p className="text-gray-600 mb-2">Status: {form.status}</p>

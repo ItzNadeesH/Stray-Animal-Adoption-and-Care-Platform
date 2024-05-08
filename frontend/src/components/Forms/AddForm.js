@@ -42,14 +42,14 @@ const AddForm = () => {
             <h1 className="text-xl font-bold text-center mb-4">Financial Needs Form</h1>
             <form onSubmit={handleSubmit}>
                 <div className="mb-5">
-                    <label htmlFor="formId" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Form ID</label>
+                    <label htmlFor="formId" className="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Form ID</label>
                     <input type="text" id="formId" value={formId} onChange={e => setFormId(e.target.value)}
                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                            required />
                 </div>
 
                 <div className="mb-5">
-                    <label htmlFor="date" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date</label>
+                    <label htmlFor="date" className="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Date</label>
                     <input type="date" id="date" value={date} onChange={e => setDate(e.target.value)}
                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                            required />
@@ -57,11 +57,11 @@ const AddForm = () => {
 
                 {formFields.map((field, index) => (
                     <div key={index} className="mb-5">
-                        <label htmlFor={`text-${index}`} className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Text {index + 1}</label>
+                        <label htmlFor={`text-${index}`} className="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Requirement {index + 1}</label>
                         <input type="text" name="text" value={field.text} onChange={e => handleFormChange(index, e)}
                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                required />
-                        <label htmlFor={`amount-${index}`} className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Amount {index + 1}</label>
+                        <label htmlFor={`amount-${index}`} className="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Amount {index + 1}</label>
                         <input type="number" name="amount" value={field.amount} onChange={e => handleFormChange(index, e)}
                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                required />
