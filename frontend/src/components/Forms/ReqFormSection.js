@@ -34,6 +34,20 @@ const ReqFormSection = () => {
             });
     };
 
+    const handleDelete = (id) =>{
+
+        axios.delete(`http://localhost:5000/requestforms/delete/${id}`)
+            .then(response =>{
+                alert(response.data.message);
+                window.location.reload();
+            })
+            .catch(error => {
+                console.error('Error deleting request form:', error);
+                alert('Failed to delete request: ' + (error.response?.data?.message || 'Server error'));
+            });
+
+    };
+
     return (
         <div className="bg-gray-100 p-4 rounded-lg shadow-md">
             <h2 className="text-2xl font-bold text-green-600 mb-4">Request Forms</h2>
@@ -48,14 +62,20 @@ const ReqFormSection = () => {
                     <div>
                         <button 
                             onClick={() => handleAccept(form._id)}
-                            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md mr-2">
+                            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md mr-3 ">
                             Accept
                         </button>
                         <button 
                             onClick={() => handleDecline(form._id)}
-                            className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-md">
+                            className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-md mr-3">
                             Decline
                         </button>
+                        <button 
+                            onClick={() => handleDelete(form._id)}
+                            className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-md">
+                            Delete
+                        </button>
+
                     </div>
                 </div>
             ))}

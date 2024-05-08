@@ -79,4 +79,13 @@ router.put("/decline/:id", async (req, res) => {
     }
 });
 
+router.delete("/delete/:id" ,async (req, res) =>{
+
+    RequestForm.findByIdAndDelete(req.params.id)
+        .then(() => res.json('Requset has been deleted'))
+        .catch(err => res.status(400).json('Error :' +err));
+
+
+});
+
 module.exports = router;
