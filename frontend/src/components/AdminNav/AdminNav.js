@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 function Nav() {
   return (
     <div className="bg-blue-300 py-4 ">
-      <ul className="flex justify-center">
+      <ul className="flex justify-center ">
         <li className="mr-6">
           <Link
             to="/Admin"
