@@ -217,7 +217,49 @@ router.post(
 
       await product.save();
 
-      res.status(200).json({ msg: 'Success' });
+      res.status(200).json(newReview);
+    } catch (error) {
+      if (error.kind === 'ObjectId') {
+        return res.status(404).json({ msg: 'product not found!' });
+      }
+      console.error(error.message);
+      res.status(500).send('Server error');
+    }
+  }
+);
+
+// @route   PUT api/products/review/:id
+// @desc    update a review
+// @access  Private
+router.put(
+  '/review/:id',
+  [
+    auth,
+    [
+      check('reviewId', 'reviewId is required').not().isEmpty(),
+      check('rating', 'rating is required').not().isEmpty(),
+      check('comment', 'comment is required').not().isEmpty(),
+    ],
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    try {
+      const user = await User.findById(req.user.id).select('-password');
+      let product = await Product.findById(req.params.id);
+      product.reviews.filter((review) => req.body.reviewId == review._id);
+
+      const newReview = {
+        user: req.user.id,
+        name: user.username,
+        rating: req.body.rating,
+        comment: req.body.comment,
+      };
+
+      res.status(200).json(review);
     } catch (error) {
       if (error.kind === 'ObjectId') {
         return res.status(404).json({ msg: 'product not found!' });
