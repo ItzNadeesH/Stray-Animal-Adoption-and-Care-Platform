@@ -10,7 +10,7 @@ const cors = require('cors');
 
 const app = express();
 
-// Connect database
+// Connect databas
 connectDB();
 
 // Init Middleware
