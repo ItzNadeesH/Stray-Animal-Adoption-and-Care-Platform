@@ -83,7 +83,11 @@ const ProductPreview = () => {
 
             {reviews &&
               reviews.map((review) => (
-                <Review key={review._id} data={review} />
+                <Review
+                  key={review._id}
+                  data={review}
+                  updateReviews={updateReviews}
+                />
               ))}
           </div>
         </div>

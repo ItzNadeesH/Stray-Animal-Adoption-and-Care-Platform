@@ -270,4 +270,34 @@ router.put(
   }
 );
 
+// @route   DELETE api/products/review/:id
+// @desc    update a review
+// @access  Private
+router.delete('/review/:id', auth, async (req, res) => {
+  const { reviewId } = req.body;
+
+  if (reviewId === undefined || reviewId === null) {
+    return res.status(404).json({ msg: 'review not found!' });
+  }
+
+  try {
+    let product = await Product.findById(req.params.id).select('reviews');
+
+    product.reviews = product.reviews.filter((review) => {
+      if (review.user === req.user.id) throw Error('authorization failed');
+      return review._id != reviewId;
+    });
+
+    product.save();
+
+    res.status(200).json(product.reviews);
+  } catch (error) {
+    if (error.kind === 'ObjectId') {
+      return res.status(404).json({ msg: 'review not found!' });
+    }
+    console.error(error.message);
+    res.status(500).send('Server error');
+  }
+});
+
 module.exports = router;
