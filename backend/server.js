@@ -217,6 +217,7 @@ app.use('/api/volunteerRespond', require('./routes/volunteerRespond'));
 
 app.use('/api/eventFundRequest', require('./routes/eventFundRequest'));
 
+app.use('/api/notification', require('./routes/notification'));
 
 app.use('/api/appointment', require('./routes/appointment'));
 

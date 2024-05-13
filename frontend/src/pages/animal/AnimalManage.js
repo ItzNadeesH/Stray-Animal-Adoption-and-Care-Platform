@@ -173,7 +173,7 @@ function AnimalManage() {
 
   return (
     <Layout>
-      <div className="p-10">
+      <div className="p-10 ">
         <h1 className="text-2xl font-bold">Manage Animals</h1>
         <div className="flex space-x-3">
           <button

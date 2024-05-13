@@ -117,6 +117,7 @@ const getShelterProfile = async (req, res) => {
       const adoptions = await adoption.find({ state: "PENDING" });
       const appointments = await Appointment.find({ state: { $in: ["APPROVED", "REJECTED", "DELETED"] } });
       const volunteerResponds = await VolunteerRespond.find({ state: "ACTIVE" });
+      
       return res.status(200).json({ user, adoptions, appointments, volunteerResponds });
    }
    catch (error) {
