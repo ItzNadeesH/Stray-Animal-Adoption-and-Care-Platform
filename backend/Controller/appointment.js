@@ -64,11 +64,21 @@ const createAppointment = async (req, res) => {
 const updateAppointment = async (req, res) => {
    try {
       const { id } = req.params;
-      const appointment = await Appointment
-         .findByIdAndUpdate(id, req.body, { new: true });
+      const appointment = await Appointment.findById(id);
       if (!appointment) {
          return res.status(404).json({ error: true, message: "Appointment not found" });
       }
+      await appointment.updateOne(req.body);
+      const notifyUsers = await User.find({ role: 'SHELTER_OWNER' });
+      notifyUsers.forEach(async (user) => {
+         const notification = new Notification({
+            user: user._id,
+            title: "Appointment Status Updated",
+            message: `The appointment for [${appointment.animal}] on [${new Date(appointment.requestedDate).toDateString()}] has been updated. Please check the appointments page for more details.`,
+            link: "/admin/animal/manage",
+         });
+         await notification.save();
+      });
       return res.status(200).json({ error: false, message: "Appointment updated successfully" });
    }
    catch (error) {
@@ -84,32 +94,17 @@ const deleteAppointment = async (req, res) => {
          return res.status(404).json({ error: true, message: "Appointment not found" });
       }
       await appointment.deleteOne();
-      return res.status(200).json({ error: false, message: "Appointment deleted successfully" });
-   }
-   catch (error) {
-      return res.status(500).json({ error: true, message: error.message });
-   }
-}
-
-const deleteStateAppointment = async (req, res) => {
-   try {
-      const { id } = req.params;
-      const appointment = await Appointment
-         .findByIdAndUpdate(id, { state: 'DELETED' });
-      if (!appointment) {
-         return res.status(404).json({ error: true, message: "Appointment not found" });
-      }
       const notifyUsers = await User.find({ role: 'SHELTER_OWNER' });
       notifyUsers.forEach(async (user) => {
          const notification = new Notification({
             user: user._id,
-            title: "Appointment Status Updated",
-            message: `The appointment for [${appointment.animal}] on [${appointment.requestedDate}] has been deleted by the doctor.`,
+            title: "Appointment Deleted",
+            message: `The appointment for [${appointment.animal}] on [${new Date(appointment.requestedDate).toDateString()}] has been deleted.`,
             link: "/admin/animal/manage",
          });
          await notification.save();
       });
-      return res.status(200).json({ error: false, message: "Appointment updated successfully" });
+      return res.status(200).json({ error: false, message: "Appointment deleted successfully" });
    }
    catch (error) {
       return res.status(500).json({ error: true, message: error.message });
@@ -122,7 +117,6 @@ module.exports = {
    getAppointment,
    createAppointment,
    updateAppointment,
-   deleteAppointment,
-   deleteStateAppointment
+   deleteAppointment
 }
 

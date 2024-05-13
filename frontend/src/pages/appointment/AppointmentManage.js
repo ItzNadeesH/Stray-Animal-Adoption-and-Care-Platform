@@ -16,6 +16,7 @@ function AppointmentManage() {
 
    const [isModalOpen, setIsModalOpen] = useState(false);
    const [selectedAppointentId, setSelectedAppointentId] = useState('');
+   const [selectedAppointent, setSelectedAppointment] = useState({});
    const [selectedDate, setSelectedDate] = useState('');
    const [selectedState, setSelectedState] = useState('');
    const [reason, setReason] = useState('');
@@ -25,7 +26,12 @@ function AppointmentManage() {
 
    const [isVaccinationModalOpen, setIsVaccinationModalOpen] = useState(false);
 
+   const [minDate, setMinDate] = useState("");
+
    useEffect(() => {
+      const today = new Date();
+      const formattedDate = today.toISOString().split('T')[0];
+      setMinDate(formattedDate);
       fetchAppointments();
    }, []);
 
@@ -109,6 +115,7 @@ function AppointmentManage() {
 
    const handleEdit = async (id) => {
       setSelectedAppointentId(id);
+      setSelectedAppointment(appointmentData.find((item) => item._id === id));
       setIsModalOpen(true);
    }
 
@@ -139,7 +146,7 @@ function AppointmentManage() {
    }
 
    const handleDelete = async (id) => {
-      const response = await fetch(APP_URL + `/api/appointment/del/${id}`, {
+      const response = await fetch(APP_URL + `/api/appointment/${id}`, {
          method: 'DELETE',
       });
       const data = await response.json();
@@ -271,12 +278,12 @@ function AppointmentManage() {
                   <div className="flex">
                      <div className="w-[200px] text-sm font-semibold leading-4">Date for Vaccination</div>
                      <div className="w-[10px] px-5">:</div>
-                     <input type="date" className="w-full p-2 text-sm" onChange={(e) => setSelectedDate(e.target.value)} />
+                     <input type="date" min={minDate} className="w-full p-2 text-sm" value={new Date(selectedAppointent.requestedDate ? selectedAppointent.requestedDate : new Date()).toISOString().slice(0, 10).replace('T', ' ')} onChange={(e) => setSelectedDate(e.target.value)} />
                   </div>
                   <div className="flex mt-5">
-                     <div className="w-[200px] text-sm font-semibold leading-4">State </div>
+                     <div className="w-[200px] text-sm font-semibold leading-4">State</div>
                      <div className="w-[10px] px-5">:</div>
-                     <select className="w-full p-2 text-sm" onChange={(e) => setSelectedState(e.target.value)}>
+                     <select className="w-full p-2 text-sm" value={selectedAppointent.state} onChange={(e) => setSelectedState(e.target.value)}>
                         <option value="PENDING">Pending</option>
                         <option value="APPROVED">Approved</option>
                         <option value="REJECTED">Rejected</option>

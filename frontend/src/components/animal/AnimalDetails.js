@@ -61,7 +61,7 @@ const AnimalDetails = ({ animalId }) => {
             <div className='text-sm'><span className='font-[600]'>Weight : </span>{animal?.weight} kg</div>
             <div className='text-sm'><span className='font-[600]'>Adoption Fee : </span>{animal?.adoptionFee}</div>
          </div>
-         {user && user.role === 'USER' ? (
+         {user && user.role === 'User' ? (
             <button className='bg-blue-500 hover:bg-blue-800 text-white p-2 rounded-lg mt-4 w-full font-bold uppercase shadow-[2px_2px_2px_1px_#0004]' onClick={handleAdopt}>Adopt This Animal</button>
          ) : (
             <Link className='block text-center bg-blue-500 hover:bg-blue-800 text-white p-2 rounded-lg mt-4 w-full font-bold uppercase shadow-[2px_2px_2px_1px_#0004]' to={'/login'}>Login To Adopt</Link>

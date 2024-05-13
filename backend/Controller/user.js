@@ -19,7 +19,7 @@ const updateUser = async (req, res) => {
          username,
          email,
          password: hashedPassword,
-         role: role || "USER",
+         role: role || "User",
       });
       return res.status(201).json({ error: true, message: "User updated successfully" });
    } catch (error) {
@@ -71,7 +71,7 @@ const createUser = async (req, res) => {
       username,
       email,
       password: hashedPassword,
-      role: role || "USER",
+      role: role || "User",
    });
    try {
       const u = await newUser.save();
