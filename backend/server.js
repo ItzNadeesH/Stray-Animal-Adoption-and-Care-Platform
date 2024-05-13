@@ -2,10 +2,12 @@ const express = require("express");
 const connectDB = require("./config/db");
 const mongoose = require("mongoose");
 //insert of route of donationrouter
-const router = require("./Routes/DonationRouter");
-const Maitanacerouter = require("./Routes/MaintananceRoute");
-const doctorfeedbackRouter = require("./Routes/DoctorfeedbackRoutes");
-const servicesRouter = require("./Routes/serviceFeedbackRoutes");
+const router = require("./routes/DonationRouter");
+//const Maitanacerouter = require("./routes/MaintananceRoute");
+const doctorfeedbackRouter = require("./routes/DoctorfeedbackRoutes");
+const servicesRouter = require("./routes/serviceFeedbackRoutes");
+const donationFormsRouter = require("./routes/MaintananceRoute");
+
 const cors = require("cors");
 
 const app = express();
@@ -30,8 +32,9 @@ app.use("/api/reports", require("./routes/reports"));
 
 //donation
 app.use("/donations", router);
-app.use("/requrements", Maitanacerouter);
 app.use("/file", express.static("file"));
+app.use("/donationforms", donationFormsRouter);
+//app.use("/requrements", Maitanacerouter);
 
 // feedback
 app.use("/api/Doctorfeedback", doctorfeedbackRouter);
