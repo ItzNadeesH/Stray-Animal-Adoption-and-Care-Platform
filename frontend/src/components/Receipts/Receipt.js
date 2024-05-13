@@ -20,7 +20,15 @@ const Receipt = () => {
 
   const handleItemChange = (index, e) => {
     const updatedItems = items.map((item, i) =>
-      i === index ? { ...item, [e.target.name]: e.target.type === 'number' ? parseFloat(e.target.value) : e.target.value } : item
+      i === index
+        ? {
+            ...item,
+            [e.target.name]:
+              e.target.type === 'number'
+                ? parseFloat(e.target.value)
+                : e.target.value,
+          }
+        : item
     );
     setItems(updatedItems);
   };
@@ -70,18 +78,21 @@ const Receipt = () => {
         console.log('Saved successfully:', response.data);
         alert('Invoice saved successfully!');
       })
-      .catch(error => {
+      .catch((error) => {
         console.error('Error saving the invoice:', error);
         alert('Failed to save the invoice.');
       });
   };
-  
 
   return (
     <div id="pdf-content">
       <div className="bg-white border rounded-lg shadow-lg px-6 py-8 max-w-md mx-auto mt-8">
-        <h1 className="font-bold text-2xl my-4 text-center text-blue-600">Shelter Maintenance</h1>
-        <h1 className="font-bold text-1xl my-2 text-center text-blue-600">Fund Receipt</h1>
+        <h1 className="font-bold text-2xl my-4 text-center text-blue-600">
+          Shelter Maintenance
+        </h1>
+        <h1 className="font-bold text-1xl my-2 text-center text-blue-600">
+          Fund Receipt
+        </h1>
         <div className="flex justify-between mb-6">
           <div className="text-gray-700">
             <input
@@ -112,13 +123,30 @@ const Receipt = () => {
             {items.map((item, index) => (
               <tr key={index}>
                 <td className="text-left text-gray-700">
-                  <input type="text" name="description" className="p-1 w-full" value={item.description} onChange={(e) => handleItemChange(index, e)} />
+                  <input
+                    type="text"
+                    name="description"
+                    className="p-1 w-full"
+                    value={item.description}
+                    onChange={(e) => handleItemChange(index, e)}
+                  />
                 </td>
                 <td className="text-right text-gray-700">
-                  <input type="number" name="amount" className="p-1 w-full text-right" value={item.amount.toFixed(2)} onChange={(e) => handleItemChange(index, e)} />
+                  <input
+                    type="number"
+                    name="amount"
+                    className="p-1 w-full text-right"
+                    value={item.amount.toFixed(2)}
+                    onChange={(e) => handleItemChange(index, e)}
+                  />
                 </td>
                 <td>
-                  <button onClick={() => handleRemoveItem(index)} className="text-red-500">Remove</button>
+                  <button
+                    onClick={() => handleRemoveItem(index)}
+                    className="text-red-500"
+                  >
+                    Remove
+                  </button>
                 </td>
               </tr>
             ))}
@@ -126,7 +154,9 @@ const Receipt = () => {
           <tfoot>
             <tr>
               <td className="text-left font-bold text-gray-700">Total</td>
-              <td className="text-right font-bold text-gray-700">{calculateTotal().toFixed(2)}</td>
+              <td className="text-right font-bold text-gray-700">
+                {calculateTotal().toFixed(2)}
+              </td>
               <td></td>
             </tr>
           </tfoot>

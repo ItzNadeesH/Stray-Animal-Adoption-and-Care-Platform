@@ -4,13 +4,13 @@ import ReceiptCard from './ReceiptCard';
 import { useNavigate } from 'react-router-dom';
 
 const SendReccat = () => {
-    const [receipts, setReceipts] = useState([]);
-    const [search, setSearch] = useState('');
-    const navigate = useNavigate();
+  const [receipts, setReceipts] = useState([]);
+  const [search, setSearch] = useState('');
+  const navigate = useNavigate();
 
-    useEffect(() => {
-        fetchReceipts();
-    }, []);
+  useEffect(() => {
+    fetchReceipts();
+  }, []);
 
     const fetchReceipts = async () => {
         try {

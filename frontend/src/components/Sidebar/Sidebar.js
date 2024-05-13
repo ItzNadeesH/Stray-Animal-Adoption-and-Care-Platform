@@ -37,7 +37,6 @@ const Sidebar = () => {
                 </div>  
            
 
-
                 <NavLink to="requestsection" className="py-[20px] w-full text-center text-white font-bold text-[18px] leading-[20px] hover:bg-blue-700 transition duration-150 ease-in-out">Requests</NavLink>
                 
                 <div className="w-full">
@@ -58,6 +57,8 @@ const Sidebar = () => {
                         </div>
                     )}
                 </div>  
+
+                <NavLink to="profile" className="py-[20px] w-full text-center text-white font-bold text-[18px] leading-[20px] hover:bg-blue-700 transition duration-150 ease-in-out">Profile</NavLink>
             </div>
         </div>
     );

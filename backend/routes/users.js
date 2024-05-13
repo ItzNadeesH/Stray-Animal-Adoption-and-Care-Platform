@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const { check, validationResult } = require('express-validator');
 const User = require('../models/User');
 const auth = require('../middleware/auth');
+const userController = require('../Controller/user')
 
 const router = express.Router();
 
@@ -83,5 +84,10 @@ router.delete('/:id', auth, async (req, res) => {
     res.status(500).send('Server error');
   }
 });
+
+
+router.get("/profile/:id", userController.getProfile);
+router.get("/doctor/:id", userController.getDoctorProfile);
+router.get("/shelter/:id", userController.getShelterProfile);
 
 module.exports = router;
