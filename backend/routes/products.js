@@ -217,7 +217,7 @@ router.post(
 
       await product.save();
 
-      res.status(200).json({ msg: 'Success' });
+      res.status(200).json(newReview);
     } catch (error) {
       if (error.kind === 'ObjectId') {
         return res.status(404).json({ msg: 'product not found!' });
@@ -227,5 +227,78 @@ router.post(
     }
   }
 );
+
+// @route   PUT api/products/review/:id
+// @desc    update a review
+// @access  Private
+router.put(
+  '/review/:id',
+  [
+    auth,
+    [
+      check('reviewId', 'reviewId is required').not().isEmpty(),
+      check('comment', 'comment is required').not().isEmpty(),
+    ],
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    try {
+      let product = await Product.findById(req.params.id);
+      const reviewIndex = product.reviews.findIndex(
+        (review) => review._id == req.body.reviewId
+      );
+
+      if (reviewIndex === -1) {
+        return res.status(404).json({ msg: 'Review not found' });
+      }
+
+      product.reviews[reviewIndex].comment = req.body.comment;
+
+      await product.save();
+
+      res.status(200).json(product.reviews[reviewIndex]);
+    } catch (error) {
+      if (error.kind === 'ObjectId') {
+        return res.status(404).json({ msg: 'product not found!' });
+      }
+      console.error(error.message);
+      res.status(500).send('Server error');
+    }
+  }
+);
+
+// @route   DELETE api/products/review/:id
+// @desc    update a review
+// @access  Private
+router.delete('/review/:id', auth, async (req, res) => {
+  const { reviewId } = req.body;
+
+  if (reviewId === undefined || reviewId === null) {
+    return res.status(404).json({ msg: 'review not found!' });
+  }
+
+  try {
+    let product = await Product.findById(req.params.id).select('reviews');
+
+    product.reviews = product.reviews.filter((review) => {
+      if (review.user === req.user.id) throw Error('authorization failed');
+      return review._id != reviewId;
+    });
+
+    product.save();
+
+    res.status(200).json(product.reviews);
+  } catch (error) {
+    if (error.kind === 'ObjectId') {
+      return res.status(404).json({ msg: 'review not found!' });
+    }
+    console.error(error.message);
+    res.status(500).send('Server error');
+  }
+});
 
 module.exports = router;

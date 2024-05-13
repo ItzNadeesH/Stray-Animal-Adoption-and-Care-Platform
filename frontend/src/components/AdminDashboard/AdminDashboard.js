@@ -1,13 +1,13 @@
-import React, { useEffect, useState, useRef } from 'react';
-import AdminNav from '../AdminNav/AdminNav';
-import axios from 'axios';
-import DonationDisplay from '../DonationDisplayForAdmin/DonationDisplayForAdmin';
-import { useReactToPrint } from 'react-to-print';
-import { Link } from 'react-router-dom';
-import { totalAllocation } from '../DisplayDonationRequests/FetchDisplayRequest'; // Import totalAllocation
-import Chart from 'chart.js/auto';
+import React, { useEffect, useState, useRef } from "react";
+import AdminNav from "../AdminNav/AdminNav";
+import axios from "axios";
+import DonationDisplay from "../DonationDisplayForAdmin/DonationDisplayForAdmin";
+import { useReactToPrint } from "react-to-print";
+import { Link } from "react-router-dom";
+import { totalAllocation } from "../DisplayDonationRequests/FetchDisplayRequest"; // Import totalAllocation
+import Chart from "chart.js/auto";
 
-const URL = 'http://localhost:5000/donations';
+const URL = "http://localhost:5000/donations";
 
 const fetchHandler = async () => {
   return await axios.get(URL).then((res) => res.data);
@@ -16,7 +16,7 @@ const fetchHandler = async () => {
 function AdminDashboard() {
   const [donations, setDonations] = useState();
   const [totalDonationGathered, setTotalDonationGathered] = useState(0); // Initialize totalDonationGathered state
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const [filteredDonations, setFilteredDonations] = useState(null);
   const ComponentsRef = useRef();
   const chartRef = useRef(null); // Reference to the chart canvas
@@ -38,20 +38,20 @@ function AdminDashboard() {
         if (chartInstance.current) {
           chartInstance.current.destroy();
         }
-        const ctx = chartRef.current.getContext('2d');
+        const ctx = chartRef.current.getContext("2d");
         chartInstance.current = new Chart(ctx, {
-          type: 'bar',
+          type: "bar",
           data: {
-            labels: ['Total Donation Gathered', 'totalAllocation'],
+            labels: ["Total Donation Gathered", "totalAllocation"],
             datasets: [
               {
-                label: 'Amount (Rs)',
+                label: "Amount (Rs)",
                 data: [totalDonationGathered, totalAllocation], // Ensure totalAllocation is accessible here
                 backgroundColor: [
-                  'rgba(54, 162, 235, 0.2)',
-                  'rgba(255, 99, 132, 0.2)',
+                  "rgba(54, 162, 235, 0.2)",
+                  "rgba(255, 99, 132, 0.2)",
                 ],
-                borderColor: ['rgba(54, 162, 235, 1)', 'rgba(255, 99, 132, 1)'],
+                borderColor: ["rgba(54, 162, 235, 1)", "rgba(255, 99, 132, 1)"],
                 borderWidth: 1,
               },
             ],
@@ -68,10 +68,11 @@ function AdminDashboard() {
     });
   }, [totalDonationGathered]); // Ensure totalAllocation is included in the dependency array
 
+  //handle printfunction
   const handlePrint = useReactToPrint({
     content: () => ComponentsRef.current,
-    DocumentTitle: 'Donation Information',
-    onAfterPrint: () => alert('Donations report successfully downloaded'),
+    DocumentTitle: "Donation Information",
+    onAfterPrint: () => alert("Donations report successfully downloaded"),
   });
 
   const handleSearch = () => {

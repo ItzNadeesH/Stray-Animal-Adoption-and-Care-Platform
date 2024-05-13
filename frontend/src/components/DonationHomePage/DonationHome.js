@@ -28,6 +28,10 @@ function DonationHome() {
   const handleButtonClick = () => {
     navigate("/adddonation");
   };
+  //add function to navigate to review page
+  const handleButtonClickforreview = () => {
+    navigate("/add-services");
+  };
 
   return (
     <div>
@@ -65,13 +69,13 @@ function DonationHome() {
 
           <div className="form mt-6">
             <p className="link par mt-6 text-1xl font-bold">
-              Join volunteer community Here
+              Leave a memory about us...
               <br />
               <button
                 className="bg-blue-500 text-white py-2 px-4 rounded mt-2"
-                name="signupbutton"
+                onClick={handleButtonClickforreview}
               >
-                Join Us
+                Feedbacks
               </button>
             </p>
           </div>

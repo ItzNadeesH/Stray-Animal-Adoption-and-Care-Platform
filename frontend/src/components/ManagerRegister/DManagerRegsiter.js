@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import AdminNav from "../AdminNav/AdminNav";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import backgroundImage from "../ContactDonationManager/contactUsImage.png";
 
 function DManagerRegister() {
   const history = useNavigate();
@@ -42,6 +43,11 @@ function DManagerRegister() {
         <form
           onSubmit={handleSubmit}
           className="w-full max-w-md bg-white rounded-lg shadow-lg p-8"
+          style={{
+            backgroundImage: `url(${backgroundImage})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
         >
           <h1 className="text-2xl font-bold mb-4">Admin Registration</h1>
           <label htmlFor="username" className="block mb-2">

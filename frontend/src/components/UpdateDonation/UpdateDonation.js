@@ -91,20 +91,6 @@ function UpdateDonation() {
             />
           </div>
 
-          <div>
-            <label className="block text-lg text-blue-700 font-semibold">
-              Amount
-            </label>
-            <input
-              type="number"
-              name="amount"
-              onChange={handleChange}
-              value={inputs.amount || ""}
-              className="form-input mt-1 block w-full rounded-md border-gray-300"
-              required
-            />
-          </div>
-
           <button
             type="submit"
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"

@@ -61,7 +61,7 @@ const kpiData = [
   },
   {
     title: 'Customers',
-    metric: '1,072',
+    metric: '13',
     progress: 53.6,
     target: '2,000',
     delta: '10.1%',
