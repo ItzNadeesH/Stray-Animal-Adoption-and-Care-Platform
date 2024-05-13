@@ -5,6 +5,8 @@ const Adoption = require('../models/adoption');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
+const User = require('../models/User');
+const Notification = require('../models/Notification');
 
 const storage = multer.diskStorage({
    destination: function (req, file, cb) {
@@ -121,6 +123,16 @@ const createAnimal = async (req, res) => {
             vaccinationFrequency,
          });
          const a = await newAnimal.save();
+         const notifyUsers = await User.find({ role: 'DOCTOR' });
+         notifyUsers.forEach(async (user) => {
+            const notification = new Notification({
+               user: user._id,
+               title: "New Animal Added",
+               message: `A new animal [${a._id}] has been added to the system. Please check and update the vaccination details. Check the animal list for more details.`,
+               link: "/admin/vaccination/manage",
+            });
+            await notification.save();
+         });
          return res.status(200).json(a);
       });
    } catch (error) {

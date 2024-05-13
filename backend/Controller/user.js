@@ -5,7 +5,7 @@ const adoption = require('../models/adoption');
 const VolunteerRequest = require('../models/VolunteerRequest');
 const VolunteerRespond = require('../models/VolunteerRespond');
 const Appointment = require('../models/appointment');
-const Vaccination = require('../models/vaccination');
+const Notification = require('../models/Notification');
 
 const updateUser = async (req, res) => {
    const { username, email, password, role } = req.body;
@@ -103,7 +103,8 @@ const getDoctorProfile = async (req, res) => {
    try {
       const user = await User.findById(id);
       const appointments = await Appointment.find({ state: "PENDING" });
-      return res.status(200).json({ user, appointments });
+      const notifications = await Notification.find({ user: id });
+      return res.status(200).json({ user, appointments, notifications });
    }
    catch (error) {
       return res.status(500).json({ error: true, message: error.message });
@@ -117,8 +118,8 @@ const getShelterProfile = async (req, res) => {
       const adoptions = await adoption.find({ state: "PENDING" });
       const appointments = await Appointment.find({ state: { $in: ["APPROVED", "REJECTED", "DELETED"] } });
       const volunteerResponds = await VolunteerRespond.find({ state: "ACTIVE" });
-      
-      return res.status(200).json({ user, adoptions, appointments, volunteerResponds });
+      const notifications = await Notification.find({ user: id });
+      return res.status(200).json({ user, adoptions, appointments, volunteerResponds, notifications });
    }
    catch (error) {
       return res.status(500).json({ error: true, message: error.message });

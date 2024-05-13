@@ -1,4 +1,6 @@
 const Animal = require('../models/Animal');
+const Notification = require('../models/Notification');
+const User = require('../models/User');
 const Appointment = require('../models/appointment');
 
 const getAppointments = async (req, res) => {
@@ -43,6 +45,16 @@ const createAppointment = async (req, res) => {
       }
       appointment.reason = "-";
       await appointment.save();
+      const notifyUsers = await User.find({ role: 'DOCTOR' });
+      notifyUsers.forEach(async (user) => {
+         const notification = new Notification({
+            user: user._id,
+            title: "New Appointment Added",
+            message: `A new appointment has been added for [${appointment.animal}] on [${appointment.requestedDate}]. Please check the appointments page for more details.`,
+            link: "/admin/appointment/manage",
+         });
+         await notification.save();
+      });
       return res.status(200).json({ error: false, message: "Appointment created successfully" });
    } catch (error) {
       return res.status(500).json({ error: true, message: error.message });
@@ -87,14 +99,22 @@ const deleteStateAppointment = async (req, res) => {
       if (!appointment) {
          return res.status(404).json({ error: true, message: "Appointment not found" });
       }
+      const notifyUsers = await User.find({ role: 'SHELTER_OWNER' });
+      notifyUsers.forEach(async (user) => {
+         const notification = new Notification({
+            user: user._id,
+            title: "Appointment Status Updated",
+            message: `The appointment for [${appointment.animal}] on [${appointment.requestedDate}] has been deleted by the doctor.`,
+            link: "/admin/animal/manage",
+         });
+         await notification.save();
+      });
       return res.status(200).json({ error: false, message: "Appointment updated successfully" });
    }
    catch (error) {
       return res.status(500).json({ error: true, message: error.message });
    }
 }
-
-
 
 
 module.exports = {
