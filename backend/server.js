@@ -10,7 +10,7 @@ const cors = require('cors');
 
 const app = express();
 
-// Connect databas
+// Connect database
 connectDB();
 
 // Init Middleware
@@ -200,3 +200,25 @@ app.get('/getfile', async (req, res) => {
     res.status(500).send({ status: ' error' });
   }
 });
+
+
+// Define routes
+// app.use('/api/auth', require('./routes/auth'));
+app.use('/api/user', require('./routes/users'));
+app.use('/api/animal', require('./routes/animal'));
+app.use('/api/vaccination', require('./routes/vaccination'));
+
+app.use('/api/event', require('./routes/event'));
+app.use('/api/eventAttend', require('./routes/eventAttend'));
+
+app.use('/api/adoption', require('./routes/adoption'));
+app.use('/api/volunteer', require('./routes/volunteerRequest'));
+app.use('/api/volunteerRespond', require('./routes/volunteerRespond'));
+
+app.use('/api/eventFundRequest', require('./routes/eventFundRequest'));
+
+
+app.use('/api/appointment', require('./routes/appointment'));
+
+// Serve static files from the 'upload' folder
+app.use('/uploads', express.static('uploads'));
