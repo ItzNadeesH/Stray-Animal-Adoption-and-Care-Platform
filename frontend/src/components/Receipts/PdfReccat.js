@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate hook for navigation
-
+import ViewPdf from './ViewPdf'; // Import ViewPdf component
 
 const PdfReccat = () => {
     const [pdfs, setPdfs] = useState([]);
     const navigate = useNavigate(); // Initialize useNavigate hook
 
-  useEffect(() => {
-    fetchPdfs();
-  }, []);
+    useEffect(() => {
+        fetchPdfs();
+    }, []);
 
     const fetchPdfs = async () => {
         try {
@@ -62,11 +62,8 @@ const PdfReccat = () => {
                     </div>
                 ))}
             </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+        </div>
+    );
 };
 
 export default PdfReccat;
