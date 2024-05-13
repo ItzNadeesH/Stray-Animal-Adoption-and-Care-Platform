@@ -31,7 +31,7 @@ app.use("/api/reports", require("./routes/reports"));
 //donation
 app.use("/donations", router);
 app.use("/requrements", Maitanacerouter);
-app.use("/files", express.static("files"));
+app.use("/file", express.static("file"));
 
 // feedback
 app.use("/api/Doctorfeedback", doctorfeedbackRouter);
