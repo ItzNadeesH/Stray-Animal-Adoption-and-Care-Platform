@@ -4,6 +4,7 @@ import { useUser } from '../contexts/UserContext';
 import { HiTrash } from 'react-icons/hi';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Layout from './Layout';
 
 
 function Profile() {
@@ -17,7 +18,7 @@ function Profile() {
    }, []);
 
    const fetchData = async () => {
-      const response = await fetch(APP_URL + '/api/user/profile/' + user.id);
+      const response = await fetch(APP_URL + '/api/user/profile/' + user._id);
       const data = await response.json();
       setAdoptions(data.adoptions);
       setVolunteerRequests(data.volunteerRequests);
@@ -30,7 +31,7 @@ function Profile() {
             "Content-Type": "application/json",
             "Authorization": localStorage.getItem("token"),
          },
-         body: JSON.stringify({ userId: user.id }),
+         body: JSON.stringify({ userId: user._id }),
       });
       const data = await response.json();
       if (data.error) {
@@ -42,6 +43,7 @@ function Profile() {
    }
 
    return (
+      <Layout>
       <div className="p-10">
          <h1 className="text-2xl font-bold mb-10">Manage Profile</h1>
          <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -49,7 +51,7 @@ function Profile() {
                {user && (
                   <div className="">
                      <h2 className="text-xl font-bold mb-4">User Details </h2>
-                     <p>User ID: {user.id}</p>
+                     <p>User ID: {user._id}</p>
                      <p>User Email: {user.email}</p>
                      <p>User Role: {user.role}</p>
                   </div>
@@ -112,7 +114,7 @@ function Profile() {
          </div>
          <ToastContainer />
       </div >
-
+</Layout>
 
    );
 };

@@ -60,7 +60,7 @@ function EventAdd() {
       formData.append("start_time", start_time);
       formData.append("end_time", end_time);
       formData.append("location", location);
-      formData.append("user", user.id);
+      formData.append("user", user._id);
       formData.append("fundState", "NONE");
       formData.append("state", "ACTIVE");
       formData.append("image", image);

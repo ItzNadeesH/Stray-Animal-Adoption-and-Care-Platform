@@ -95,13 +95,13 @@ const ProfileDropdown = ({ logout }) => {
                 to="/admin/vaccination/manage"
                 className="block px-4 py-2 text-sm transition-all hover:bg-cyan-blue text-black hover:text-white"
               >
-                Event Manage
+                Vaccination Manage
               </Link>
               <Link
                 to="/admin/appointment/manage"
                 className="block px-4 py-2 text-sm transition-all hover:bg-cyan-blue text-black hover:text-white"
               >
-                Event Fund Manage
+                Appointment Manage
               </Link>
               <Link
                 to="/profile"

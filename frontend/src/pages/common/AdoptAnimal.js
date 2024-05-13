@@ -83,7 +83,7 @@ function AdoptAnimal() {
             animal_cruelty,
             animal_cruelty_explanation,
             animal: animalId,
-            user: user.id
+            user: user._id
          })
       }).then((res) => res.json())
          .then((data) => {

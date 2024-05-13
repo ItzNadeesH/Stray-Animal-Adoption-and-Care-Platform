@@ -45,7 +45,7 @@ function Volunteer() {
          },
          body: JSON.stringify({
             volunteerRequest: selectedVolunteer._id,
-            user: user.id
+            user: user._id
          })
       });
       const data = await response.json();

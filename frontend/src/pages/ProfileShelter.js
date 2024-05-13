@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { APP_URL } from '../config';
 import { useUser } from '../contexts/UserContext';
+import Layout from './Layout';
 
 
 function ProfileShelter() {
@@ -15,7 +16,7 @@ function ProfileShelter() {
    }, []);
 
    const fetchData = async () => {
-      const response = await fetch(APP_URL + '/api/user/shelter/' + user.id);
+      const response = await fetch(APP_URL + '/api/user/shelter/' + user._id);
       const data = await response.json();
       setAppointments(data.appointments);
       setAdoptions(data.adoptions);
@@ -23,6 +24,7 @@ function ProfileShelter() {
    }
 
    return (
+      <Layout>
       <div className="p-10">
          <h1 className="text-2xl font-bold mb-10">Manage Profile</h1>
          <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -30,7 +32,7 @@ function ProfileShelter() {
                {user && (
                   <div className="">
                      <h2 className="text-xl font-bold mb-4">User Details </h2>
-                     <p>User ID: {user.id}</p>
+                     <p>User ID: {user._id}</p>
                      <p>User Email: {user.email}</p>
                      <p>User Role: {user.role}</p>
                   </div>
@@ -126,7 +128,7 @@ function ProfileShelter() {
 
          </div>
       </div >
-
+</Layout>
 
    );
 };

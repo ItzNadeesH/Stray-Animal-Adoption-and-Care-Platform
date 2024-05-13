@@ -34,7 +34,7 @@ const AnimalDetails = ({ animalId }) => {
             'Content-Type': 'application/json',
             'Authorization': localStorage.getItem('token'),
          },
-         body: JSON.stringify({ user: user.id })
+         body: JSON.stringify({ user: user._id })
       })
          .then(response => response.json())
          .then(data => {
