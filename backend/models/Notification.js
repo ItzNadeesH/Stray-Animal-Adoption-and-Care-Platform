@@ -1,4 +1,5 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
+const { link } = require("../Routes/DonationRouter");
 
 const notificationSchema = new mongoose.Schema({
    title: {
@@ -9,14 +10,13 @@ const notificationSchema = new mongoose.Schema({
       type: String,
       required: true
    },
-   sender: {
+   user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      required: true
    },
-   receiver: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+   link: {
+      type: String,
+      required: true
    },
    status: {
       type: String,
