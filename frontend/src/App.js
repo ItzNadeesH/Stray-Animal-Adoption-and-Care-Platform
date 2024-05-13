@@ -72,8 +72,6 @@ function App() {
     store.dispatch(loadUser());
   }, []);
 
-  const { user } = useUser();
-
   return (
     <>
       <Router>
