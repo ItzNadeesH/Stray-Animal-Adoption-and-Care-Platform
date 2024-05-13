@@ -50,7 +50,7 @@ const createAppointment = async (req, res) => {
          const notification = new Notification({
             user: user._id,
             title: "New Appointment Added",
-            message: `A new appointment has been added for [${appointment.animal}] on [${appointment.requestedDate}]. Please check the appointments page for more details.`,
+            message: `A new appointment has been added for [${appointment.animal}] on [${new Date(appointment.requestedDate).toDateString()}]. Please check the appointments page for more details.`,
             link: "/admin/appointment/manage",
          });
          await notification.save();
@@ -68,13 +68,16 @@ const updateAppointment = async (req, res) => {
       if (!appointment) {
          return res.status(404).json({ error: true, message: "Appointment not found" });
       }
-      await appointment.updateOne(req.body);
+      appointment.state = req.body.state;
+      appointment.reason = req.body.reason;
+      appointment.requestedDate = req.body.requestedDate;
+      await appointment.save();
       const notifyUsers = await User.find({ role: 'SHELTER_OWNER' });
       notifyUsers.forEach(async (user) => {
          const notification = new Notification({
             user: user._id,
             title: "Appointment Status Updated",
-            message: `The appointment for [${appointment.animal}] on [${new Date(appointment.requestedDate).toDateString()}] has been updated. Please check the appointments page for more details.`,
+            message: `The appointment for [${appointment.animal}] on [${new Date(appointment.requestedDate).toDateString()}] has been updated the status to [${appointment.state}] with the reason [${appointment.reason}]. Please check the appointments page for more details.`,
             link: "/admin/animal/manage",
          });
          await notification.save();

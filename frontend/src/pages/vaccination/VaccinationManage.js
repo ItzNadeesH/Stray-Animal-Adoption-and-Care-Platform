@@ -37,9 +37,17 @@ function VaccinationManage() {
       let filteredData = vaccinationData;
       const filterState = document.getElementById("filterState").value;
       const search = document.getElementById("search").value;
+      const filterVaccination = document.getElementById("filterVaccination").value;
+
+
       if (filterState !== "") {
          filteredData = filteredData.filter((item) => {
             return item.state.toLowerCase().includes(filterState.toLowerCase());
+         });
+      }
+      if (filterVaccination !== "") {
+         filteredData = filteredData.filter((item) => {
+            return item.vaccinationFrequency.toLowerCase().includes(filterVaccination.toLowerCase());
          });
       }
       if (search !== "") {
@@ -154,6 +162,19 @@ function VaccinationManage() {
                      <option value="">All</option>
                      <option value="AVAILABLE">Available</option>
                      <option value="ADOPTED">Adopted</option>
+                  </select>
+               </div>
+               <div>
+                  <label htmlFor="filterVaccination" className="text-sm font-medium mr-3">Filter by Vaccination State: </label>
+                  <select id="filterVaccination" className="border border-gray-300 rounded-md px-2 py-1" onChange={() => handleSearch()}>
+                     <option value="">All</option>
+                     <option value="NOT_SET">Not Set</option>
+                     <option value="ONCE_A_WEEK">Once a week</option>
+                     <option value="TWICE_A_MONTH">Twice a month</option>
+                     <option value="ONCE_A_MONTH">Once a month</option>
+                     <option value="ONCE_A_YEAR">Once a year</option>
+                     <option value="TWICE_A_YEAR">Twice a year</option>
+                     <option value="THRISE_A_YEAR">Thrise a year</option>
                   </select>
                </div>
                <div>

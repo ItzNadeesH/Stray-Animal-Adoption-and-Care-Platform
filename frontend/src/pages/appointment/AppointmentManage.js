@@ -215,7 +215,7 @@ function AppointmentManage() {
 
             <div className="flex justify-between space-x-10 bg-slate-100 p-3 mb-3 border border-slate-400">
                <div>
-                  <label htmlFor="filterState" className="text-sm font-medium mr-3">Filter by Adoption State:</label>
+                  <label htmlFor="filterState" className="text-sm font-medium mr-3">Filter by Appointment State:</label>
                   <select id="filterState" className="border border-gray-300 rounded-md px-2 py-1" onChange={() => handleSearch()}>
                      <option value="">ALL</option>
                      <option value="PENDING">Pending</option>
@@ -278,12 +278,12 @@ function AppointmentManage() {
                   <div className="flex">
                      <div className="w-[200px] text-sm font-semibold leading-4">Date for Vaccination</div>
                      <div className="w-[10px] px-5">:</div>
-                     <input type="date" min={minDate} className="w-full p-2 text-sm" value={new Date(selectedAppointent.requestedDate ? selectedAppointent.requestedDate : new Date()).toISOString().slice(0, 10).replace('T', ' ')} onChange={(e) => setSelectedDate(e.target.value)} />
+                     <input type="date" min={minDate} className="w-full p-2 text-sm" onChange={(e) => setSelectedDate(e.target.value)} />
                   </div>
                   <div className="flex mt-5">
                      <div className="w-[200px] text-sm font-semibold leading-4">State</div>
                      <div className="w-[10px] px-5">:</div>
-                     <select className="w-full p-2 text-sm" value={selectedAppointent.state} onChange={(e) => setSelectedState(e.target.value)}>
+                     <select className="w-full p-2 text-sm" onChange={(e) => setSelectedState(e.target.value)}>
                         <option value="PENDING">Pending</option>
                         <option value="APPROVED">Approved</option>
                         <option value="REJECTED">Rejected</option>
