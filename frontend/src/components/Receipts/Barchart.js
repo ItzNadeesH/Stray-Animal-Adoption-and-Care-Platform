@@ -6,19 +6,11 @@ const BarChart = () => {
   const [chartData, setChartData] = useState(null);
   const [totalAmount, setTotalAmount] = useState(0);
 
-<<<<<<< HEAD
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await axios.get('http://localhost:5000/Fund/getall');
                 const funds = response.data;
-=======
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get('/Fund/getall');
-        const funds = response.data;
->>>>>>> 5e54eb13a14a354805576da17e6b4f0c0cb417c1
 
         // Data processing logic
         const donationFund = funds
