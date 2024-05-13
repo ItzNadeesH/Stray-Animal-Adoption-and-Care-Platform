@@ -7,6 +7,7 @@ import axios from 'axios';
 
 const Review = ({ data, updateReviews }) => {
   const [editMode, setEditMode] = useState(false);
+  const [comment, setComment] = useState('');
   const { productId } = useParams();
   const user = useSelector((state) => state.userAuth.user);
   const formattedDate = format(new Date(data.date), 'MMMM d, yyyy');
@@ -25,7 +26,23 @@ const Review = ({ data, updateReviews }) => {
   };
 
   const handleEdit = () => {
+    setComment(data.comment);
     setEditMode(true);
+  };
+
+  const handleUpdate = async () => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    const body = JSON.stringify({
+      reviewId: data._id,
+      comment,
+    });
+    await axios.put('/api/products/review/' + productId, body, config);
+    updateReviews();
+    setEditMode(false);
   };
 
   return (
@@ -113,13 +130,25 @@ const Review = ({ data, updateReviews }) => {
             </button>
           </div>
         )}
-        <p className="mb-2 pl-[56px] text-[14px]">{data.comment}</p>
+        <p className={`mb-2 pl-[56px] text-[14px] ${editMode && 'hidden'}`}>
+          {data.comment}
+        </p>
         <div className={!editMode && `hidden`}>
           <textarea
-            className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 outline-0 ml-[56px] max-w-[928px]"
-            value={data.comment}
+            onChange={(e) => setComment(e.target.value)}
+            className="block mt-3 p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 outline-0 ml-[56px] max-w-[928px]"
+            value={comment}
           ></textarea>
-          <button className="mt-3 h-8 px-4 text-[12px] text-white bg-cyan-blue rounded-md hover:bg-black transition-all ml-[56px]">
+          <button
+            onClick={() => setEditMode(false)}
+            className="mt-3 h-8 px-4 text-[12px] text-white bg-cyan-blue rounded-md hover:bg-black transition-all ml-[56px]"
+          >
+            Cencel
+          </button>
+          <button
+            onClick={handleUpdate}
+            className="mt-3 h-8 px-4 text-[12px] text-white bg-cyan-blue rounded-md hover:bg-black transition-all ml-2"
+          >
             Update Review
           </button>
         </div>

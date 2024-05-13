@@ -237,7 +237,6 @@ router.put(
     auth,
     [
       check('reviewId', 'reviewId is required').not().isEmpty(),
-      check('rating', 'rating is required').not().isEmpty(),
       check('comment', 'comment is required').not().isEmpty(),
     ],
   ],
@@ -248,18 +247,20 @@ router.put(
     }
 
     try {
-      const user = await User.findById(req.user.id).select('-password');
       let product = await Product.findById(req.params.id);
-      product.reviews.filter((review) => req.body.reviewId == review._id);
+      const reviewIndex = product.reviews.findIndex(
+        (review) => review._id == req.body.reviewId
+      );
 
-      const newReview = {
-        user: req.user.id,
-        name: user.username,
-        rating: req.body.rating,
-        comment: req.body.comment,
-      };
+      if (reviewIndex === -1) {
+        return res.status(404).json({ msg: 'Review not found' });
+      }
 
-      res.status(200).json(review);
+      product.reviews[reviewIndex].comment = req.body.comment;
+
+      await product.save();
+
+      res.status(200).json(product.reviews[reviewIndex]);
     } catch (error) {
       if (error.kind === 'ObjectId') {
         return res.status(404).json({ msg: 'product not found!' });
