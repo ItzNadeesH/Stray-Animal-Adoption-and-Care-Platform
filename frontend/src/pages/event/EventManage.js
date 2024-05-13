@@ -7,6 +7,7 @@ import Modal from "react-modal";
 import jsPDF from "jspdf";
 import { TbListDetails } from "react-icons/tb";
 import { APP_URL } from "../../config";
+import Layout from "../Layout";
 
 function EventManage() {
    Modal.setAppElement('#root');
@@ -193,7 +194,7 @@ function EventManage() {
    }
 
    return (
-
+      <Layout>
       <div className="p-10">
          <h1 className="text-2xl font-bold">Manage Events</h1>
          <div className="flex space-x-3">
@@ -338,6 +339,7 @@ function EventManage() {
          </Modal>
          <ToastContainer />
       </div>
+      </Layout>
    );
 }
 

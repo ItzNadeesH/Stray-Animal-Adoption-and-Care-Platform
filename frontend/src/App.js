@@ -1,67 +1,67 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { useEffect } from 'react';
-import { loadUser } from './actions/auth';
-import setAuthToken from './utils/setAuthToken';
-import PrivateRoute from './components/routing/PrivateRoute';
-import store from './store';
-import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
+import { loadUser } from "./actions/auth";
+import setAuthToken from "./utils/setAuthToken";
+import PrivateRoute from "./components/routing/PrivateRoute";
+import store from "./store";
+import React from "react";
 
 // Pages
-import Signup from './pages/Signup';
-import Login from './pages/Login';
-import Home from './pages/Home';
-import Store from './pages/Store';
-import Product from './pages/Product';
-import Cart from './pages/Cart';
-import Checkout from './pages/Checkout';
-import OrderComplete from './pages/OrderComplete';
-import PageNotFound from './pages/PageNotFound';
-import Dashboard from './pages/Dashboard';
-import Contact from './pages/Contact';
-import About from './pages/About';
-import DonationHome from './components/DonationHomePage/DonationHome';
-import DonationDisplay from './components/DonationDisplay/DonationDisplay';
-import AddDonation from './components/AddDonation/AddDonation';
-import DonationDetails from './components/DonationDetails/DonationDetails';
-import UpdateDonation from './components/UpdateDonation/UpdateDonation';
-import UpdateDonationBeforeConfirm from './components/UpdateDonation/UpdateDonationinPreview';
-import Register from './components/Register/Register';
-import MatheeshaLogin from './components/Login/Login';
-import DonationManager from './components/DonationManager/DonationManager';
-import DManagerRegister from './components/ManagerRegister/DManagerRegsiter';
-import AdminDashboard from './components/AdminDashboard/AdminDashboard';
-import SendPdf from './components/SendPdf/SendPdf';
-import DonationPreview from './components/DonationPreview/DonationPreview';
-import ContactDonationManager from './components/ContactDonationManager/ContactDonationManager';
-import FetchDisplayRequest from './components/DisplayDonationRequests/FetchDisplayRequest';
+import Signup from "./pages/Signup";
+import Login from "./pages/Login";
+import Home from "./pages/Home";
+import Store from "./pages/Store";
+import Product from "./pages/Product";
+import Cart from "./pages/Cart";
+import Checkout from "./pages/Checkout";
+import OrderComplete from "./pages/OrderComplete";
+import PageNotFound from "./pages/PageNotFound";
+import Dashboard from "./pages/Dashboard";
+import Contact from "./pages/Contact";
+import About from "./pages/About";
+import DonationHome from "./components/DonationHomePage/DonationHome";
+import DonationDisplay from "./components/DonationDisplay/DonationDisplay";
+import AddDonation from "./components/AddDonation/AddDonation";
+import DonationDetails from "./components/DonationDetails/DonationDetails";
+import UpdateDonation from "./components/UpdateDonation/UpdateDonation";
+import UpdateDonationBeforeConfirm from "./components/UpdateDonation/UpdateDonationinPreview";
+import Register from "./components/Register/Register";
+import MatheeshaLogin from "./components/Login/Login";
+import DonationManager from "./components/DonationManager/DonationManager";
+import DManagerRegister from "./components/ManagerRegister/DManagerRegsiter";
+import AdminDashboard from "./components/AdminDashboard/AdminDashboard";
+import SendPdf from "./components/SendPdf/SendPdf";
+import DonationPreview from "./components/DonationPreview/DonationPreview";
+import ContactDonationManager from "./components/ContactDonationManager/ContactDonationManager";
+import FetchDisplayRequest from "./components/DisplayDonationRequests/FetchDisplayRequest";
 
 // pasindu
-import AddFeedbackForm from './components/feedback/AddFeedbackForm';
-import AllFeedback from './components/feedback/AllFeedback';
-import EditFeedbackForm from './components/feedback/EditFeedbackForm';
-import ActiveFeedbackForm from './components/feedback/admin/ActiveFeedbackForm';
-import DisplayAllFeedback from './components/feedback/admin/DisplayAllFeedback';
-import AllFeedbackService from './components/services/AllFeedbackService';
-import ServiceFeedbackEdit from './components/services/ServiceFeedbackEdit';
-import AddNewServiceFeedback from './components/services/AddNewServiceFeedback';
-import Feedback from './pages/Feedback';
+import AddFeedbackForm from "./components/feedback/AddFeedbackForm";
+import AllFeedback from "./components/feedback/AllFeedback";
+import EditFeedbackForm from "./components/feedback/EditFeedbackForm";
+import ActiveFeedbackForm from "./components/feedback/admin/ActiveFeedbackForm";
+import DisplayAllFeedback from "./components/feedback/admin/DisplayAllFeedback";
+import AllFeedbackService from "./components/services/AllFeedbackService";
+import ServiceFeedbackEdit from "./components/services/ServiceFeedbackEdit";
+import AddNewServiceFeedback from "./components/services/AddNewServiceFeedback";
+import Feedback from "./pages/Feedback";
 
 // osanda
-import MainLayout from './components/Layouts/MainLayout';
-import Form from './pages/Forms/Form';
-import FormSection from './pages/Forms/FormSection';
-import EditForm from './pages/Forms/EditForm';
-import AddReceipt from './pages/Receipt/AddReceipt';
-import SendRecsection from './pages/Receipt/SendRecsection';
-import UpdateSendReceipt from './pages/Receipt/UpdateSendReceipt';
-import PdfRecsection from './pages/Receipt/PdfRecsection';
-import RequestSection from './pages/Forms/RequestSection';
-import DonationFund from './pages/Funds/DonationFund';
-import DForm from './pages/Forms/DForm';
-import DFormSection from './pages/Forms/DFormSection';
-import EditDForm from './pages/Forms/EditDForm';
-import ShelterDashBoard from './components/ShelterDashBoard/Dashboard';
-import { useUser } from './contexts/UserContext';
+import MainLayout from "./components/Layouts/MainLayout";
+import Form from "./pages/Forms/Form";
+import FormSection from "./pages/Forms/FormSection";
+import EditForm from "./pages/Forms/EditForm";
+import AddReceipt from "./pages/Receipt/AddReceipt";
+import SendRecsection from "./pages/Receipt/SendRecsection";
+import UpdateSendReceipt from "./pages/Receipt/UpdateSendReceipt";
+import PdfRecsection from "./pages/Receipt/PdfRecsection";
+import RequestSection from "./pages/Forms/RequestSection";
+import DonationFund from "./pages/Funds/DonationFund";
+import DForm from "./pages/Forms/DForm";
+import DFormSection from "./pages/Forms/DFormSection";
+import EditDForm from "./pages/Forms/EditDForm";
+import ShelterDashBoard from "./components/ShelterDashBoard/Dashboard";
+import { useUser } from "./contexts/UserContext";
 
 // maleesha
 import AdoptionManage from "./pages/adoption/AdoptionManage.js";
@@ -198,63 +198,71 @@ function App() {
             <Route path="donationform" element={<DonationFund />} />
           </Route>
 
+          <Route path="/animal" element={<Animal />} />
+          <Route path="/event" element={<Event />} />
+          <Route path="/volunteer" element={<Volunteer />} />
 
-         
-                <Route  path="/animal" element={<Animal />} />
-                <Route  path="/event" element={<Event />} />
-                <Route  path="/volunteer" element={<Volunteer />} />
-            
-            {user?.role === 'USER' && (
-              <>
-                <Route  path="/animal/:id/adopt" element={<AdoptAnimal />} />
-                <Route  path="/profile" element={<Profile />} />
-              </>
-            )}
+          {user?.role === "USER" && (
+            <>
+              <Route path="/animal/:id/adopt" element={<AdoptAnimal />} />
+              <Route path="/profile" element={<Profile />} />
+            </>
+          )}
 
-            {user?.role === 'SHELTER_OWNER' && (
-              <>
-                <Route  path="/admin/animal/manage" element={<AnimalManage />} />
-                <Route  path="/admin/animal/add" element={<AnimalAdd />} />
-                <Route  path="/admin/animal/edit/:id" element={<AnimalEdit />} />
-                <Route  path="/admin/animal/view/:id" element={<AnimalView />} />
+          {user?.role === "SHELTER_OWNER" && (
+            <>
+              <Route path="/admin/animal/manage" element={<AnimalManage />} />
+              <Route path="/admin/animal/add" element={<AnimalAdd />} />
+              <Route path="/admin/animal/edit/:id" element={<AnimalEdit />} />
+              <Route path="/admin/animal/view/:id" element={<AnimalView />} />
 
-                <Route  path="/admin/adoption/manage" element={<AdoptionManage />} />
-                <Route  path="/admin/adoption/view/:id" element={<AdoptionView />} />
+              <Route
+                path="/admin/adoption/manage"
+                element={<AdoptionManage />}
+              />
+              <Route
+                path="/admin/adoption/view/:id"
+                element={<AdoptionView />}
+              />
 
-                <Route  path="/admin/volunteer/manage" element={<VolunteerManage />} />
-                <Route  path="/admin/volunteer/add" element={<VolunteerAdd />} />
-                <Route  path="/admin/volunteer/edit/:id" element={<VolunteerEdit />} />
+              <Route
+                path="/admin/volunteer/manage"
+                element={<VolunteerManage />}
+              />
+              <Route path="/admin/volunteer/add" element={<VolunteerAdd />} />
+              <Route
+                path="/admin/volunteer/edit/:id"
+                element={<VolunteerEdit />}
+              />
 
-                <Route  path="/profile" element={<ProfileShelter />} />
-              </>
-            )}
+              <Route path="/profile" element={<ProfileShelter />} />
+            </>
+          )}
 
-            {user?.role === 'EVENT_MANAGER' && (
-              <>
-                <Route  path="/admin/event/manage" element={<EventManage />} />
-                <Route  path="/admin/event/add" element={<EventAdd />} />
-                <Route  path="/admin/event/edit/:id" element={<EventEdit />} />
-                <Route  path="/admin/event/view/:id" element={<EventView />} />
+          {user?.role === "EVENT_MANAGER" && (
+            <>
+              <Route path="/admin/event/manage" element={<EventManage />} />
+              <Route path="/admin/event/add" element={<EventAdd />} />
+              <Route path="/admin/event/edit/:id" element={<EventEdit />} />
+              <Route path="/admin/event/view/:id" element={<EventView />} />
 
-                <Route  path="/admin/event-fund/manage" element={<FundManage />} />
+              <Route path="/admin/event-fund/manage" element={<FundManage />} />
+            </>
+          )}
 
-
-
-              </>
-            )}
-
-            {user?.role === 'DOCTOR' && (
-              <>
-                <Route  path="/admin/vaccination/manage" element={<VaccinationManage />} />
-                <Route  path="/admin/appointment/manage" element={<AppointmentManage />} />
-                <Route  path="/profile" element={<ProfileDoctor />} />
-              </>
-            )}
-
-
-
-
-
+          {user?.role === "DOCTOR" && (
+            <>
+              <Route
+                path="/admin/vaccination/manage"
+                element={<VaccinationManage />}
+              />
+              <Route
+                path="/admin/appointment/manage"
+                element={<AppointmentManage />}
+              />
+              <Route path="/profile" element={<ProfileDoctor />} />
+            </>
+          )}
         </Routes>
       </Router>
     </>

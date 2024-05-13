@@ -4,6 +4,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useUser } from "../../contexts/UserContext";
 import { APP_URL } from '../../config';
+import Layout from "../Layout";
 
 function AdoptAnimal() {
    const navigate = useNavigate();
@@ -96,6 +97,7 @@ function AdoptAnimal() {
    }
 
    return (
+      <Layout>
       <div className="p-10" style={{
          backgroundImage: `url(${process.env.PUBLIC_URL}/images/bg-2.jpg)`,
          backgroundSize: 'cover',
@@ -175,7 +177,7 @@ function AdoptAnimal() {
          </div>
          <ToastContainer />
       </div >
-
+      </Layout>
    );
 }
 

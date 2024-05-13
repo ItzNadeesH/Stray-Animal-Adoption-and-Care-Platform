@@ -6,6 +6,7 @@ import { useUser } from "../../contexts/UserContext";
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Layout from "../Layout";
 
 function Volunteer() {
    Modal.setAppElement('#root');
@@ -80,6 +81,7 @@ function Volunteer() {
    }
 
    return (
+      <Layout>
       <div className="p-10">
          <h1 className="text-2xl font-bold mb-10">Be A Volunteer</h1>
          <div className="flex justify-between space-x-10 bg-slate-100 p-3 mb-3 border border-slate-400">
@@ -171,6 +173,7 @@ function Volunteer() {
          </Modal>
          <ToastContainer />
       </div>
+      </Layout>
    );
 }
 

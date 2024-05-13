@@ -5,6 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Modal from "react-modal";
 import jsPDF from "jspdf";
 import { APP_URL } from "../../config";
+import Layout from "../Layout";
 
 function FundManage() {
    Modal.setAppElement('#root');
@@ -141,6 +142,7 @@ function FundManage() {
    }
 
    return (
+      <Layout>
       <div className="p-10">
          <h1 className="text-2xl font-bold">Manage Event Fundings</h1>
          <div className="flex space-x-3">
@@ -219,6 +221,7 @@ function FundManage() {
 
          <ToastContainer />
       </div>
+      </Layout>
    );
 }
 

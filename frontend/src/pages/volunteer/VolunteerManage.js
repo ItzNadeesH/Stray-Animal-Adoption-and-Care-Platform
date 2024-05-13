@@ -7,6 +7,7 @@ import jsPDF from "jspdf";
 import Modal from "react-modal";
 import { APP_URL } from "../../config";
 import { TbListDetails } from "react-icons/tb";
+import Layout from "../Layout";
 
 require('jspdf-autotable');
 
@@ -205,6 +206,7 @@ function VolunteerManage() {
 
 
    return (
+      <Layout>
       <div className="p-10">
          <h1 className="text-2xl font-bold">Manage Volunteer</h1>
          <div className="flex space-x-3">
@@ -326,6 +328,7 @@ function VolunteerManage() {
          </Modal>
          <ToastContainer />
       </div >
+      </Layout>
    );
 }
 

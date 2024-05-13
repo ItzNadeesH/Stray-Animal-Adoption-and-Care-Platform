@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { APP_URL } from "../../config";
+import Layout from "../Layout";
 
 function EventEdit() {
    const navigate = useNavigate();
@@ -80,6 +81,7 @@ function EventEdit() {
    }
 
    return (
+      <Layout>
       <div className="p-10">
          <h1 className="text-2xl font-bold">Manage Events</h1>
          <button onClick={() => navigate("/admin/event/manage")} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-3 flex items-center"><HiChevronLeft className="mr-2" /> Go Back</button>
@@ -154,6 +156,7 @@ function EventEdit() {
          </div>
          <ToastContainer />
       </div>
+      </Layout>
    );
 }
 

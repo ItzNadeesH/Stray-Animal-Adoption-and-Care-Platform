@@ -7,6 +7,7 @@ import { HiPencilAlt, HiPlus } from "react-icons/hi";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { APP_URL } from "../../config";
+import Layout from "../Layout";
 
 function AdoptionManage() {
    Modal.setAppElement('#root');
@@ -150,7 +151,7 @@ function AdoptionManage() {
 
 
    return (
-
+      <Layout>
       <div className="p-10">
          <h1 className="text-2xl font-bold">Manage Adoptions</h1>
          <div className="flex space-x-3">
@@ -227,6 +228,7 @@ function AdoptionManage() {
          </Modal>
          <ToastContainer />
       </div>
+      </Layout>
    );
 }
 

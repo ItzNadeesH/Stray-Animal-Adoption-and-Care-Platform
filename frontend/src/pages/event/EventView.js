@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { APP_URL } from "../../config";
+import Layout from "../Layout";
 
 function EventView() {
 
@@ -16,6 +17,7 @@ function EventView() {
    }
 
    return (
+      <Layout>
       <div className="p-10">
          <h3 className="text-2xl font-bold text-center mb-5">Event Details - {eventData._id}</h3>
          <div className="w-[800px] shadow-md shadow-neutral-300 m-auto p-4 bg-white">
@@ -64,6 +66,7 @@ function EventView() {
             )}
          </div>
       </div>
+      </Layout>
    );
 }
 

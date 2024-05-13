@@ -28,7 +28,7 @@ const HoverDropdown = () => {
         >
           <li>
             <Link
-              to="/"
+              to="/animal"
               className="block px-4 py-2 text-black hover:bg-cyan-blue hover:text-white transition-all"
             >
               Adoption
@@ -52,7 +52,7 @@ const HoverDropdown = () => {
           </li>
           <li>
             <Link
-              to="/"
+              to="/volunteer"
               className="block px-4 py-2 text-black hover:bg-cyan-blue hover:text-white transition-all"
             >
               Volunteers

@@ -6,6 +6,7 @@ import Modal from "react-modal";
 import jsPDF from "jspdf";
 import { TbListDetails } from "react-icons/tb";
 import { APP_URL } from "../../config";
+import Layout from "../Layout";
 
 function VaccinationManage() {
    Modal.setAppElement('#root');
@@ -140,6 +141,7 @@ function VaccinationManage() {
    }
 
    return (
+      <Layout>
       <div className="p-10">
          <h1 className="text-2xl font-bold">Manage Vaccination</h1>
          <div className="flex space-x-3">
@@ -238,6 +240,7 @@ function VaccinationManage() {
          </Modal>
          <ToastContainer />
       </div>
+      </Layout>
    );
 }
 

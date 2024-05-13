@@ -6,6 +6,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { BiInjection } from "react-icons/bi";
 import { APP_URL } from "../../config";
+import Layout from "../Layout";
 
 function AppointmentManage() {
    Modal.setAppElement('#root');
@@ -198,7 +199,7 @@ function AppointmentManage() {
 
 
    return (
-
+      <Layout>
       <div className="p-10">
          <h1 className="text-2xl font-bold">Manage Appointment</h1>
          <div className="flex space-x-3">
@@ -295,6 +296,7 @@ function AppointmentManage() {
          </Modal>
          <ToastContainer />
       </div>
+      </Layout>
    );
 }
 

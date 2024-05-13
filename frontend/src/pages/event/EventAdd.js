@@ -5,6 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useUser } from "../../contexts/UserContext";
 import { APP_URL } from '../../config';
+import Layout from "../Layout";
 
 function EventAdd() {
    const navigate = useNavigate();
@@ -74,6 +75,7 @@ function EventAdd() {
    }
 
    return (
+      <Layout>
       <div className="p-10">
          <h1 className="text-2xl font-bold">Manage Events</h1>
          <button onClick={() => navigate("/admin/event/manage")} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-3 flex items-center"><HiChevronLeft className="mr-2" /> Go Back</button>
@@ -142,7 +144,7 @@ function EventAdd() {
          </div>
          <ToastContainer />
       </div >
-
+</Layout>
    );
 }
 

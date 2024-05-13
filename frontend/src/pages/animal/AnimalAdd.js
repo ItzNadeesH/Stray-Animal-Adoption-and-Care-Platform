@@ -4,6 +4,7 @@ import { HiChevronLeft } from "react-icons/hi";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { APP_URL } from '../../config';
+import Layout from "../Layout";
 
 function AnimalAdd() {
    const navigate = useNavigate();
@@ -70,6 +71,7 @@ function AnimalAdd() {
    }
 
    return (
+      <Layout>
       <div className="p-10">
          <h1 className="text-2xl font-bold">Manage Animal</h1>
          <button onClick={() => navigate("/admin/animal/manage")} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-3 flex items-center"><HiChevronLeft className="mr-2" /> Go Back</button>
@@ -128,7 +130,7 @@ function AnimalAdd() {
          </div>
          <ToastContainer />
       </div >
-
+</Layout>
    );
 }
 
