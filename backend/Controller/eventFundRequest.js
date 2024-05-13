@@ -41,7 +41,6 @@ const createEventFundRequest = async (req, res) => {
       }
       requestedEvent.fundState = 'PENDING';
       await requestedEvent.save();
-
       const a = await newEventFundRequest.save();
       return res.status(200).json(a);
    } catch (error) {
@@ -89,4 +88,18 @@ const deleteEventFundRequest = async (req, res) => {
    }
 }
 
-module.exports = { getEventFundRequests, getEventFundRequest, createEventFundRequest, updateEventFundRequest, deleteEventFundRequest };
+const getEventFundRequests2 = async (req, res) => {
+   try {
+      const eventFundRequests = await EventFundRequest.find();
+      let fundRequests = [];
+      for (let i = 0; i < eventFundRequests.length; i++) {
+         const event = await Event.findById(eventFundRequests[i].event);
+         fundRequests.push({ ...eventFundRequests[i]._doc, eventDetails: event });
+      }
+      return res.status(200).json(fundRequests);
+   } catch (error) {
+      return res.status(500).json({ error: true, message: error.message });
+   }
+}
+
+module.exports = { getEventFundRequests, getEventFundRequest, createEventFundRequest, updateEventFundRequest, deleteEventFundRequest, getEventFundRequests2 };
