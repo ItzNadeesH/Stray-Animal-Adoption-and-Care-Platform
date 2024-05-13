@@ -1,6 +1,7 @@
 const VolunteerRequest = require('../models/VolunteerRequest');
 const VolunteerRespond = require('../models/VolunteerRespond');
 const User = require('../models/User');
+const Notification = require('../models/Notification');
 
 const getVolunteerResponds = async (req, res) => {
    try {
@@ -55,12 +56,21 @@ const createVolunteerRespond = async (req, res) => {
          }
       }
 
-
       const newVolunteerRespond = new VolunteerRespond({
          volunteerRequest,
          user,
       });
       const a = await newVolunteerRespond.save();
+
+      const u = await User.findOne({ _id: user });
+      const notification = new Notification({
+         user: u._id,
+         title: "Volunteer Respond Created",
+         message: `You have been added as a volunteer for the request [${vR.skill}] in [${vR.district}] on [${new Date(vR.onDate).toISOString().slice(0, 10)}]. Please check the volunteer requests page for more details.`,
+         link: "/profile",
+      });
+      await notification.save();
+
       return res.status(200).json({ error: false, message: "Volunteer Respond created successfully.", data: a });
    } catch (error) {
       return res.status(500).json({ error: true, message: error.message });

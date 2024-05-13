@@ -63,6 +63,8 @@ function AppointmentManage() {
          headers.forEach((header) => {
             if (header.dataKey === "no") {
                row.push(filteredData.indexOf(event) + 1);
+            } else if (header.dataKey === "requestedDate") {
+               row.push(new Date(event.requestedDate).toISOString().slice(0, 10).replace('T', ' '));
             } else {
                const keys = header.dataKey.split('.');
                let value = event;

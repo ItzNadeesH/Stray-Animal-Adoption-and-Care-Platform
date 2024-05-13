@@ -1,6 +1,7 @@
 const Animal = require('../models/Animal');
 const Adoption = require('../models/adoption');
 const User = require('../models/User');
+const Notification = require('../models/Notification');
 
 const getAdoptions = async (req, res) => {
    try {
@@ -46,6 +47,16 @@ const createAdoption = async (req, res) => {
       const _id = 'ADO_' + index;
       let adoption = new Adoption({ _id, ...req.body });
       await adoption.save();
+      const notifyUsers = await User.find({ role: 'SHELTER_OWNER' });
+      notifyUsers.forEach(async (user) => {
+         const notification = new Notification({
+            user: user._id,
+            title: "New Adoption Request",
+            message: `A new adoption request has been made for the animal [${adoption.animal}]. Please check the adoption page for more details.`,
+            link: "/admin/adoption/manage",
+         });
+         await notification.save();
+      });
       return res.status(200).json(adoption);
    } catch (error) {
       return res.status(500).json({ error: true, message: error.message });
@@ -79,7 +90,17 @@ const updateAdoption = async (req, res) => {
          animal.state = 'AVAILABLE';
          await animal.save();
       }
+
       await Adoption.findByIdAndUpdate(id, data, { useFindAndModify: false });
+
+      const u = await User.findOne({ _id: adoption.user });
+      const notification = new Notification({
+         user: u._id,
+         title: "Adoption Request Updated",
+         message: `Your adoption request for the animal [${adoption.animal}] has been updated to [${data.state}] with reason [${data.reason}]. Please check the adoption page for more details.`,
+         link: "/profile",
+      });
+      await notification.save();
       return res.status(200).json({ error: false, message: "Adoption updated successfully" });
    } catch (error) {
       return res.status(500).json({ error: true, message: error.message });

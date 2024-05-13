@@ -87,12 +87,14 @@ const getProfile = async (req, res) => {
       const user = await User.findById(id);
       const adoptions = await adoption.find({ user: id });
       const volunteerResponds = await VolunteerRespond.find({ user: id });
+
       let volunteerRequests = [];
       for (let i = 0; i < volunteerResponds.length; i++) {
          const volunteerRequest = await VolunteerRequest.findById(volunteerResponds[i].volunteerRequest);
          volunteerRequests.push(volunteerRequest);
       }
-      return res.status(200).json({ user, adoptions, volunteerRequests });
+      const notifications = await Notification.find({ user: id });
+      return res.status(200).json({ user, adoptions, volunteerRequests, notifications });
    } catch (error) {
       return res.status(500).json({ error: true, message: error.message });
    }
