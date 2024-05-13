@@ -29,7 +29,12 @@ const ProfileDropdown = ({ logout }) => {
           <span className="block text-xs truncate">{email}</span>
         </div>
         <ul className="py-2 " aria-labelledby="user-menu-button">
-          {/* <li>
+        {user.role !== "SHELTER_OWNER" &&
+        user.role !== "EVENT_MANAGER" &&
+        user.role !== "DOCTOR"
+         && (
+          <>
+           <li>
             <Link
               to="/dashboard"
               className="block px-4 py-2 text-sm transition-all hover:bg-cyan-blue text-black hover:text-white"
@@ -44,7 +49,9 @@ const ProfileDropdown = ({ logout }) => {
             >
               Settings
             </Link>
-          </li> */}
+          </li> 
+          </>
+        )}
           {user.role === "SHELTER_OWNER" && (
             <>
               <Link

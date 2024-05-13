@@ -73,7 +73,7 @@ function AnimalAdd() {
    return (
       <Layout>
       <div className="p-10">
-         <h1 className="text-2xl font-bold">Manage Animal</h1>
+         <h1 className="text-2xl font-bold">Manage Animals</h1>
          <button onClick={() => navigate("/admin/animal/manage")} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-3 flex items-center"><HiChevronLeft className="mr-2" /> Go Back</button>
 
          <div className="w-full shadow-md shadow-neutral-300 m-auto p-4 bg-white">
