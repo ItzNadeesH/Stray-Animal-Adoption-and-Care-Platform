@@ -143,84 +143,84 @@ function FundManage() {
 
    return (
       <Layout>
-      <div className="p-10">
-         <h1 className="text-2xl font-bold">Manage Event Fundings</h1>
-         <div className="flex space-x-3">
-            <button onClick={handleDownloadPDF} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-3 flex items-center"><HiPlus className="mr-3" /> Download PDF</button>
-         </div>
-         <div className="flex justify-between space-x-10 bg-slate-100 p-3 mb-3 border border-slate-400">
-            <div>
-               <label htmlFor="filterState" className="text-sm font-medium mr-3">Filter by Funding State: </label>
-               <select id="filterState" className="border border-gray-300 rounded-md px-2 py-1" onChange={() => handleSearch()}>
-                  <option value="">All</option>
-                  <option value="PENDING">Pending</option>
-                  <option value="APPROVED">Approved</option>
-                  <option value="REJECTED">Rejected</option>
-               </select>
+         <div className="p-10">
+            <h1 className="text-2xl font-bold">Manage Event Fundings</h1>
+            <div className="flex space-x-3">
+               <button onClick={handleDownloadPDF} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-3 flex items-center"><HiPlus className="mr-3" /> Download PDF</button>
             </div>
-            <div>
-               <input id="search" type="text" placeholder="Search everyware" className="border border-gray-300 rounded-md px-2 py-1" onInput={() => handleSearch()} />
-            </div>
-         </div>
-         <table className="w-full">
-            <thead>
-               <tr>
-                  <th className="border px-4 py-1 bg-slate-400">Event</th>
-                  <th className="border px-4 py-1 bg-slate-400">Event Name</th>
-                  <th className="border px-4 py-1 bg-slate-400">Fund Amount</th>
-                  <th className="border px-4 py-1 bg-slate-400">State</th>
-                  <th className="border px-4 py-1 bg-slate-400">Requestd On</th>
-                  <th className="border px-4 py-1 bg-slate-400">Updated On</th>
-                  <th className="border px-4 py-1 bg-slate-400">Actions</th>
-               </tr>
-            </thead>
-            <tbody>
-               {filteredData.map((item) => (
-                  <tr key={item._id} className="bg-white">
-                     <td className="border px-4 py-1">{item.event}</td>
-                     <td className="border px-4 py-1">{item.eventName}</td>
-                     <td className="border px-4 py-1">{item.fundAmount}</td>
-                     <td className="border px-4 py-1">{item.fundState}</td>
-                     <td className="border px-4 py-1">{new Date(item.createdAt).toISOString().slice(0, 19).replace('T', ' ')}</td>
-                     <td className="border px-4 py-1">{new Date(item.updatedAt).toISOString().slice(0, 19).replace('T', ' ')}</td>
-                     <td className="border px-4 py-1 ">
-                        <div className="flex justify-center">
-                           <HiPencilAlt onClick={() => handleEdit(item._id)} size={20} className="mr-4 hover:cursor-pointer" />
-                        </div>
-                     </td>
-                  </tr>
-               ))}
-            </tbody>
-         </table>
-         <Modal isOpen={isFundRequestModalOpen} onRequestClose={() => setIsFundRequestModalOpen(false)} className="modal lg empty" overlayClassName="modal-overlay" appElement={document.getElementById('root')}>
-            <div className="bg-sky-200 p-3 rounded-lg shadow-[2px_2px_2px_1px_#0004]">
-               <h2 className="text-center text-lg font-bold mb-4">Fund Request Details</h2>
-
-               <div className="flex items-center mb-4">
-                  <div className="w-[200px] text-sm font-semibold leading-4">Event</div>
-                  <div className="w-[10px] px-5">:</div>
-                  <div>{fundingEvent.name}</div>
-               </div>
-
-               <div className="flex items-center mb-4">
-                  <div className="w-[200px] text-sm font-semibold leading-4">Fund State</div>
-                  <div className="w-[10px] px-5">:</div>
-
-                  <select onChange={(e) => setFundState(e.target.value)} value={fundState} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="fundState">
-                     <option value="">-- Select Fund State --</option>
+            <div className="flex justify-between space-x-10 bg-slate-100 p-3 mb-3 border border-slate-400">
+               <div>
+                  <label htmlFor="filterState" className="text-sm font-medium mr-3">Filter by Funding State: </label>
+                  <select id="filterState" className="border border-gray-300 rounded-md px-2 py-1" onChange={() => handleSearch()}>
+                     <option value="">All</option>
+                     <option value="PENDING">Pending</option>
                      <option value="APPROVED">Approved</option>
                      <option value="REJECTED">Rejected</option>
                   </select>
                </div>
-
-               <div className="text-right">
-                  <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={handleSubmit}>Submit</button>
+               <div>
+                  <input id="search" type="text" placeholder="Search everyware" className="border border-gray-300 rounded-md px-2 py-1" onInput={() => handleSearch()} />
                </div>
             </div>
-         </Modal>
+            <table className="w-full">
+               <thead>
+                  <tr>
+                     <th className="border px-4 py-1 bg-slate-400">Event</th>
+                     <th className="border px-4 py-1 bg-slate-400">Event Name</th>
+                     <th className="border px-4 py-1 bg-slate-400">Fund Amount</th>
+                     <th className="border px-4 py-1 bg-slate-400">State</th>
+                     <th className="border px-4 py-1 bg-slate-400">Requested On</th>
+                     <th className="border px-4 py-1 bg-slate-400">Updated On</th>
+                     <th className="border px-4 py-1 bg-slate-400">Actions</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  {filteredData.map((item) => (
+                     <tr key={item._id} className="bg-white">
+                        <td className="border px-4 py-1">{item.event}</td>
+                        <td className="border px-4 py-1">{item.eventName}</td>
+                        <td className="border px-4 py-1">{item.fundAmount}</td>
+                        <td className="border px-4 py-1">{item.fundState}</td>
+                        <td className="border px-4 py-1">{new Date(item.createdAt).toISOString().slice(0, 19).replace('T', ' ')}</td>
+                        <td className="border px-4 py-1">{new Date(item.updatedAt).toISOString().slice(0, 19).replace('T', ' ')}</td>
+                        <td className="border px-4 py-1 ">
+                           <div className="flex justify-center">
+                              <HiPencilAlt onClick={() => handleEdit(item._id)} size={20} className="mr-4 hover:cursor-pointer" />
+                           </div>
+                        </td>
+                     </tr>
+                  ))}
+               </tbody>
+            </table>
+            <Modal isOpen={isFundRequestModalOpen} onRequestClose={() => setIsFundRequestModalOpen(false)} className="modal lg empty" overlayClassName="modal-overlay" appElement={document.getElementById('root')}>
+               <div className="bg-sky-200 p-3 rounded-lg shadow-[2px_2px_2px_1px_#0004]">
+                  <h2 className="text-center text-lg font-bold mb-4">Fund Request Details</h2>
 
-         <ToastContainer />
-      </div>
+                  <div className="flex items-center mb-4">
+                     <div className="w-[200px] text-sm font-semibold leading-4">Event</div>
+                     <div className="w-[10px] px-5">:</div>
+                     <div>{fundingEvent.name}</div>
+                  </div>
+
+                  <div className="flex items-center mb-4">
+                     <div className="w-[200px] text-sm font-semibold leading-4">Fund State</div>
+                     <div className="w-[10px] px-5">:</div>
+
+                     <select onChange={(e) => setFundState(e.target.value)} value={fundState} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="fundState">
+                        <option value="">-- Select Fund State --</option>
+                        <option value="APPROVED">Approved</option>
+                        <option value="REJECTED">Rejected</option>
+                     </select>
+                  </div>
+
+                  <div className="text-right">
+                     <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={handleSubmit}>Submit</button>
+                  </div>
+               </div>
+            </Modal>
+
+            <ToastContainer />
+         </div>
       </Layout>
    );
 }

@@ -202,7 +202,7 @@ function App() {
           <Route path="/event" element={<Event />} />
           <Route path="/volunteer" element={<Volunteer />} />
 
-          {user?.role === "USER" && (
+          {user?.role === "User" && (
             <>
               <Route path="/animal/:id/adopt" element={<AdoptAnimal />} />
               <Route path="/profile" element={<Profile />} />

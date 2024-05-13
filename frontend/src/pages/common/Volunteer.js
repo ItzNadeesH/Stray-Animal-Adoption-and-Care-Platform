@@ -27,8 +27,8 @@ function Volunteer() {
    const fetchVolunteers = async () => {
       const response = await fetch(APP_URL + `/api/volunteer`);
       const data = await response.json();
-      setVolunteerData(data);
-      setFilteredData(data);
+      setVolunteerData(data.filter((item) => item.state !== 'DELETED'));
+      setFilteredData(data.filter((item) => item.state !== 'DELETED'));
    }
 
    const handleViewRequest = (volunteerId) => {
