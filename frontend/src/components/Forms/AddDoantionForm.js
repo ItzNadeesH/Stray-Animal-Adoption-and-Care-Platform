@@ -9,12 +9,11 @@ const AddDonationForm = () => {
     amount: '',
   });
 
-  const handleChange = (event) => {
+  const handleChange = async (event) => {
     const { name, value } = event.target;
     setFormFields({ ...formFields, [name]: value });
   };
 
-<<<<<<< HEAD
     const handleSubmit = async (event) => {
         event.preventDefault();
         
@@ -27,10 +26,6 @@ const AddDonationForm = () => {
             alert("Error submitting form");
         }
     };
-=======
-  const handleSubmit = async (event) => {
-    event.preventDefault();
->>>>>>> 5e54eb13a14a354805576da17e6b4f0c0cb417c1
 
     try {
       await axios.post('/donationforms/add', formFields);
