@@ -61,6 +61,7 @@ import DForm from './pages/Forms/DForm';
 import DFormSection from './pages/Forms/DFormSection';
 import EditDForm from './pages/Forms/EditDForm';
 import ShelterDashBoard from './components/ShelterDashBoard/Dashboard';
+import ViewPdfSection from './pages/Receipt/ViewPdfSection';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -159,6 +160,7 @@ function App() {
                   <Route path="Sendreceipts" element={<SendRecsection />} />
                   <Route path="Editreceipt/:id" element={<UpdateSendReceipt />} />
                   <Route path="pdfrecsection" element={<PdfRecsection />} />
+                  <Route path="viewpdfsection" element={<ViewPdfSection />} />
                   <Route path="requestsection" element={<RequestSection />} />
                   <Route path="donationform" element={<DonationFund />} />
             </Route>

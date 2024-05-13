@@ -200,3 +200,22 @@ app.get('/getfile', async (req, res) => {
     res.status(500).send({ status: ' error' });
   }
 });
+
+//delete file
+app.get('/deleteFile/:id', async (req, res) => {
+  try {
+    // Check if ID to delete is provided in query params
+    const deleteId = req.query.deleteId;
+    if (deleteId) {
+      await PdfSchema.findByIdAndDelete(deleteId);
+      console.log('File deleted successfully');
+    }
+
+    // Fetch all PDF files after potential deletion
+    const data = await PdfSchema.find({});
+    res.send({ status: 200, data: data });
+  } catch (err) {
+    console.error('Error:', err);
+    res.status(500).send({ status: 'error' });
+  }
+});

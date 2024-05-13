@@ -34,7 +34,7 @@ function Formcat() {
     };
 
     // Search function to filter forms based on the input Form ID
-    const filteredForms = forms.filter(form => form.formId.toLowerCase().includes(search.toLowerCase()));
+    const filteredForms = forms.filter(form => form.formId?.toLowerCase().includes(search?.toLowerCase()));
 
     return (
         <div className="max-w-xl mx-auto border-2 border-gray-300 rounded-lg shadow p-4">
