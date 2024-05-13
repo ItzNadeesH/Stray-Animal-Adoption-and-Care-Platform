@@ -8,7 +8,7 @@ const UpdateReceipt = () => {
   const [receipt, setReceipt] = useState({
     invoiceNumber: '',
     date: '',
-    items: [],
+    items: []
   });
 
     // Fetch receipt data
@@ -46,9 +46,6 @@ const UpdateReceipt = () => {
         } else {
             setReceipt({ ...receipt, [e.target.name]: e.target.value });
         }
-      } catch (error) {
-        console.error('Failed to fetch receipt', error);
-      }
     };
 
     const handleSubmit = async (e) => {
@@ -63,34 +60,6 @@ const UpdateReceipt = () => {
                 alert('Failed to update receipt');
             });
     };
-
-  const handleInputChange = (e, index) => {
-    if (index !== null) {
-      const updatedItems = receipt.items.map((item, idx) => {
-        if (idx === index) {
-          return { ...item, [e.target.name]: e.target.value };
-        }
-        return item;
-      });
-      setReceipt({ ...receipt, items: updatedItems });
-    } else {
-      setReceipt({ ...receipt, [e.target.name]: e.target.value });
-    }
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    axios
-      .put(`/Receipts/update/${id}`, receipt)
-      .then(() => {
-        alert('Receipt updated successfully!');
-        navigate('/receipts'); // Navigate away after update
-      })
-      .catch((error) => {
-        console.error('Failed to update receipt', error);
-        alert('Failed to update receipt');
-      });
-  };
 
   return (
     <div className="bg-white border rounded-lg shadow-lg px-6 py-8 max-w-md mx-auto mt-8">
