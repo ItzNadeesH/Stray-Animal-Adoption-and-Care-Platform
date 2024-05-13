@@ -11,7 +11,6 @@ const UpdateReceipt = () => {
     items: [],
   });
 
-<<<<<<< HEAD
     // Fetch receipt data
     useEffect(() => {
         const fetchReceipt = async () => {
@@ -46,29 +45,12 @@ const UpdateReceipt = () => {
             setReceipt({ ...receipt, items: updatedItems });
         } else {
             setReceipt({ ...receipt, [e.target.name]: e.target.value });
-=======
-  // Fetch receipt data
-  useEffect(() => {
-    const fetchReceipt = async () => {
-      try {
-        const response = await axios.get(`/Receipts/getdata/${id}`);
-        if (response.data) {
-          setReceipt({
-            invoiceNumber: response.data.invoiceNumber,
-            date: response.data.date.slice(0, 10), // Slice to format YYYY-MM-DD
-            items: response.data.items.map((item) => ({
-              description: item.description || '',
-              amount: item.amount || 0,
-            })),
-          });
->>>>>>> 5e54eb13a14a354805576da17e6b4f0c0cb417c1
         }
       } catch (error) {
         console.error('Failed to fetch receipt', error);
       }
     };
 
-<<<<<<< HEAD
     const handleSubmit = async (e) => {
         e.preventDefault();
         axios.put(`http://localhost:5000/Receipts/update/${id}`, receipt)
@@ -81,10 +63,6 @@ const UpdateReceipt = () => {
                 alert('Failed to update receipt');
             });
     };
-=======
-    fetchReceipt();
-  }, [id]);
->>>>>>> 5e54eb13a14a354805576da17e6b4f0c0cb417c1
 
   const handleInputChange = (e, index) => {
     if (index !== null) {

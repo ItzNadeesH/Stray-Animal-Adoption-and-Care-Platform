@@ -13,7 +13,6 @@ import { IoMdContacts } from 'react-icons/io';
 import { FaUserCircle } from 'react-icons/fa';
 import menu from '../../assets/icons/icon-menu.svg';
 import HoverDropdown from '../common/HoverDropdown';
-import { useUser } from '../../contexts/UserContext';
 
 const Navbar = ({ isAuthenticated }) => {
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -22,8 +21,6 @@ const Navbar = ({ isAuthenticated }) => {
   const navbarRef = useRef(null);
   const cartRef = useRef(null);
   const navigate = useNavigate();
-
-const {user} = useUser();
 
   useEffect(() => {
     const handleOutsideClick = (event) => {
@@ -101,7 +98,6 @@ const {user} = useUser();
       </Link>
     </div>
   );
-  
   return (
     <>
       <nav className="flex justify-between p-6 h-[80px] border-b border-[#e6e6e6] max-w-screen-xl mx-auto">
@@ -132,7 +128,6 @@ const {user} = useUser();
           : isAuthenticated === false
           ? guestLinks
           : ''}
- 
       </nav>
       {/* Mobile Navbar */}
       <nav
