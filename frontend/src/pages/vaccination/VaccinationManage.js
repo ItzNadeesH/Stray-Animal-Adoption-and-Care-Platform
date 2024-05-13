@@ -115,6 +115,7 @@ function VaccinationManage() {
          { title: "Animal", dataKey: "name" },
          { title: "Animal State", dataKey: "state" },
          { title: "Vaccine", dataKey: "vaccinationName" },
+         { title: "Vaccination Frequency", dataKey: "vaccinationFrequency" },
          { title: "Last Vaccinated Date", dataKey: "lastVaccination" },
       ];
 

@@ -168,7 +168,6 @@ function AppointmentManage() {
          return;
       }
       if (new Date(appointment.requestedDate).toISOString().slice(0, 10) !== new Date().toISOString().slice(0, 10)) {
-
          toast.error("You can only vaccinate on the requested date");
          return;
       }

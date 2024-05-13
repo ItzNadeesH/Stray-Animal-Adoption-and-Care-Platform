@@ -66,20 +66,20 @@ function Profile() {
                   <div className="mb-8">
                      <h3 className="text-lg font-bold mb-2">Notifications</h3>
                      {notifications.map((item) => (
-                        <div key={item._id} className="border grid grid-cols-[1fr,100px] border-purple-500 p-4 mb-4 rounded-lg shadow-lg bg-gradient-to-r from-purple-200 via-purple-300 to-purple-400 hover:from-purple-300 hover:via-purple-400 hover:to-purple-500 hover:shadow-xl transition duration-300 ease-in-out">
+                        <div key={item._id} className="bg-orange-100 hover:bg-orange-200 border grid grid-cols-[1fr,40px]  p-4 mb-4 rounded-lg shadow-lg">
                            <div>
-                              <Link to={item.link} className="text-purple-800 hover:text-purple-900">
+                              <Link to={item.link} className="">
                                  <div className="text-gray-800">
-                                    <p className="font-bold">{item.title}</p>
-                                    <p className=" text-sm">{item.message}</p>
+                                    <p className="font-bold text-sm">{item.title}</p>
+                                    <p className=" text-xs">{item.message}</p>
                                  </div>
                               </Link>
-                              <div className="text-sm text-gray-800">
-                                 <p>{new Date(item.createdAt).toISOString().slice(0, 19).replace('T', ' ')}</p>
+                              <div className="text-xs text-gray-800">
+                                 <p className='ms-auto w-fit'>{new Date(item.createdAt).toISOString().slice(0, 19).replace('T', ' ')}</p>
                               </div>
                            </div>
-                           <div className='flex justify-end items-center'>
-                              <button className="text-red-800 hover:text-red-900" onClick={() => handleNotificationDelete(item._id)}>Delete</button>
+                           <div className='flex justify-end items-end'>
+                              <button className="text-red-800 hover:text-red-900" onClick={() => handleNotificationDelete(item._id)}>  <HiTrash size={20} className="hover:cursor-pointer" /></button>
                            </div>
                         </div>
                      ))}
