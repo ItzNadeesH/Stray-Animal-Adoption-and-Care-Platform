@@ -1,11 +1,11 @@
-import { Link, useNavigate } from "react-router-dom";
-import { logout } from "../../actions/auth";
-import { connect, useSelector } from "react-redux";
-import { loadUser } from "../../actions/auth";
-import PropTypes from "prop-types";
-import store from "../../store";
-import setAuthToken from "../../utils/setAuthToken";
-import { useUser } from "../../contexts/UserContext";
+import { Link, useNavigate } from 'react-router-dom';
+import { logout } from '../../actions/auth';
+import { connect, useSelector } from 'react-redux';
+import { loadUser } from '../../actions/auth';
+import PropTypes from 'prop-types';
+import store from '../../store';
+import setAuthToken from '../../utils/setAuthToken';
+import { useUser } from '../../contexts/UserContext';
 
 const ProfileDropdown = ({ logout }) => {
   const { username, email } = useSelector((state) => state.userAuth.user);
@@ -16,7 +16,7 @@ const ProfileDropdown = ({ logout }) => {
     logout();
     setAuthToken();
     store.dispatch(loadUser());
-    return navigate("/");
+    return navigate('/');
   };
   return (
     <>
@@ -29,7 +29,7 @@ const ProfileDropdown = ({ logout }) => {
           <span className="block text-xs truncate">{email}</span>
         </div>
         <ul className="py-2 " aria-labelledby="user-menu-button">
-          {/* <li>
+          <li>
             <Link
               to="/dashboard"
               className="block px-4 py-2 text-sm transition-all hover:bg-cyan-blue text-black hover:text-white"
@@ -37,15 +37,7 @@ const ProfileDropdown = ({ logout }) => {
               Dashboard
             </Link>
           </li>
-          <li>
-            <Link
-              to="/"
-              className="block px-4 py-2 text-sm transition-all hover:bg-cyan-blue text-black hover:text-white"
-            >
-              Settings
-            </Link>
-          </li> */}
-          {user.role === "SHELTER_OWNER" && (
+          {user.role === 'SHELTER_OWNER' && (
             <>
               <Link
                 to="/admin/animal/manage"
@@ -73,7 +65,7 @@ const ProfileDropdown = ({ logout }) => {
               </Link>
             </>
           )}
-          {user.role === "EVENT_MANAGER" && (
+          {user.role === 'EVENT_MANAGER' && (
             <>
               <Link
                 to="/admin/event/manage"
@@ -89,7 +81,7 @@ const ProfileDropdown = ({ logout }) => {
               </Link>
             </>
           )}
-          {user.role === "DOCTOR" && (
+          {user.role === 'DOCTOR' && (
             <>
               <Link
                 to="/admin/vaccination/manage"
