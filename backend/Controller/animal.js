@@ -8,6 +8,7 @@ const fs = require('fs');
 const User = require('../models/User');
 const Notification = require('../models/Notification');
 const IncrementKey = require('../models/IncrementKey');
+const Appointment = require('../models/appointment');
 
 const storage = multer.diskStorage({
    destination: function (req, file, cb) {
@@ -208,9 +209,11 @@ const deleteAnimal = async (req, res) => {
          }
       } catch (ignore) {
       }
+
       await animal.deleteOne();
       await Vaccination.deleteMany({ animal: id });
       await Adoption.deleteMany({ animal: id });
+      await Appointment.deleteMany({ animal: id });
       return res.status(200).json({ error: false, message: "Animal deleted successfully" });
    } catch (error) {
       return res.status(500).json({ error: true, message: error.message });
