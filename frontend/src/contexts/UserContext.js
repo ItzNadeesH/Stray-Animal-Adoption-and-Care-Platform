@@ -1,25 +1,16 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { APP_URL } from '../config';
+import { useUsers } from '../hooks/useUsers';
 
 const UserContext = createContext();
 
 export const useUser = () => useContext(UserContext);
 
 export const UserProvider = ({ children }) => {
+   const { data } = useUsers();
+
    const [user, setUser] = useState(null);
    const [hasNotifications, setHasNotifications] = useState(false);
-   const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('token') !== null);
-
-   const login = (token) => {
-      localStorage.setItem('token', token);
-      setIsLoggedIn(true);
-   };
-
-   const logout = () => {
-      localStorage.removeItem('token');
-      setIsLoggedIn(false);
-      setUser(null);
-   };
 
    useEffect(() => {
       if (localStorage.getItem("token") === null) return;
@@ -54,11 +45,12 @@ export const UserProvider = ({ children }) => {
                   });
             }
          });
-   }, []);
+   }, [data]);
+
 
 
    return (
-      <UserContext.Provider value={{ user, isLoggedIn, login, logout, hasNotifications }}>
+      <UserContext.Provider value={{ user, hasNotifications }}>
          {children}
       </UserContext.Provider>
    );
