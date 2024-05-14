@@ -278,7 +278,7 @@ function VaccinationManage() {
                         </tr>
                      </thead>
                      <tbody>
-                        {vaccinationHistoryData.map((item) => (
+                        {vaccinationHistoryData.length > 0 && vaccinationHistoryData.map((item) => (
                            <tr key={item._id} className="bg-white">
                               <td className="border px-4 py-1 text-sm">{item.animal}</td>
                               <td className="border px-4 py-1 text-sm">{item.vaccine}</td>
