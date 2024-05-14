@@ -200,6 +200,36 @@ function VaccinationManage() {
       }
    }
 
+   const calculateDueDate = (vaccinationFrequency, lastVaccination) => {
+      if (lastVaccination === "Not Vaccinated") {
+         return "Not Vaccinated";
+      }
+      let date = new Date(lastVaccination);
+      switch (vaccinationFrequency) {
+         case "ONCE_A_WEEK":
+            date.setDate(date.getDate() + 7);
+            break;
+         case "TWICE_A_MONTH":
+            date.setDate(date.getDate() + 15);
+            break;
+         case "ONCE_A_MONTH":
+            date.setMonth(date.getMonth() + 1);
+            break;
+         case "ONCE_A_YEAR":
+            date.setFullYear(date.getFullYear() + 1);
+            break;
+         case "TWICE_A_YEAR":
+            date.setFullYear(date.getFullYear() + 2);
+            break;
+         case "THRISE_A_YEAR":
+            date.setFullYear(date.getFullYear() + 3);
+            break;
+         default:
+            break;
+      }
+      return date.toISOString().slice(0, 10).replace('T', ' ');
+   }
+
    return (
       <Layout>
          <div className="p-10">
@@ -241,6 +271,7 @@ function VaccinationManage() {
                      <th className="border px-4 py-1 bg-slate-400">Animal State</th>
                      <th className="border px-4 py-1 bg-slate-400">Vaccine</th>
                      <th className="border px-4 py-1 bg-slate-400">Vaccination Frequency</th>
+                     <th className="border px-4 py-1 bg-slate-400">Due Date</th>
                      <th className="border px-4 py-1 bg-slate-400">Last Vaccinated Date</th>
                      <th className="border px-4 py-1 bg-slate-400">Actions</th>
                   </tr>
@@ -253,7 +284,8 @@ function VaccinationManage() {
                         <td className="border px-4 py-1">{vaccination.state}</td>
                         <td className="border px-4 py-1">{vaccination.vaccinationName}</td>
                         <td className="border px-4 py-1">{vaccination.vaccinationFrequency}</td>
-                        <td className="border px-4 py-1">{vaccination.lastVaccination === "Not Vaccinated" ? "Not Vaccinated" : new Date(vaccination.lastVaccination).toISOString().slice(0, 19).replace('T', ' ')}</td>
+                        <td className="border px-4 py-1">{calculateDueDate(vaccination.vaccinationFrequency, vaccination.lastVaccination)}</td>
+                        <td className="border px-4 py-1">{vaccination.lastVaccination === "Not Vaccinated" ? "Not Vaccinated" : new Date(vaccination.lastVaccination).toISOString().slice(0, 10).replace('T', ' ')}</td>
                         <td className="border px-4 py-1 ">
                            <div className="flex justify-between">
                               {vaccination.state !== "ADOPTED" ? <HiPencilAlt onClick={() => handleEdit(vaccination._id)} size={20} className="mr-4 hover:cursor-pointer" /> : <></>}
