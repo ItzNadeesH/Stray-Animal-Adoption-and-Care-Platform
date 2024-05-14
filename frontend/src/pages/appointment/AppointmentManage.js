@@ -177,7 +177,7 @@ function AppointmentManage() {
    }
 
    const handleSubmit = async () => {
-      if (!vaccinationName) {
+      if (!vaccinationName || !animal) {
          toast.error("Please fill in all fields");
          return;
       }

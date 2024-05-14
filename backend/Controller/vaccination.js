@@ -71,7 +71,7 @@ const deleteVaccination = async (req, res) => {
       if (!vaccination) {
          return res.status(404).json({ error: true, message: "Vaccination not found" });
       }
-      await vaccination.remove();
+      await vaccination.deleteOne();
       return res.status(200).json({ error: false, message: "Vaccination deleted successfully" });
    }
    catch (error) {

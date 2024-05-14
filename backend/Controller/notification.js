@@ -36,7 +36,7 @@ const getNotificationById = async (req, res) => {
 const getNotificationByReceiver = async (req, res) => {
    const { id } = req.params;
    try {
-      const notification = await Notification.find({ receiver: id });
+      const notification = await Notification.find({ user: id });
       return res.status(200).json(notification);
    }
    catch (error) {

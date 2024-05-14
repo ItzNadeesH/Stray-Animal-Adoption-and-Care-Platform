@@ -23,7 +23,7 @@ const Navbar = ({ isAuthenticated }) => {
   const cartRef = useRef(null);
   const navigate = useNavigate();
 
-const {user} = useUser();
+  const { hasNotifications } = useUser();
 
   useEffect(() => {
     const handleOutsideClick = (event) => {
@@ -83,7 +83,19 @@ const {user} = useUser();
         {isCartOpen && <CartTab />}
       </div>
       <button onClick={handleProfileClick} className="">
-        <FaUserCircle color="#000000" size={26} />
+        <div style={{ position: 'relative', display: 'inline-block' }}>
+          <FaUserCircle color="#000000" size={26} />
+          {hasNotifications && (
+            <div style={{
+              position: 'absolute',
+              top: '0px',
+              right: '-5px',
+              width: '10px',
+              height: '10px',
+              borderRadius: '50%',
+              backgroundColor: 'red'
+            }}></div>)}
+        </div>
       </button>
       <div className="absolute top-6 right-[-24px] z-10">
         {isProfileMenuOpen && <ProfileDropdown />}
@@ -101,7 +113,7 @@ const {user} = useUser();
       </Link>
     </div>
   );
-  
+
   return (
     <>
       <nav className="flex justify-between p-6 h-[80px] border-b border-[#e6e6e6] max-w-screen-xl mx-auto">
@@ -130,16 +142,15 @@ const {user} = useUser();
         {isAuthenticated
           ? authLinks
           : isAuthenticated === false
-          ? guestLinks
-          : ''}
- 
+            ? guestLinks
+            : ''}
+
       </nav>
       {/* Mobile Navbar */}
       <nav
         ref={navbarRef}
-        className={`absolute bg-[#ffffff] top-0 bottom-0 w-[320px] shadow-2xl transition-all z-10 ${
-          isMenuOpen ? 'left-0' : 'left-[-320px]'
-        }`}
+        className={`absolute bg-[#ffffff] top-0 bottom-0 w-[320px] shadow-2xl transition-all z-10 ${isMenuOpen ? 'left-0' : 'left-[-320px]'
+          }`}
       >
         <h2 className="text-[32px] mt-[80px] ml-10 mb-8 pb-4 border-b border-[#e6e6e6]">
           Welcome

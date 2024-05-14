@@ -7,6 +7,7 @@ export const useUser = () => useContext(UserContext);
 
 export const UserProvider = ({ children }) => {
    const [user, setUser] = useState(null);
+   const [hasNotifications, setHasNotifications] = useState(false);
    const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('token') !== null);
 
    const login = (token) => {
@@ -35,13 +36,29 @@ export const UserProvider = ({ children }) => {
                console.log(data);
             } else {
                setUser(data);
+
+               fetch(APP_URL + `/api/notification/receiver/${data._id}`, {
+                  method: "GET",
+                  headers: {
+                     "Content-Type": "application/json",
+                     "x-auth-token": localStorage.getItem("token"),
+                  },
+               })
+                  .then((res) => res.json())
+                  .then((data) => {
+                     if (data.error) {
+                        console.log(data);
+                     } else {
+                        setHasNotifications(data.length > 0);
+                     }
+                  });
             }
          });
    }, []);
 
 
    return (
-      <UserContext.Provider value={{ user, isLoggedIn, login, logout }}>
+      <UserContext.Provider value={{ user, isLoggedIn, login, logout, hasNotifications }}>
          {children}
       </UserContext.Provider>
    );

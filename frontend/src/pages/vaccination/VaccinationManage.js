@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { HiPencilAlt, HiPlus, } from "react-icons/hi";
+import { HiPencilAlt, HiPlus, HiTrash, } from "react-icons/hi";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Modal from "react-modal";
@@ -149,6 +149,57 @@ function VaccinationManage() {
       doc.save("vaccination_table.pdf");
    }
 
+   const [svac, setSvac] = useState({});
+   const [isSvacModalOpen, setIsSvacModalOpen] = useState(false);
+
+   const handleVaccinationEdit = async (vaccinationId) => {
+      setSvac(vaccinationHistoryData.find((item) => item._id === vaccinationId));
+      setIsVacinationHistoryModalOpen(false);
+      setIsSvacModalOpen(true);
+   }
+
+   const handleSvacEdit = async () => {
+      const response = await fetch(APP_URL + `/api/vaccination/${svac._id}`, {
+         method: "PUT",
+         headers: {
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem('token')
+         },
+         body: JSON.stringify({
+            vaccine: svac.vaccine,
+            animal: svac.animal,
+            date: svac.date
+         })
+      });
+      const data = await response.json();
+      if (data.error) {
+         toast.error(data.message);
+      } else {
+         toast.success(data.message);
+         setIsSvacModalOpen(false);
+         handleHistoryView(svac.animal);
+         fetchVaccinates();
+      }
+   }
+
+   const handleVaccinationDelete = async (vaccinationId) => {
+      const response = await fetch(APP_URL + `/api/vaccination/${vaccinationId}`, {
+         method: "DELETE",
+         headers: {
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem('token')
+         }
+      });
+      const data = await response.json();
+      if (data.error) {
+         toast.error(data.message);
+      } else {
+         toast.success(data.message);
+         handleHistoryView(svac.animal);
+         fetchVaccinates();
+      }
+   }
+
    return (
       <Layout>
          <div className="p-10">
@@ -223,6 +274,7 @@ function VaccinationManage() {
                            <th className="border px-4 py-1 bg-slate-400">Animal ID</th>
                            <th className="border px-4 py-1 bg-slate-400">Vaccination</th>
                            <th className="border px-4 py-1 bg-slate-400">Vaccination Date</th>
+                           <th className="border px-4 py-1 bg-slate-400">Action</th>
                         </tr>
                      </thead>
                      <tbody>
@@ -230,7 +282,11 @@ function VaccinationManage() {
                            <tr key={item._id} className="bg-white">
                               <td className="border px-4 py-1 text-sm">{item.animal}</td>
                               <td className="border px-4 py-1 text-sm">{item.vaccine}</td>
-                              <td className="border px-4 py-1 text-sm">{item.createdAt}</td>
+                              <td className="border px-4 py-1 text-sm">{new Date(item.createdAt).toISOString().slice(0, 19).replace('T', ' ')}</td>
+                              <td className="border px-4 py-1 text-sm flex justify-between">
+                                 <HiPencilAlt onClick={() => handleVaccinationEdit(item._id)} size={20} className="mr-4 hover:cursor-pointer" />
+                                 <HiTrash onClick={() => handleVaccinationDelete(item._id)} size={20} className="mr-4 hover:cursor-pointer" />
+                              </td>
                            </tr>
                         ))}
                      </tbody>
@@ -257,6 +313,18 @@ function VaccinationManage() {
                   </div>
                   <div className="text-right">
                      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={handleFundRequestSubmit}>Submit</button>
+                  </div>
+               </div>
+            </Modal>
+            <Modal isOpen={isSvacModalOpen} onRequestClose={() => setIsSvacModalOpen(false)} className="modal lg empty" overlayClassName="modal-overlay" appElement={document.getElementById('root')}>
+               <div className=" bg-sky-200 p-3 rounded-lg shadow-[2px_2px_2px_1px_#0004]">
+                  <h2 className="text-center text-lg font-bold mb-4">Vacination Edit</h2>
+                  <div className="border-2 border-gray-800 rounded-md mb-2 px-2 py-1 bg-white">
+                     <input type="email" placeholder="Vaccination Name" className="placeholder-slate-600 w-full outline-none" value={svac.vaccine} onChange={(e) => setSvac({ ...svac, vaccine: e.target.value })} />
+                  </div>
+
+                  <div className="text-right">
+                     <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={handleSvacEdit}>Submit</button>
                   </div>
                </div>
             </Modal>
