@@ -177,7 +177,21 @@ function AnimalManage() {
       default:
         break;
     }
-    return date.toISOString().slice(0, 10).replace('T', ' ');
+    return date.toISOString().slice(0, 10).replace('T', ' ')
+
+  }
+
+  const colorRow = (vaccinationFrequency, lastVaccination) => {
+    const due = calculateDueDate(vaccinationFrequency, lastVaccination);
+    const checkDate = new Date();
+    checkDate.setDate(checkDate.getDate() + 2);
+    const cDate = checkDate.toISOString().slice(0, 10).replace('T', ' ');
+
+    if (due < cDate) {
+      return "bg-red-300 border px-4 py-1"
+    } else {
+      return "border px-4 py-1"
+    }
   }
 
   const handleCreateAppointment = async () => {
@@ -322,9 +336,7 @@ function AnimalManage() {
                     />
                   )}
                 </td>
-                <td className="border px-4 py-1 text-sm">
-                  {calculateDueDate(item.vaccinationFrequency, item.lastVaccination)}
-                </td>
+                <td className={colorRow(item.vaccinationFrequency, item.lastVaccination)}>{calculateDueDate(item.vaccinationFrequency, item.lastVaccination)}</td>
                 <td className="border px-4 py-1 ">
                   <div className="flex justify-between">
                     <TbListDetails

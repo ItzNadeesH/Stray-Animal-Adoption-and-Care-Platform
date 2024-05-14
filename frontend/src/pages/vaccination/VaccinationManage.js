@@ -227,7 +227,21 @@ function VaccinationManage() {
          default:
             break;
       }
-      return date.toISOString().slice(0, 10).replace('T', ' ');
+      return date.toISOString().slice(0, 10).replace('T', ' ')
+
+   }
+
+   const colorRow = (vaccinationFrequency, lastVaccination) => {
+      const due = calculateDueDate(vaccinationFrequency, lastVaccination);
+      const checkDate = new Date();
+      checkDate.setDate(checkDate.getDate() + 2);
+      const cDate = checkDate.toISOString().slice(0, 10).replace('T', ' ');
+
+      if (due < cDate) {
+         return "bg-red-300 border px-4 py-1"
+      } else {
+         return "border px-4 py-1"
+      }
    }
 
    return (
@@ -284,7 +298,7 @@ function VaccinationManage() {
                         <td className="border px-4 py-1">{vaccination.state}</td>
                         <td className="border px-4 py-1">{vaccination.vaccinationName}</td>
                         <td className="border px-4 py-1">{vaccination.vaccinationFrequency}</td>
-                        <td className="border px-4 py-1">{calculateDueDate(vaccination.vaccinationFrequency, vaccination.lastVaccination)}</td>
+                        <td className={colorRow(vaccination.vaccinationFrequency, vaccination.lastVaccination)}>{calculateDueDate(vaccination.vaccinationFrequency, vaccination.lastVaccination)}</td>
                         <td className="border px-4 py-1">{vaccination.lastVaccination === "Not Vaccinated" ? "Not Vaccinated" : new Date(vaccination.lastVaccination).toISOString().slice(0, 10).replace('T', ' ')}</td>
                         <td className="border px-4 py-1 ">
                            <div className="flex justify-between">
