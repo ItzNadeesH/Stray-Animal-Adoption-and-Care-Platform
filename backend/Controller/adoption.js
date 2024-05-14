@@ -2,6 +2,7 @@ const Animal = require('../models/Animal');
 const Adoption = require('../models/adoption');
 const User = require('../models/User');
 const Notification = require('../models/Notification');
+const IncrementKey = require('../models/IncrementKey');
 
 const getAdoptions = async (req, res) => {
    try {
