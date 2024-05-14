@@ -7,6 +7,7 @@ const path = require('path');
 const fs = require('fs');
 const User = require('../models/User');
 const Notification = require('../models/Notification');
+const IncrementKey = require('../models/IncrementKey');
 
 const storage = multer.diskStorage({
    destination: function (req, file, cb) {
@@ -109,8 +110,10 @@ const createAnimal = async (req, res) => {
          if (err) {
             return res.status(500).json({ error: true, message: "Error uploading image:" + err.message });
          }
-         const index = await Animal.countDocuments() + 1;
-         const _id = 'AN_' + index;
+         const key = await IncrementKey.findOne({ key: 'ANIMAL' });
+         key.value = key.value + 1;
+         await key.save();
+         const _id = 'AN_' + (key.value);
          const newAnimal = new Animal({
             _id,
             name,

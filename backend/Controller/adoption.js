@@ -43,8 +43,10 @@ const createAdoption = async (req, res) => {
       if (existingAdoption) {
          return res.status(400).json({ error: true, message: "This user has already sent a adoption request for this animal" });
       }
-      const index = await Adoption.countDocuments() + 1;
-      const _id = 'ADO_' + index;
+      const key = await IncrementKey.findOne({ key: 'ADOPTION' });
+      key.value = key.value + 1;
+      await key.save();
+      const _id = 'ADO_' + (key.value);
       let adoption = new Adoption({ _id, ...req.body });
       await adoption.save();
       const notifyUsers = await User.find({ role: 'SHELTER_OWNER' });

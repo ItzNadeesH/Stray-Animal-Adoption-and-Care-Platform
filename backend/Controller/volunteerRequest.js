@@ -35,8 +35,10 @@ const getVolunteerRequest = async (req, res) => {
 const createVolunteerRequest = async (req, res) => {
    try {
       const { skill, description, district, maxVolunteers, onDate } = req.body;
-      const index = await VolunteerRequest.countDocuments() + 1;
-      const _id = 'VRES_' + index;
+      const key = await IncrementKey.findOne({ key: 'VOLUNTEER_REQUEST' });
+      key.value = key.value + 1;
+      await key.save();
+      const _id = 'VRES_' + (key.value);
       const newVolunteerRequest = new VolunteerRequest({
          _id,
          skill,

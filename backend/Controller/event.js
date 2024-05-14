@@ -80,8 +80,10 @@ const createEvent = async (req, res) => {
          if (err) {
             return res.status(500).json({ error: true, message: "Error uploading image:" + err.message });
          }
-         const index = await Event.countDocuments() + 1;
-         const _id = 'EV_' + index;
+         const key = await IncrementKey.findOne({ key: 'EVENT' });
+         key.value = key.value + 1;
+         await key.save();
+         const _id = 'EV_' + (key.value);
          const event = new Event({ _id, name, description, date, start_time, end_time, location, image, user, fundState, state });
          const a = await event.save();
          return res.status(201).json(a);
