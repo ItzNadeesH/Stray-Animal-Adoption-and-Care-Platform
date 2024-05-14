@@ -1,6 +1,8 @@
 const VolunteerRequest = require('../models/VolunteerRequest');
 const volunteerResponds = require('../models/VolunteerRespond');
-
+const User = require('../models/User');
+const Notification = require('../models/Notification');
+const VolunteerRespond = require('../models/VolunteerRespond');
 
 const getVolunteerRequests = async (req, res) => {
    try {
@@ -77,8 +79,19 @@ const deleteVolunteerRequest = async (req, res) => {
       if (!volunteerRequest) {
          return res.status(404).json({ error: true, message: "Volunteer Request not found" });
       }
-      volunteerRequest.state = 'DELETED';
-      await volunteerRequest.save();
+      const volunteerResponds = await VolunteerRespond.find({ volunteerRequest: id });
+      volunteerResponds.forEach(async (volunteerRespond) => {
+         const u = await User.findById(volunteerRespond.user);
+         const notification = new Notification({
+            user: u._id,
+            title: "Volunteer Request Deleted",
+            message: `Your volunteer request for ${volunteerRequest.skill} has been deleted`,
+            link: "/profile",
+         });
+         await notification.save();
+         await volunteerRespond.deleteOne();
+      });
+      await volunteerRequest.deleteOne();
       return res.status(200).json({ error: false, message: "Volunteer Request deleted successfully" });
    } catch (error) {
       return res.status(500).json({ error: true, message: error.message });
