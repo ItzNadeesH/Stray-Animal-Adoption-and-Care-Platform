@@ -150,6 +150,36 @@ function AnimalManage() {
     setIsModalOpen(true);
   };
 
+  const calculateDueDate = (vaccinationFrequency, lastVaccination) => {
+    if (lastVaccination === "Not Vaccinated") {
+      return "Not Vaccinated";
+    }
+    let date = new Date(lastVaccination);
+    switch (vaccinationFrequency) {
+      case "ONCE_A_WEEK":
+        date.setDate(date.getDate() + 7);
+        break;
+      case "TWICE_A_MONTH":
+        date.setDate(date.getDate() + 15);
+        break;
+      case "ONCE_A_MONTH":
+        date.setMonth(date.getMonth() + 1);
+        break;
+      case "ONCE_A_YEAR":
+        date.setFullYear(date.getFullYear() + 1);
+        break;
+      case "TWICE_A_YEAR":
+        date.setFullYear(date.getFullYear() + 2);
+        break;
+      case "THRISE_A_YEAR":
+        date.setFullYear(date.getFullYear() + 3);
+        break;
+      default:
+        break;
+    }
+    return date.toISOString().slice(0, 10).replace('T', ' ');
+  }
+
   const handleCreateAppointment = async () => {
     if (selectedDate === "") {
       toast.error("Please select a date for vaccination");
@@ -257,6 +287,7 @@ function AnimalManage() {
               <th className="border px-4 py-1 bg-slate-400">
                 Last Vaccinated Date
               </th>
+              <th className="border px-4 py-1 bg-slate-400">Due Date</th>
               <th className="border px-4 py-1 bg-slate-400">Actions</th>
             </tr>
           </thead>
@@ -281,7 +312,7 @@ function AnimalManage() {
                     ? "Not Vaccinated"
                     : new Date(item.lastVaccination)
                       .toISOString()
-                      .slice(0, 19)
+                      .slice(0, 10)
                       .replace("T", " ")}
                   {item.state === "AVAILABLE" && (
                     <BiInjection
@@ -290,6 +321,9 @@ function AnimalManage() {
                       onClick={() => handleAppointmentAdd(item._id)}
                     />
                   )}
+                </td>
+                <td className="border px-4 py-1 text-sm">
+                  {calculateDueDate(item.vaccinationFrequency, item.lastVaccination)}
                 </td>
                 <td className="border px-4 py-1 ">
                   <div className="flex justify-between">
