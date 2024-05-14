@@ -21,7 +21,12 @@ function AnimalManage() {
   const [selectedAnimalId, setSelectedAnimalId] = useState("");
   const [selectedDate, setSelectedDate] = useState("");
 
+  const [minDate, setMinDate] = useState("");
+
   useEffect(() => {
+    const today = new Date();
+    const formattedDate = today.toISOString().split('T')[0];
+    setMinDate(formattedDate);
     fetchAnimals();
   }, []);
 
@@ -275,9 +280,9 @@ function AnimalManage() {
                   {item.lastVaccination === "Not Vaccinated"
                     ? "Not Vaccinated"
                     : new Date(item.lastVaccination)
-                        .toISOString()
-                        .slice(0, 19)
-                        .replace("T", " ")}
+                      .toISOString()
+                      .slice(0, 19)
+                      .replace("T", " ")}
                   {item.state === "AVAILABLE" && (
                     <BiInjection
                       size={20}
@@ -329,6 +334,7 @@ function AnimalManage() {
               <div className="w-[10px] px-5">:</div>
               <input
                 type="date"
+                min={minDate}
                 className="w-full p-2 text-sm"
                 onChange={(e) => setSelectedDate(e.target.value)}
               />
