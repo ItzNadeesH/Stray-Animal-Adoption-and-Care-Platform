@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { APP_URL } from '../config';
 import { useUser } from '../contexts/UserContext';
-import { HiTrash } from 'react-icons/hi';
+import { HiEye, HiTrash } from 'react-icons/hi';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Layout from './Layout';
@@ -57,6 +57,24 @@ function Profile() {
       }
    }
 
+   const handleNotificationRead = async (id) => {
+      const n = notifications.find((item) => item._id === id);
+      n.status = "read";
+      const response = await fetch(APP_URL + '/api/notification/' + id, {
+         method: 'PUT',
+         headers: {
+            'Content-Type': 'application/json',
+         },
+         body: JSON.stringify(n),
+      });
+      const data = await response.json();
+      if (data.error) {
+         console.log(data.message);
+      } else {
+         setNotifications(notifications.map((item) => (item._id === id ? data : item)));
+      }
+   }
+
    return (
       <Layout>
          <div className="p-10">
@@ -78,8 +96,12 @@ function Profile() {
                                  <p className='ms-auto w-fit'>{new Date(item.createdAt).toISOString().slice(0, 19).replace('T', ' ')}</p>
                               </div>
                            </div>
-                           <div className='flex justify-end items-end'>
-                              <button className="text-red-800 hover:text-red-900" onClick={() => handleNotificationDelete(item._id)}>  <HiTrash size={20} className="hover:cursor-pointer" /></button>
+                           <div className=''>
+                              <HiTrash size={20} className="hover:cursor-pointer" onClick={() => handleNotificationDelete(item._id)} />
+
+                              {item.status === "unread" && <HiEye size={20} className="hover:cursor-pointer" onClick={() => handleNotificationRead(item._id)} />
+                              }
+
                            </div>
                         </div>
                      ))}

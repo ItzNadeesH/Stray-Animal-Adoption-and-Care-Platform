@@ -44,14 +44,25 @@ const getNotificationByReceiver = async (req, res) => {
    }
 }
 
+const getNotificationByReceiverUnread = async (req, res) => {
+   const { id } = req.params;
+   try {
+      const notification = await Notification.find({ user: id, status: "unread" });
+      return res.status(200).json(notification);
+   }
+   catch (error) {
+      return res.status(500).json({ error: true, message: error.message });
+   }
+}
+
 const updateNotification = async (req, res) => {
    const { id } = req.params;
-   const { title, message, sender, receiver } = req.body;
-   if (!title || !message || !sender) {
+   const { title, message, user, status } = req.body;
+   if (!title || !message || !user || !status) {
       return res.status(400).json({ error: true, message: "Please fill all fields" });
    }
    try {
-      const notification = await Notification.findByIdAndUpdate(id, { title, message, sender, receiver }, { new: true });
+      const notification = await Notification.findByIdAndUpdate(id, { title, message, user, status }, { new: true });
       return res.status(200).json(notification);
    } catch (error) {
       return res.status(500).json({ error: true, message: error.message });
@@ -74,5 +85,6 @@ module.exports = {
    getNotificationById,
    getNotificationByReceiver,
    updateNotification,
-   deleteNotification
+   deleteNotification,
+   getNotificationByReceiverUnread
 }

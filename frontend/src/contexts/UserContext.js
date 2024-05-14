@@ -1,19 +1,26 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { APP_URL } from '../config';
 import { useUsers } from '../hooks/useUsers';
+import userAuth from '../reducers/userAuth';
+import { loadUser } from '../actions/auth';
+import { useSelector } from 'react-redux';
 
 const UserContext = createContext();
 
 export const useUser = () => useContext(UserContext);
 
 export const UserProvider = ({ children }) => {
-   const { data } = useUsers();
+
+
+   const isAuthenticated = useSelector(
+      (state) => state.userAuth.isAuthenticated
+   );
 
    const [user, setUser] = useState(null);
    const [hasNotifications, setHasNotifications] = useState(false);
 
    useEffect(() => {
-      if (localStorage.getItem("token") === null) return;
+      if (localStorage.getItem("token") === null || !isAuthenticated) return;
       fetch(APP_URL + `/api/auth`, {
          method: "GET",
          headers: {
@@ -22,13 +29,13 @@ export const UserProvider = ({ children }) => {
          },
       })
          .then((res) => res.json())
-         .then((data) => {
-            if (data.error) {
-               console.log(data);
+         .then((d) => {
+            if (d.error) {
+               console.log(d);
             } else {
-               setUser(data);
+               setUser(d);
 
-               fetch(APP_URL + `/api/notification/receiver/${data._id}`, {
+               fetch(APP_URL + `/api/notification/receiverunread/${d._id}`, {
                   method: "GET",
                   headers: {
                      "Content-Type": "application/json",
@@ -36,17 +43,17 @@ export const UserProvider = ({ children }) => {
                   },
                })
                   .then((res) => res.json())
-                  .then((data) => {
-                     if (data.error) {
-                        console.log(data);
+                  .then((d) => {
+                     if (d.error) {
+                        console.log(d);
                      } else {
-                        setHasNotifications(data.length > 0);
+                        setHasNotifications(d.length > 0);
                      }
                   });
             }
          });
-   }, [data]);
-
+      console.log("run");
+   }, [isAuthenticated]);
 
 
    return (
