@@ -7,7 +7,7 @@ import { HiEye, HiTrash } from 'react-icons/hi';
 
 
 function ProfileShelter() {
-   const { user } = useUser();
+   const { user, sync } = useUser();
 
    const [appointments, setAppointments] = useState([]);
    const [adoptions, setAdoptions] = useState([]);
@@ -58,6 +58,7 @@ function ProfileShelter() {
          console.log(data.message);
       } else {
          setNotifications(notifications.map((item) => (item._id === id ? data : item)));
+         sync();
       }
    }
 

@@ -104,6 +104,14 @@ const deleteVolunteerRespond = async (req, res) => {
       if (!volunteerRespond) {
          return res.status(404).json({ error: true, message: "VolunteerRespond not found" });
       }
+      const u = await User.findOne({ _id: volunteerRespond.user });
+      const notification = new Notification({
+         user: u._id,
+         title: "Volunteer Respond Deleted",
+         message: `You have deleted the volunteer request [${vR.skill}] in [${vR.district}] on [${new Date(vR.onDate).toISOString().slice(0, 10)}].`,
+         link: "/profile",
+      });
+      await notification.save();
       await volunteerRespond.deleteOne();
       return res.status(200).json({ error: false, message: "VolunteerRespond deleted successfully" });
    } catch (error) {

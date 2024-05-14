@@ -55,9 +55,42 @@ export const UserProvider = ({ children }) => {
       console.log("run");
    }, [isAuthenticated]);
 
+   const sync = () => {
+      fetch(APP_URL + `/api/auth`, {
+         method: "GET",
+         headers: {
+            "Content-Type": "application/json",
+            "x-auth-token": localStorage.getItem("token"),
+         },
+      })
+         .then((res) => res.json())
+         .then((d) => {
+            if (d.error) {
+               console.log(d);
+            } else {
+               setUser(d);
+
+               fetch(APP_URL + `/api/notification/receiverunread/${d._id}`, {
+                  method: "GET",
+                  headers: {
+                     "Content-Type": "application/json",
+                     "x-auth-token": localStorage.getItem("token"),
+                  },
+               })
+                  .then((res) => res.json())
+                  .then((d) => {
+                     if (d.error) {
+                        console.log(d);
+                     } else {
+                        setHasNotifications(d.length > 0);
+                     }
+                  });
+            }
+         });
+   }
 
    return (
-      <UserContext.Provider value={{ user, hasNotifications }}>
+      <UserContext.Provider value={{ user, hasNotifications, sync }}>
          {children}
       </UserContext.Provider>
    );

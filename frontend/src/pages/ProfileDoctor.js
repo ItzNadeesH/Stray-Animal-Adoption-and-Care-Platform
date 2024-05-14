@@ -7,7 +7,7 @@ import { HiEye, HiTrash } from 'react-icons/hi';
 
 
 function ProfileDoctor() {
-   const { user } = useUser();
+   const { user, sync } = useUser();
 
    const [appointments, setAppointments] = useState([]);
    const [notifications, setNotifications] = useState([]);
@@ -54,6 +54,7 @@ function ProfileDoctor() {
          console.log(data.message);
       } else {
          setNotifications(notifications.map((item) => (item._id === id ? data : item)));
+         sync();
       }
    }
 

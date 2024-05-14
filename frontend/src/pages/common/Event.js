@@ -13,7 +13,7 @@ import Layout from "../Layout";
 function Event() {
    Modal.setAppElement('#root');
 
-   const { user } = useUser();
+   const { user, sync } = useUser();
 
    const [eventData, setEventData] = useState([]);
    const [isModalOpen, setIsModalOpen] = useState(false);
@@ -88,6 +88,7 @@ function Event() {
                setIsAttendModalOpen(false);
             }
          });
+      sync();
    }
 
    return (

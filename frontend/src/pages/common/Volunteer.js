@@ -11,7 +11,7 @@ import Layout from "../Layout";
 function Volunteer() {
    Modal.setAppElement('#root');
 
-   const { user } = useUser();
+   const { user, sync } = useUser();
 
    const [volunteerData, setVolunteerData] = useState([]);
    const [filteredData, setFilteredData] = useState([]);
@@ -54,6 +54,7 @@ function Volunteer() {
       } else {
          toast.success(data.message);
          setIsModalOpen(false);
+         sync();
       }
    }
    const handleSearch = async () => {
@@ -163,7 +164,7 @@ function Volunteer() {
                   <hr />
                   <h2 className="text-center text-lg font-bold mt-4">Volunteer Information</h2>
                   <div className="mb-4">
-                     <div className="text-sm"><span className="font-[600]">User ID : </span> {user?.id} </div>
+                     <div className="text-sm"><span className="font-[600]">User ID : </span> {user?._id} </div>
                      <div className="text-sm"><span className="font-[600]">Email : </span> {user?.email} </div>
                   </div>
                   <div className="text-right">
