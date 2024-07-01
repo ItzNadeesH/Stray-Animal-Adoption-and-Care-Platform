@@ -71,11 +71,6 @@ const Settings = ({ loadProfile }) => {
 
   return (
     <>
-      {!profile && (
-        <div className="mt-[-80px]">
-          <Loader />
-        </div>
-      )}
       <div className="max-w-screen-full bg-[#f6f6f6] p-2">
         <div className="p-5 bg-white rounded-lg shadow-lg">
           <p className="mb-2">Edit Profile</p>

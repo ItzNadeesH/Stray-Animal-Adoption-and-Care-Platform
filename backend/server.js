@@ -2,8 +2,12 @@ const express = require("express");
 const connectDB = require("./config/db");
 const mongoose = require("mongoose");
 //insert of route of donationrouter
-const router = require("./Routes/DonationRouter");
-const Maitanacerouter = require("./Routes/MaintananceRoute");
+const router = require("./routes/DonationRouter");
+//const Maitanacerouter = require("./routes/MaintananceRoute");
+const doctorfeedbackRouter = require("./routes/DoctorfeedbackRoutes");
+const servicesRouter = require("./routes/serviceFeedbackRoutes");
+const donationFormsRouter = require("./routes/MaintananceRoute");
+
 const cors = require("cors");
 
 const app = express();
@@ -14,6 +18,7 @@ connectDB();
 // Init Middleware
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ extended: false }));
+app.use(cors());
 
 app.get("/", (req, res) => res.send("API Running"));
 
@@ -25,12 +30,37 @@ app.use("/api/profiles", require("./routes/profiles"));
 app.use("/api/orders", require("./routes/orders"));
 app.use("/api/reports", require("./routes/reports"));
 
-//middleware
-app.use(express.json());
-app.use(cors());
+//donation
 app.use("/donations", router);
-app.use("/requrements", Maitanacerouter);
-app.use("/files", express.static("files"));
+app.use("/file", express.static("file"));
+app.use("/donationforms", donationFormsRouter);
+//app.use("/requrements", Maitanacerouter);
+
+// feedback
+app.use("/api/Doctorfeedback", doctorfeedbackRouter);
+app.use("/api/services", servicesRouter);
+
+// shelter maintainance management
+const formRouter = require("./routes/Form.js");
+app.use("/Form", formRouter);
+
+const fundRouter = require("./routes/fund.js");
+app.use("/Fund", fundRouter);
+
+const invoiceRoutes = require("./routes/receipt");
+app.use("/Receipts", invoiceRoutes);
+
+const invoicepdf = require("./routes/filepdf");
+app.use("/Invoices", invoicepdf);
+
+const requestform = require("./routes/requestForm");
+app.use("/requestforms", requestform);
+
+const donationForm = require("./routes/DonationForm");
+app.use("/donationforms", donationForm);
+
+const authfunction = require("./routes/auth.js");
+app.use("/authentication", authfunction);
 
 const PORT = process.env.PORT || 5000;
 
@@ -146,7 +176,7 @@ const storage = multer.diskStorage({
 });
 
 //insert model part
-require("./Models/PdfModel");
+require("./models/PdfModel.js");
 const PdfSchema = mongoose.model("PdfDetails");
 const upload = multer({ storage });
 // pdf upload endpoint
@@ -173,3 +203,25 @@ app.get("/getfile", async (req, res) => {
     res.status(500).send({ status: " error" });
   }
 });
+
+// Define routes
+// app.use('/api/auth', require('./routes/auth'));
+app.use("/api/user", require("./routes/users"));
+app.use("/api/animal", require("./routes/animal"));
+app.use("/api/vaccination", require("./routes/vaccination"));
+
+app.use("/api/event", require("./routes/event"));
+app.use("/api/eventAttend", require("./routes/eventAttend"));
+
+app.use("/api/adoption", require("./routes/adoption"));
+app.use("/api/volunteer", require("./routes/volunteerRequest"));
+app.use("/api/volunteerRespond", require("./routes/volunteerRespond"));
+
+app.use("/api/eventFundRequest", require("./routes/eventFundRequest"));
+
+app.use("/api/notification", require("./routes/notification"));
+
+app.use("/api/appointment", require("./routes/appointment"));
+
+// Serve static files from the 'upload' folder
+app.use("/uploads", express.static("uploads"));

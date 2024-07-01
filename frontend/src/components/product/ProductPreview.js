@@ -9,6 +9,7 @@ import SuccessMessage from '../common/SuccessMessage';
 import Loader from '../../utils/Loader';
 import { useReviews } from '../../hooks/useReviews';
 import Review from '../review/Review';
+import ReviewForm from '../review/ReviewForm';
 
 const ProductPreview = () => {
   const isAuthenticated = useSelector(
@@ -18,10 +19,13 @@ const ProductPreview = () => {
   const navigate = useNavigate();
   const { productId } = useParams();
   const { data } = useProduct(productId);
-  const { reviews } = useReviews(productId);
+  const { reviews, refetchReviews } = useReviews(productId);
   const [value, setValue] = useState(1);
   const [active, setActive] = useState(false);
 
+  const updateReviews = () => {
+    refetchReviews();
+  };
   return (
     <>
       {!data && !reviews && (
@@ -74,8 +78,18 @@ const ProductPreview = () => {
               </div>
             </div>
           </div>
-          {reviews &&
-            reviews.map((review) => <Review key={review._id} data={review} />)}
+          <div className="p-5">
+            <ReviewForm productId={productId} updateReviews={updateReviews} />
+
+            {reviews &&
+              reviews.map((review) => (
+                <Review
+                  key={review._id}
+                  data={review}
+                  updateReviews={updateReviews}
+                />
+              ))}
+          </div>
         </div>
       )}
     </>

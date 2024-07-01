@@ -10,14 +10,14 @@ let totalAllocation = 0;
 function FetchDisplayRequest() {
   const [requests, setRequests] = useState([]);
   const ComponentsRef = useRef();
-  const [accepted, setAccepted] = useState(false);
+  const [accepted] = useState(false);
 
   useEffect(() => {
     // Fetch donation requests data from backend
     axios
-      .get("http://localhost:5000/requrements")
+      .get("http://localhost:5000/donationforms")
       .then((response) => {
-        setRequests(response.data.maintanance);
+        setRequests(response.data); // Assuming response.data is an array of donation forms
       })
       .catch((error) => {
         console.error("Error fetching donation requests:", error);
