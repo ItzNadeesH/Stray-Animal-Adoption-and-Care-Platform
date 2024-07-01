@@ -1,7 +1,5 @@
-import { Link } from "react-router-dom";
-import Layout from "./Layout";
-import hero from "../assets/hero-image.svg";
-import { IoStorefrontOutline } from "react-icons/io5";
+import Layout from './Layout';
+import hero from '../assets/hero-image.svg';
 
 const Home = () => {
   return (
@@ -28,61 +26,34 @@ const Home = () => {
               </div>
             </div>
             <div className="w-[480px] mr-[80px]">
-              <img src={hero} alt="hero" />
+              <img src={hero} alt="hero-image" />
             </div>
           </section>
-          <section className="mt-2">
+          <section className="mt-10">
             <h2 className="text-center text-[40px] mb-10">Our Services</h2>
-            <div className="grid grid-cols-4 gap-5 gap-y-10">
+            <div class="grid grid-cols-4 gap-4">
               <div>
-                <div className="flex justify-center">
-                  <IoStorefrontOutline size={56} />
-                </div>
                 <h3 className="text-center">Adoption</h3>
               </div>
               <div>
-                <div className="flex justify-center">
-                  <IoStorefrontOutline size={56} />
-                </div>
                 <h3 className="text-center">Lost and Found</h3>
               </div>
               <div>
-                <div className="flex justify-center">
-                  <IoStorefrontOutline size={56} />
-                </div>
                 <h3 className="text-center">Adoption</h3>
               </div>
               <div>
-                <div className="flex justify-center">
-                  <IoStorefrontOutline size={56} />
-                </div>
                 <h3 className="text-center">Store</h3>
               </div>
               <div>
-                <div className="flex justify-center">
-                  <IoStorefrontOutline size={56} />
-                </div>
                 <h3 className="text-center">Shelters</h3>
               </div>
               <div>
-                <div className="flex justify-center">
-                  <IoStorefrontOutline size={56} />
-                </div>
                 <h3 className="text-center">Volunteers</h3>
               </div>
               <div>
-                <div className="flex justify-center">
-                  <IoStorefrontOutline size={56} />
-                </div>
-                <h3 className="text-center">
-                  <a href="/donationhome">Donations</a>
-                </h3>
+                <h3 className="text-center">Donations</h3>
               </div>
-
               <div>
-                <div className="flex justify-center">
-                  <IoStorefrontOutline size={56} />
-                </div>
                 <h3 className="text-center">Feedbacks</h3>
               </div>
             </div>

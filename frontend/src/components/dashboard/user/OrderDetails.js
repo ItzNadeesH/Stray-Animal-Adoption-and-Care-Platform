@@ -14,9 +14,7 @@ const OrderDetails = ({ product }) => {
             alt="bokdok"
           />
           <div className="sm:w-2/3 text-[14px] sm:ml-10">
-            <h2 className="text-[16px]">
-              {data.name + ' x ' + product.quantity}
-            </h2>
+            <h2 className="text-[16px]">{data.name}</h2>
             <p className="mt-2">Rs.{data.price}.00</p>
             <p className="mt-3 text-[#767676]">{data.description}</p>
           </div>
