@@ -35,6 +35,59 @@ import DonationPreview from "./components/DonationPreview/DonationPreview";
 import ContactDonationManager from "./components/ContactDonationManager/ContactDonationManager";
 import FetchDisplayRequest from "./components/DisplayDonationRequests/FetchDisplayRequest";
 
+// pasindu
+import AddFeedbackForm from "./components/feedback/AddFeedbackForm";
+import AllFeedback from "./components/feedback/AllFeedback";
+import EditFeedbackForm from "./components/feedback/EditFeedbackForm";
+import ActiveFeedbackForm from "./components/feedback/admin/ActiveFeedbackForm";
+import DisplayAllFeedback from "./components/feedback/admin/DisplayAllFeedback";
+import AllFeedbackService from "./components/services/AllFeedbackService";
+import ServiceFeedbackEdit from "./components/services/ServiceFeedbackEdit";
+import AddNewServiceFeedback from "./components/services/AddNewServiceFeedback";
+import Feedback from "./pages/Feedback";
+
+// osanda
+import MainLayout from "./components/Layouts/MainLayout";
+import Form from "./pages/Forms/Form";
+import FormSection from "./pages/Forms/FormSection";
+import EditForm from "./pages/Forms/EditForm";
+import AddReceipt from "./pages/Receipt/AddReceipt";
+import SendRecsection from "./pages/Receipt/SendRecsection";
+import UpdateSendReceipt from "./pages/Receipt/UpdateSendReceipt";
+import PdfRecsection from "./pages/Receipt/PdfRecsection";
+import RequestSection from "./pages/Forms/RequestSection";
+import DonationFund from "./pages/Funds/DonationFund";
+import DForm from "./pages/Forms/DForm";
+import DFormSection from "./pages/Forms/DFormSection";
+import EditDForm from "./pages/Forms/EditDForm";
+import ShelterDashBoard from "./components/ShelterDashBoard/Dashboard";
+import { useUser } from "./contexts/UserContext";
+
+// maleesha
+import AdoptionManage from "./pages/adoption/AdoptionManage.js";
+import AdoptionView from "./pages/adoption/AdoptionView.js";
+import AnimalManage from "./pages/animal/AnimalManage.js";
+import AnimalAdd from "./pages/animal/AnimalAdd.js";
+import AnimalEdit from "./pages/animal/AnimalEdit.js";
+import EventManage from "./pages/event/EventManage.js";
+import EventAdd from "./pages/event/EventAdd.js";
+import EventEdit from "./pages/event/EventEdit.js";
+import VolunteerManage from "./pages/volunteer/VolunteerManage.js";
+import VolunteerAdd from "./pages/volunteer/VolunteerAdd.js";
+import VolunteerEdit from "./pages/volunteer/VolunteerEdit.js";
+import EventView from "./pages/event/EventView.js";
+import AnimalView from "./pages/animal/AnimalView.js";
+import Animal from "./pages/common/Animal.js";
+import AdoptAnimal from "./pages/common/AdoptAnimal.js";
+import AppointmentManage from "./pages/appointment/AppointmentManage.js";
+import Event from "./pages/common/Event.js";
+import VaccinationManage from "./pages/vaccination/VaccinationManage.js";
+import Volunteer from "./pages/common/Volunteer.js";
+import FundManage from "./pages/fund/FundManage.js";
+import Profile from "./pages/Profile.js";
+import ProfileDoctor from "./pages/ProfileDoctor.js";
+import ProfileShelter from "./pages/ProfileShelter.js";
+
 if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
@@ -43,6 +96,9 @@ function App() {
   useEffect(() => {
     store.dispatch(loadUser());
   }, []);
+
+  const { user } = useUser();
+
   return (
     <>
       <Router>
@@ -110,6 +166,103 @@ function App() {
             path="/acceptrejectrequest"
             element={<FetchDisplayRequest />}
           />
+          <Route path="/feedback" element={<Feedback />} />
+          <Route path="/add-feedback" element={<AddFeedbackForm />} />
+          <Route path="/add-services" element={<AddNewServiceFeedback />} />
+          <Route
+            path="/ActiveFeedbackForm/:id"
+            element={<ActiveFeedbackForm />}
+          />
+          <Route path="/all-feedback" element={<AllFeedback />} />
+          <Route path="/all-servies" element={<AllFeedbackService />} />
+          <Route path="/Doctorfeedback/:id" element={<EditFeedbackForm />} />
+          <Route
+            path="/ServiceFeedbackEdit/:id"
+            element={<ServiceFeedbackEdit />}
+          />
+          <Route path="/DisplayAllFeedback" element={<DisplayAllFeedback />} />
+
+          <Route path="/shelter" element={<MainLayout />}>
+            <Route path="Dashboard" element={<ShelterDashBoard />} />
+            <Route path="Form" element={<Form />} />
+            <Route path="Dform" element={<DForm />} />
+            <Route path="Formsection" element={<FormSection />} />
+            <Route path="DFormsection" element={<DFormSection />} />
+            <Route path="Editform/:formId" element={<EditForm />} />
+            <Route path="EditDform/:id" element={<EditDForm />} />
+            <Route path="addReceipt" element={<AddReceipt />} />
+            <Route path="Sendreceipts" element={<SendRecsection />} />
+            <Route path="Editreceipt/:id" element={<UpdateSendReceipt />} />
+            <Route path="pdfrecsection" element={<PdfRecsection />} />
+            <Route path="requestsection" element={<RequestSection />} />
+            <Route path="donationform" element={<DonationFund />} />
+          </Route>
+
+          <Route path="/animal" element={<Animal />} />
+          <Route path="/event" element={<Event />} />
+          <Route path="/volunteer" element={<Volunteer />} />
+
+          {user?.role === "USER" && (
+            <>
+              <Route path="/animal/:id/adopt" element={<AdoptAnimal />} />
+              <Route path="/profile" element={<Profile />} />
+            </>
+          )}
+
+          {user?.role === "SHELTER_OWNER" && (
+            <>
+              <Route path="/admin/animal/manage" element={<AnimalManage />} />
+              <Route path="/admin/animal/add" element={<AnimalAdd />} />
+              <Route path="/admin/animal/edit/:id" element={<AnimalEdit />} />
+              <Route path="/admin/animal/view/:id" element={<AnimalView />} />
+
+              <Route
+                path="/admin/adoption/manage"
+                element={<AdoptionManage />}
+              />
+              <Route
+                path="/admin/adoption/view/:id"
+                element={<AdoptionView />}
+              />
+
+              <Route
+                path="/admin/volunteer/manage"
+                element={<VolunteerManage />}
+              />
+              <Route path="/admin/volunteer/add" element={<VolunteerAdd />} />
+              <Route
+                path="/admin/volunteer/edit/:id"
+                element={<VolunteerEdit />}
+              />
+
+              <Route path="/profile" element={<ProfileShelter />} />
+            </>
+          )}
+
+          {user?.role === "EVENT_MANAGER" && (
+            <>
+              <Route path="/admin/event/manage" element={<EventManage />} />
+              <Route path="/admin/event/add" element={<EventAdd />} />
+              <Route path="/admin/event/edit/:id" element={<EventEdit />} />
+              <Route path="/admin/event/view/:id" element={<EventView />} />
+
+              <Route path="/admin/event-fund/manage" element={<FundManage />} />
+            </>
+          )}
+
+          {user?.role === "DOCTOR" && (
+            <>
+              <Route
+                path="/admin/vaccination/manage"
+                element={<VaccinationManage />}
+              />
+              <Route
+                path="/admin/appointment/manage"
+                element={<AppointmentManage />}
+              />
+              <Route path="/profile" element={<ProfileDoctor />} />
+            </>
+          )}
         </Routes>
       </Router>
     </>

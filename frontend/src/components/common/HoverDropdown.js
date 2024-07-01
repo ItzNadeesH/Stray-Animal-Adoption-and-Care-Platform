@@ -28,7 +28,7 @@ const HoverDropdown = () => {
         >
           <li>
             <Link
-              to="/"
+              to="/animal"
               className="block px-4 py-2 text-black hover:bg-cyan-blue hover:text-white transition-all"
             >
               Adoption
@@ -39,20 +39,20 @@ const HoverDropdown = () => {
               to="/"
               className="block px-4 py-2 text-black hover:bg-cyan-blue hover:text-white transition-all"
             >
-              Lost and Found
+              Veterinaries
             </Link>
           </li>
           <li>
             <Link
-              to="/"
+              to="/event"
               className="block px-4 py-2 text-black hover:bg-cyan-blue hover:text-white transition-all"
             >
-              Donations
+              Events
             </Link>
           </li>
           <li>
             <Link
-              to="/"
+              to="/volunteer"
               className="block px-4 py-2 text-black hover:bg-cyan-blue hover:text-white transition-all"
             >
               Volunteers
@@ -60,15 +60,15 @@ const HoverDropdown = () => {
           </li>
           <li>
             <Link
-              to="/"
+              to="/donationhome"
               className="block px-4 py-2 text-black hover:bg-cyan-blue hover:text-white transition-all"
             >
-              Shelters
+              Donations
             </Link>
           </li>
           <li>
             <Link
-              to="/"
+              to="/all-feedback"
               className="block px-4 py-2 text-black hover:bg-cyan-blue hover:text-white transition-all"
             >
               Feedbacks

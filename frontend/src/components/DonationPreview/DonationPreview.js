@@ -1,12 +1,11 @@
-import React, { useEffect, useState, useRef } from "react";
-import Nav from "../Nav/Nav";
-import axios from "axios";
-import DonationDisplay from "../DonationDisplayForUser/DonationDisplayForUser";
-import { useReactToPrint } from "react-to-print";
-import { useNavigate } from "react-router-dom";
-import StripeCheckout from "react-stripe-checkout"; // Import StripeCheckout component
+import React, { useEffect, useState, useRef } from 'react';
+import Nav from '../Nav/Nav';
+import axios from 'axios';
+import DonationDisplay from '../DonationDisplayForUser/DonationDisplayForUser';
+import { useNavigate } from 'react-router-dom';
+import StripeCheckout from 'react-stripe-checkout'; // Import StripeCheckout component
 
-const URL = "http://localhost:5000/donations";
+const URL = 'http://localhost:5000/donations';
 
 const fetchHandler = async () => {
   return await axios.get(URL).then((res) => res.data);
@@ -26,29 +25,19 @@ function DonationsDisplay() {
     });
   }, []);
 
-  const handleNavigate = () => {
-    navigate(`/donationdetails`);
-  };
-
-  const handlePrint = useReactToPrint({
-    content: () => ComponentsRef.current,
-    DocumentTitle: "Donation Information",
-    onAfterPrint: () => alert("Donations report successfully downloaded"),
-  });
-
   // Function to handle token received from Stripe
   const handleToken = (token) => {
     // Make API call to your server to process the payment
     axios
-      .post("/charge", { token, amount: latestDonation.amount })
+      .post('/charge', { token, amount: latestDonation.amount })
       .then((response) => {
         // Payment successful, navigate to summary page
-        navigate("/donationdetails");
-        console.log("Payment successful:", response.data);
+        navigate('/donationdetails');
+        console.log('Payment successful:', response.data);
       })
       .catch((error) => {
         // Handle payment error
-        console.error("Payment error:", error);
+        console.error('Payment error:', error);
       });
   };
 

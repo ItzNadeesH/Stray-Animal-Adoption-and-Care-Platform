@@ -13,6 +13,7 @@ import { IoMdContacts } from 'react-icons/io';
 import { FaUserCircle } from 'react-icons/fa';
 import menu from '../../assets/icons/icon-menu.svg';
 import HoverDropdown from '../common/HoverDropdown';
+import { useUser } from '../../contexts/UserContext';
 
 const Navbar = ({ isAuthenticated }) => {
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -21,6 +22,8 @@ const Navbar = ({ isAuthenticated }) => {
   const navbarRef = useRef(null);
   const cartRef = useRef(null);
   const navigate = useNavigate();
+
+const {user} = useUser();
 
   useEffect(() => {
     const handleOutsideClick = (event) => {
@@ -98,6 +101,7 @@ const Navbar = ({ isAuthenticated }) => {
       </Link>
     </div>
   );
+  
   return (
     <>
       <nav className="flex justify-between p-6 h-[80px] border-b border-[#e6e6e6] max-w-screen-xl mx-auto">
@@ -106,7 +110,7 @@ const Navbar = ({ isAuthenticated }) => {
             <img className="h-5" src={menu} alt="menu-icon" />
           </button>
           <Link to="/">
-            <h1 className="inline-block">LOGO</h1>
+            <h1 className="inline-block text-[28px]">AWPA</h1>
           </Link>
           <ul className="ml-[56px] hidden md:flex">
             <li className="mx-4">
@@ -128,6 +132,7 @@ const Navbar = ({ isAuthenticated }) => {
           : isAuthenticated === false
           ? guestLinks
           : ''}
+ 
       </nav>
       {/* Mobile Navbar */}
       <nav

@@ -15,7 +15,6 @@ const fetchHandler = async () => {
 
 function AdminDashboard() {
   const [donations, setDonations] = useState();
-  const [totalDonation, setTotalDonation] = useState(0); // Initialize totalDonation state
   const [totalDonationGathered, setTotalDonationGathered] = useState(0); // Initialize totalDonationGathered state
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredDonations, setFilteredDonations] = useState(null);
@@ -31,7 +30,6 @@ function AdminDashboard() {
         (acc, donation) => acc + donation.amount,
         0
       );
-      setTotalDonation(total);
       // Set total donation gathered amount
       setTotalDonationGathered(total);
       // Update chart data
@@ -68,8 +66,9 @@ function AdminDashboard() {
         });
       }
     });
-  }, [totalDonationGathered, totalAllocation]); // Ensure totalAllocation is included in the dependency array
+  }, [totalDonationGathered]); // Ensure totalAllocation is included in the dependency array
 
+  //handle printfunction
   const handlePrint = useReactToPrint({
     content: () => ComponentsRef.current,
     DocumentTitle: "Donation Information",

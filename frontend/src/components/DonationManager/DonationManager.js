@@ -1,12 +1,14 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
+import backgroundImage from '../DonationManager/loginbackground.jpg';
 
 function DonationManager() {
   const history = useNavigate();
   const [user, setUser] = useState({
-    name: "",
-    gmail: "",
+    name: '',
+    gmail: '',
   });
 
   const handleInputChange = (e) => {
@@ -18,20 +20,20 @@ function DonationManager() {
     e.preventDefault();
     try {
       const response = await sendRequest();
-      if (response && response.data && response.data.status === "ok") {
-        alert("Login successful");
-        history("/admindetails");
+      if (response && response.data && response.data.status === 'ok') {
+        alert('Login successful');
+        history('/admindetails');
       } else {
-        alert("Incorrect email or password");
+        alert('Incorrect email or password');
       }
     } catch (error) {
-      alert("Error logging in: " + error.message);
+      alert('Error logging in: ' + error.message);
     }
   };
 
   const sendRequest = async () => {
     return await axios
-      .post("http://localhost:5000/Adminlogin", {
+      .post('http://localhost:5000/Adminlogin', {
         gmail: user.gmail,
         password: user.password,
       })
@@ -40,21 +42,22 @@ function DonationManager() {
       });
   };
 
-  const handleRegisterClick = () => {
-    history("/ManagerRegister");
-  };
-
   return (
-    <div className="container mx-auto flex justify-center items-center h-screen bg-gray-100">
+    <div className="flex justify-center items-center h-screen bg-gray-100">
       <form
         onSubmit={handleSubmit}
         className="w-full max-w-md bg-white rounded-lg shadow-lg p-6"
+        style={{
+          backgroundImage: `url(${backgroundImage})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
       >
         <h1 className="text-2xl font-bold text-center mb-4 text-blue-600">
           Welcome to Donation Manager Dashboard
         </h1>
 
-        <h2 className="text-lg font-semibold mb-2">enter your credintials</h2>
+        <h2 className="text-lg font-semibold mb-2">enter your credentials</h2>
         <h1 className="text-xl font-bold mb-2"> Login As Donation Manager</h1>
         <label htmlFor="gmail" className="block mb-1">
           Gmail:
@@ -80,20 +83,13 @@ function DonationManager() {
           required
           className="w-full border border-gray-300 rounded-md py-2 px-3 mb-3 focus:outline-none focus:border-blue-500"
         />
+        <h2 className="text-lg font-semibold mb-2">Click here to login</h2>
+
         <button
           type="submit"
           className="bg-blue-500 text-white py-2 px-4 rounded focus:outline-none hover:bg-blue-600 w-full"
         >
           Login
-        </button>
-        <h3 className="text-lg font-semibold mt-4">
-          Add a new Donation Manager
-        </h3>
-        <button
-          onClick={handleRegisterClick}
-          className="bg-gray-500 text-white py-2 px-4 rounded focus:outline-none hover:bg-gray-600 w-full mt-2"
-        >
-          Register New Donation Manager
         </button>
       </form>
     </div>

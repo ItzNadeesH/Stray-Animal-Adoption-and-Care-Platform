@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import emailjs from "@emailjs/browser";
 import Nav from "../Nav/Nav"; // Import the Nav component
-import backgroundImage from "../DonationHomePage/background.png";
+import backgroundImage from "../ContactDonationManager/contactUsImage.png";
 
 export const ContactDonationManager = () => {
   const form = useRef();
@@ -44,6 +44,11 @@ export const ContactDonationManager = () => {
           ref={form}
           onSubmit={sendEmail}
           className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+          style={{
+            backgroundImage: `url(${backgroundImage})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
         >
           <div className="mb-4">
             <label
@@ -87,11 +92,10 @@ export const ContactDonationManager = () => {
               id="requestType"
               name="request_type"
             >
-              <option value="Name">Change Name</option>
-              <option value="email">Change Email</option>
-              <option value="amount">Change Amount</option>
-              <option value="description">Change Description</option>
-              <option value="delete">Request to Delete Donation</option>
+              <option value="Name">Requested Change Name</option>
+              <option value="email"> RequestedChange Email</option>
+              <option value="description"> Requested Change Description</option>
+              <option value="delete">Requested to Delete Donation</option>
               <option value="none">None</option>
             </select>
           </div>
